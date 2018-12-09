@@ -17,14 +17,14 @@ const GET_BEBOP = gql`
 `;
 
 const Bebop = () => {
-  const { data, loading } = useQuery(GET_BEBOP, { suspend: false });
+  const { data, error, loading } = useQuery(GET_BEBOP, { suspend: false });
   if (loading) {
     return <div>Loading...</div>
   }
 
-  // if (error) {
-  //   return `Error: ${error.message}`;
-  // }
+  if (error) {
+    return `Error: ${error.message}`;
+  }
 
   return <div>{data.anime.edges[0].node.titles.canonical}</div>
 }
