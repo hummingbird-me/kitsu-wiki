@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "allowJs": true,
     "skipLibCheck": false,
     "esModuleInterop": true,

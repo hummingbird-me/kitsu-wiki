@@ -1,9 +1,18 @@
 import React from 'react';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo-hooks';
+
+import Bebop from './Bebop';
+
+const client = new ApolloClient({
+  uri: 'https://kitsu.io/api/graphql'
+})
 
 const App = () => (
-  <div>
+  <ApolloProvider client={client}>
     <h1>Kitsu Database</h1>
-  </div>
+    <Bebop />
+  </ApolloProvider>
 );
 
 export default App;
