@@ -8,6 +8,7 @@
     "@storybook/addons": "^4.1.0-alpha.11",
     "@storybook/react": "^4.1.0-alpha.11",
     "babel-loader": "^8.0.4",
+    "bootstrap": "4",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
