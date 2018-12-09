@@ -15,7 +15,7 @@
     "@types/storybook__react": "^4.0.0",
     "apollo-boost": "^0.1.22",
     "babel-loader": "^8.0.4",
-    "bootstrap": "4",
+    "bootstrap": "^4.1.2",
     "graphql": "^14.0.2",
     "graphql-tag.macro": "^2.0.0",
     "react": "^16.7.0-alpha.2",
