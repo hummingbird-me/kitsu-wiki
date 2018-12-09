@@ -18,15 +18,11 @@ const GET_BEBOP = gql`
 
 const Bebop = () => {
   const { data, error, loading } = useQuery(GET_BEBOP, { suspend: false });
-  if (loading) {
-    return <div>Loading...</div>
-  }
 
-  if (error) {
-    return `Error: ${error.message}`;
-  }
+  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return <div>Loading...</div>;
 
-  return <div>{data.anime.edges[0].node.titles.canonical}</div>
+  return <div>{data.anime.edges[0].node.titles.canonical}</div>;
 }
 
 export default Bebop
