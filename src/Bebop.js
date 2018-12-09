@@ -23,6 +23,6 @@ const Bebop = () => {
   if (loading) return <div>Loading...</div>;
 
   return <div>{data.anime.edges[0].node.titles.canonical}</div>;
-}
+};
 
-export default Bebop
+export default Bebop;

@@ -12,6 +12,9 @@
     "bootstrap": "^4.1.2",
     "graphql": "^14.0.2",
     "graphql-tag.macro": "^2.0.0",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "1.15.3",
     "react": "^16.7.0-alpha.2",
     "react-apollo": "^2.3.2",
     "react-apollo-hooks": "^0.2.1",
@@ -29,6 +32,17 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --jsx-bracket-same-line --end-of-line lf --write",
+      "git add"
+    ]
   },
   "browserslist": [
     ">0.2%",

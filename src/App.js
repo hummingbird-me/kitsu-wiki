@@ -6,12 +6,12 @@ import Bebop from './Bebop';
 
 const handleError = ({ networkError }) => {
   if (networkError) console.log(`Network error: ${networkError}`);
-}
+};
 
 const client = new ApolloClient({
   uri: 'https://kitsu.io/api/graphql',
   onError: handleError
-})
+});
 
 const App = () => (
   <ApolloProvider client={client}>
