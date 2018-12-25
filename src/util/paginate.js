@@ -1,18 +1,20 @@
 import { navigate } from '@reach/router';
 
-const changePage = (fetchMore, direction, data, type) => {
+const changePage = (fetchMore, amount, type, data, direction) => {
   const variables = {};
   let param = '';
 
   if (direction === 'next') {
     if (data.pageInfo.endCursor) {
       variables.endCursor = data.pageInfo.endCursor;
+      variables.first = amount;
       param = `?after=${encodeURIComponent(data.pageInfo.endCursor)}`;
     }
   } else {
     // if (data.pageInfo.startCursor && data.pageInfo.hasPreviousPage) {
     if (data.pageInfo.startCursor) {
       variables.startCursor = data.pageInfo.startCursor;
+      variables.last = amount;
       param = `?before=${encodeURIComponent(data.pageInfo.startCursor)}`;
     }
   }

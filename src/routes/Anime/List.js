@@ -6,8 +6,13 @@ import Pagination from '../../components/Pagination';
 import AnimeList from '../../components/Anime/AnimeList';
 
 const GET_ANIME = gql`
-  query Anime($startCursor: String, $endCursor: String) {
-    anime(first: 20, before: $startCursor, after: $endCursor) {
+  query Anime(
+    $first: Int
+    $last: Int
+    $startCursor: String
+    $endCursor: String
+  ) {
+    anime(first: $first, last: $last, before: $startCursor, after: $endCursor) {
       edges {
         node {
           __typename
@@ -51,17 +56,28 @@ const GET_ANIME = gql`
   }
 `;
 
+const pageAmount = 20;
+
 const List = ({ query }) => {
+  const variables = {};
+
+  if (query.before) {
+    variables.startCursor = query.before;
+    variables.last = pageAmount;
+  } else {
+    if (query.after) {
+      variables.endCursor = query.after;
+    }
+    variables.first = pageAmount;
+  }
+
   const {
     data: { anime },
     error,
     loading,
     fetchMore
   } = useQuery(GET_ANIME, {
-    variables: {
-      startCursor: query.before,
-      endCursor: query.after
-    },
+    variables,
     suspend: false
   });
 
@@ -72,8 +88,12 @@ const List = ({ query }) => {
     <>
       <AnimeList anime={anime.edges} />
       <Pagination
-        onPrevPage={() => changePage(fetchMore, 'prev', anime, 'anime')}
-        onNextPage={() => changePage(fetchMore, 'next', anime, 'anime')}
+        onPrevPage={() =>
+          changePage(fetchMore, pageAmount, 'anime', anime, 'prev')
+        }
+        onNextPage={() =>
+          changePage(fetchMore, pageAmount, 'anime', anime, 'next')
+        }
         pageInfo={anime.pageInfo}
       />
     </>
