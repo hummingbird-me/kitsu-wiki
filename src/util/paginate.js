@@ -1,10 +1,20 @@
+import { navigate } from '@reach/router';
+
 const changePage = (fetchMore, direction, data, type) => {
   const variables = {};
+  let param = '';
 
   if (direction === 'next') {
-    variables.endCursor = data.pageInfo.endCursor;
+    if (data.pageInfo.endCursor) {
+      variables.endCursor = data.pageInfo.endCursor;
+      param = `?after=${encodeURIComponent(data.pageInfo.endCursor)}`;
+    }
   } else {
-    variables.startCursor = data.pageInfo.startCursor;
+    // if (data.pageInfo.startCursor && data.pageInfo.hasPreviousPage) {
+    if (data.pageInfo.startCursor) {
+      variables.startCursor = data.pageInfo.startCursor;
+      param = `?before=${encodeURIComponent(data.pageInfo.startCursor)}`;
+    }
   }
 
   fetchMore({
@@ -22,6 +32,8 @@ const changePage = (fetchMore, direction, data, type) => {
       };
     }
   });
+
+  navigate(`${type}${param}`);
 };
 
 export { changePage };

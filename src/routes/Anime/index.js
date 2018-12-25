@@ -1,11 +1,12 @@
 import React from 'react';
 import { useRouter } from '@reach/router/unstable-hooks';
+import { parse as queryParse } from 'query-string';
 import List from './List';
 import Edit from './Edit';
 
 const Anime = () => {
   const routes = useRouter({
-    '.': () => <List />,
+    '.': ({ location }) => <List query={queryParse(location.search)} />,
     '/:id': ({ id }) => <Edit id={id} />
   });
 

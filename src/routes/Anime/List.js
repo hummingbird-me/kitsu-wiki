@@ -51,13 +51,17 @@ const GET_ANIME = gql`
   }
 `;
 
-const List = () => {
+const List = ({ query }) => {
   const {
     data: { anime },
     error,
     loading,
     fetchMore
   } = useQuery(GET_ANIME, {
+    variables: {
+      startCursor: query.before,
+      endCursor: query.after
+    },
     suspend: false
   });
 
