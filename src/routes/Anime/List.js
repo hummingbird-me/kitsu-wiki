@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import gql from 'graphql-tag.macro';
 import { useQuery } from 'react-apollo-hooks';
 import useParams from '../../util/params';
+import useLocalStorage from '../../util/localStorage';
 import { changePage } from '../../util/paginate';
 import Pagination from '../../components/Pagination';
 import ListControls from '../../components/ListControls';
@@ -75,29 +76,31 @@ const GET_ANIME = gql`
   ${animeFields}
 `;
 
+const enabledColumns = {
+  posterImage: true,
+  bannerImage: false,
+  slug: true,
+  canonical: true,
+  titles: false,
+  synopsis: false,
+  sfw: true,
+  ageRating: false,
+  ageRatingGuide: false,
+  season: false,
+  status: true,
+  startDate: true,
+  endDate: true,
+  nextRelease: false,
+  episodeCount: false,
+  episodeLength: false,
+  totalLength: false,
+  userCount: false,
+  favoritesCount: false,
+  averageRating: false
+};
+
 const List = ({ query }) => {
-  const [columns, setColumns] = useState({
-    posterImage: true,
-    bannerImage: false,
-    slug: true,
-    canonical: true,
-    titles: false,
-    synopsis: false,
-    sfw: true,
-    ageRating: false,
-    ageRatingGuide: false,
-    season: false,
-    status: true,
-    startDate: true,
-    endDate: true,
-    nextRelease: false,
-    episodeCount: false,
-    episodeLength: false,
-    totalLength: false,
-    userCount: false,
-    favoritesCount: false,
-    averageRating: false
-  });
+  const [columns, setColumns] = useLocalStorage('animeColumns', enabledColumns);
 
   const { before, after } = query;
   const variables = { pageAmount: 20 };
