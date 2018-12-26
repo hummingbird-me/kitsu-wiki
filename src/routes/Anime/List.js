@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import gql from 'graphql-tag.macro';
 import { useQuery } from 'react-apollo-hooks';
 import { changePage } from '../../util/paginate';
 import Pagination from '../../components/Pagination';
+import ListControls from '../../components/ListControls';
 import AnimeList from '../../components/Anime/AnimeList';
 
 const GET_ANIME = gql`
@@ -19,6 +20,12 @@ const GET_ANIME = gql`
           ageRating
           ageRatingGuide
           averageRating
+          bannerImage {
+            views {
+              name
+              url
+            }
+          }
           endDate
           episodeCount
           episodeLength
@@ -31,6 +38,7 @@ const GET_ANIME = gql`
               url
             }
           }
+          season
           sfw
           slug
           startDate
@@ -59,6 +67,29 @@ const GET_ANIME = gql`
 const pageAmount = 20;
 
 const List = ({ query }) => {
+  const [columns, setColumns] = useState({
+    posterImage: true,
+    bannerImage: false,
+    slug: true,
+    canonical: true,
+    titles: false,
+    synopsis: false,
+    sfw: true,
+    ageRating: false,
+    ageRatingGuide: false,
+    season: false,
+    status: true,
+    startDate: true,
+    endDate: true,
+    nextRelease: false,
+    episodeCount: false,
+    episodeLength: false,
+    totalLength: false,
+    userCount: false,
+    favoritesCount: false,
+    averageRating: false
+  });
+
   const variables = {};
 
   if (query.before) {
@@ -86,7 +117,11 @@ const List = ({ query }) => {
 
   return (
     <>
-      <AnimeList anime={anime.edges} />
+      <ListControls columns={columns} setColumns={setColumns} />
+      <AnimeList
+        anime={anime.edges}
+        columns={Object.keys(columns).filter(key => columns[key])}
+      />
       <Pagination
         onPrevPage={() =>
           changePage(fetchMore, pageAmount, 'anime', anime, 'prev')
