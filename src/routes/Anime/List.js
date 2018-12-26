@@ -1,70 +1,79 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag.macro';
 import { useQuery } from 'react-apollo-hooks';
+import useParams from '../../util/params';
 import { changePage } from '../../util/paginate';
 import Pagination from '../../components/Pagination';
 import ListControls from '../../components/ListControls';
 import AnimeList from '../../components/Anime/AnimeList';
 
-const GET_ANIME = gql`
-  query Anime(
-    $first: Int
-    $last: Int
-    $startCursor: String
-    $endCursor: String
-  ) {
-    anime(first: $first, last: $last, before: $startCursor, after: $endCursor) {
-      edges {
-        node {
-          __typename
-          ageRating
-          ageRatingGuide
-          averageRating
-          bannerImage {
-            views {
-              name
-              url
-            }
+const animeFields = gql`
+  fragment animeFields on AnimeConnection {
+    edges {
+      node {
+        __typename
+        ageRating
+        ageRatingGuide
+        averageRating
+        bannerImage {
+          views {
+            name
+            url
           }
-          endDate
-          episodeCount
-          episodeLength
-          favoritesCount
-          id
-          nextRelease
-          posterImage {
-            views {
-              name
-              url
-            }
-          }
-          season
-          sfw
-          slug
-          startDate
-          status
-          synopsis {
-            locale
-            text
-          }
-          titles {
-            canonical
-          }
-          totalLength
-          userCount
         }
+        endDate
+        episodeCount
+        episodeLength
+        favoritesCount
+        id
+        nextRelease
+        posterImage {
+          views {
+            name
+            url
+          }
+        }
+        # season
+        sfw
+        slug
+        startDate
+        status
+        synopsis {
+          locale
+          text
+        }
+        titles {
+          canonical
+        }
+        totalLength
+        userCount
       }
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-        hasPreviousPage
-      }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
     }
   }
 `;
 
-const pageAmount = 20;
+const GET_ANIME = gql`
+  query Anime(
+    $pageAmount: Int
+    $startCursor: String
+    $endCursor: String
+    $forward: Boolean!
+  ) {
+    anime(first: $pageAmount, after: $endCursor) @include(if: $forward) {
+      ...animeFields
+    }
+    anime(last: $pageAmount, before: $startCursor) @skip(if: $forward) {
+      ...animeFields
+    }
+  }
+  ${animeFields}
+`;
 
 const List = ({ query }) => {
   const [columns, setColumns] = useState({
@@ -90,17 +99,20 @@ const List = ({ query }) => {
     averageRating: false
   });
 
-  const variables = {};
+  const { before, after } = query;
+  const variables = { pageAmount: 20 };
 
-  if (query.before) {
-    variables.startCursor = query.before;
-    variables.last = pageAmount;
+  if (before) {
+    variables.startCursor = before;
+    variables.forward = false;
   } else {
-    if (query.after) {
-      variables.endCursor = query.after;
+    if (after) {
+      variables.endCursor = after;
     }
-    variables.first = pageAmount;
+    variables.forward = true;
   }
+
+  const [, setParams] = useParams({ before, after });
 
   const {
     data: { anime },
@@ -124,10 +136,10 @@ const List = ({ query }) => {
       />
       <Pagination
         onPrevPage={() =>
-          changePage(fetchMore, pageAmount, 'anime', anime, 'prev')
+          changePage(fetchMore, 'anime', anime, 'prev', setParams)
         }
         onNextPage={() =>
-          changePage(fetchMore, pageAmount, 'anime', anime, 'next')
+          changePage(fetchMore, 'anime', anime, 'next', setParams)
         }
         pageInfo={anime.pageInfo}
       />

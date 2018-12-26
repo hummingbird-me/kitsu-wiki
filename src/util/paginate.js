@@ -1,21 +1,19 @@
-import { navigate } from '@reach/router';
-
-const changePage = (fetchMore, amount, type, data, direction) => {
+const changePage = (fetchMore, type, data, direction, setParams) => {
   const variables = {};
-  let param = '';
+  const params = {};
 
   if (direction === 'next') {
     if (data.pageInfo.endCursor) {
       variables.endCursor = data.pageInfo.endCursor;
-      variables.first = amount;
-      param = `?after=${encodeURIComponent(data.pageInfo.endCursor)}`;
+      variables.forward = true;
+      params.after = data.pageInfo.endCursor;
     }
   } else {
     // if (data.pageInfo.startCursor && data.pageInfo.hasPreviousPage) {
     if (data.pageInfo.startCursor) {
       variables.startCursor = data.pageInfo.startCursor;
-      variables.last = amount;
-      param = `?before=${encodeURIComponent(data.pageInfo.startCursor)}`;
+      variables.forward = false;
+      params.before = data.pageInfo.startCursor;
     }
   }
 
@@ -35,7 +33,9 @@ const changePage = (fetchMore, amount, type, data, direction) => {
     }
   });
 
-  navigate(`${type}${param}`);
+  if (setParams) {
+    setParams(params);
+  }
 };
 
 export { changePage };
