@@ -39,7 +39,7 @@ const ListItem = ({ item, columns, children }) => (
   <tr key={item.id}>
     {[<ItemActions item={item} />, <>{item.id}</>, ...columns].map(
       (Column, key) => (
-        <td key={key} className="align-middle">
+        <td key={key} className="align-middle text-nowrap">
           {Column}
         </td>
       )

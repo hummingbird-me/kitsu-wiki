@@ -21,6 +21,7 @@ const ListControls = ({ columns, setColumns }) => {
           <div className={`dropdown-menu${columnsDropdownOpen ? ' show' : ''}`}>
             {Object.keys(columns).map(key => (
               <button
+                key={key}
                 type="button"
                 className={`dropdown-item${columns[key] ? ' active' : ''}`}
                 onClick={() =>

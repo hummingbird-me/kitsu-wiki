@@ -80,7 +80,6 @@ const enabledColumns = {
   posterImage: true,
   bannerImage: false,
   slug: true,
-  canonical: true,
   titles: false,
   synopsis: false,
   sfw: true,
