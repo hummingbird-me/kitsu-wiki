@@ -21,7 +21,7 @@
     "react-apollo": "^2.3.2",
     "react-apollo-hooks": "^0.2.1",
     "react-dom": "^16.7.0-alpha.2",
-    "react-scripts": "2.1.1",
+    "react-scripts": "2.1.2",
     "reactstrap": "^6.5.0",
     "webpack": "4.19.1"
   },
