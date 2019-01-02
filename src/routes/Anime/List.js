@@ -32,7 +32,7 @@ const animeFields = gql`
           url
         }
       }
-      # season
+      season
       sfw
       slug
       startDate
@@ -82,7 +82,7 @@ const enabledColumns = {
   sfw: true,
   ageRating: false,
   ageRatingGuide: false,
-  season: false,
+  season: true,
   status: true,
   startDate: true,
   endDate: true,
