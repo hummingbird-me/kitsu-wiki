@@ -127,8 +127,8 @@ const List = ({ query }) => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <>
-      <ListControls columns={columns} setColumns={setColumns} />
+    <div className="container-fluid">
+      <ListControls type="anime" columns={columns} setColumns={setColumns} />
       <AnimeList
         anime={anime.nodes}
         columns={Object.keys(columns).filter(key => columns[key])}
@@ -142,7 +142,7 @@ const List = ({ query }) => {
         }
         pageInfo={anime.pageInfo}
       />
-    </>
+    </div>
   );
 };
 

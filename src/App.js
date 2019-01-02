@@ -33,9 +33,7 @@ const App = () => {
           </li>
         </ul>
       </nav>
-      <div className="container-fluid" style={{ paddingTop: '75px' }}>
-        {routes}
-      </div>
+      <div style={{ paddingTop: '75px' }}>{routes}</div>
     </ApolloProvider>
   );
 };
