@@ -7,7 +7,8 @@ import Edit from './Edit';
 const Anime = () => {
   const routes = useRouter({
     '.': ({ location }) => <List query={queryParse(location.search)} />,
-    '/:id': ({ id }) => <Edit id={id} />
+    '/:id': ({ id }) => <Edit id={id} />,
+    '/add': () => <Edit />
   });
 
   return routes;

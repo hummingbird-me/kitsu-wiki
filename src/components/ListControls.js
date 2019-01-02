@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { Link } from '@reach/router/unstable-hooks';
 
-const ListControls = ({ columns, setColumns }) => {
+const ListControls = ({ type, columns, setColumns }) => {
   const [columnsDropdownOpen, setColumnsDropdownOpen] = useState(false);
 
   return (
     <div className="row justify-content-between mb-3">
       <div className="col-md-auto">
-        <button type="button" className="btn btn-primary">
+        <Link to={`/${type}/add`} type="button" className="btn btn-primary">
           Add New
-        </button>
+        </Link>
       </div>
       <div className="col-md-auto">
         <div className="dropdown">
