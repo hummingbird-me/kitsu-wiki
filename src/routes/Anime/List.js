@@ -10,45 +10,42 @@ import AnimeList from '../../components/Anime/AnimeList';
 
 const animeFields = gql`
   fragment animeFields on AnimeConnection {
-    edges {
-      node {
-        __typename
-        ageRating
-        ageRatingGuide
-        averageRating
-        bannerImage {
-          views {
-            name
-            url
-          }
+    nodes {
+      ageRating
+      ageRatingGuide
+      averageRating
+      bannerImage {
+        views {
+          name
+          url
         }
-        endDate
-        episodeCount
-        episodeLength
-        favoritesCount
-        id
-        nextRelease
-        posterImage {
-          views {
-            name
-            url
-          }
-        }
-        # season
-        sfw
-        slug
-        startDate
-        status
-        synopsis {
-          locale
-          text
-        }
-        titles {
-          canonical
-        }
-        totalLength
-        userCount
       }
+      endDate
+      episodeCount
+      episodeLength
+      favoritesCount
+      id
+      nextRelease
+      posterImage {
+        views {
+          name
+          url
+        }
+      }
+      # season
+      sfw
+      slug
+      startDate
+      status
+      synopsis {
+        locale
+        text
+      }
+      titles {
+        canonical
+      }
+      totalLength
+      userCount
     }
     pageInfo {
       startCursor
@@ -133,7 +130,7 @@ const List = ({ query }) => {
     <>
       <ListControls columns={columns} setColumns={setColumns} />
       <AnimeList
-        anime={anime.edges}
+        anime={anime.nodes}
         columns={Object.keys(columns).filter(key => columns[key])}
       />
       <Pagination

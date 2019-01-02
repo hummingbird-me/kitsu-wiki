@@ -4,7 +4,7 @@ import AnimeListItem from './AnimeListItem';
 
 const AnimeList = ({ anime, columns = ['posterImage', 'slug'] }) => (
   <ResourceList columns={columns}>
-    {anime.map(({ node: anime }) => (
+    {anime.map(anime => (
       <AnimeListItem key={anime.id} item={anime} columns={columns} />
     ))}
   </ResourceList>

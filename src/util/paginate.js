@@ -21,12 +21,12 @@ const changePage = (fetchMore, type, data, direction, setParams) => {
     variables,
     updateQuery: (previousResult, { fetchMoreResult }) => {
       const { __typename } = previousResult[type];
-      const { edges, pageInfo } = fetchMoreResult[type];
+      const { nodes, pageInfo } = fetchMoreResult[type];
 
       return {
         [type]: {
           __typename,
-          edges,
+          nodes,
           pageInfo
         }
       };
