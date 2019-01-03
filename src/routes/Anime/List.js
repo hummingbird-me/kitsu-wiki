@@ -6,54 +6,7 @@ import useLocalStorage from '../../util/localStorage';
 import Pagination from '../../components/Pagination';
 import ListControls from '../../components/ListControls';
 import AnimeList from '../../components/Anime/AnimeList';
-
-const animeFields = gql`
-  fragment animeFields on AnimeConnection {
-    nodes {
-      ageRating
-      ageRatingGuide
-      averageRating
-      bannerImage {
-        views {
-          name
-          url
-        }
-      }
-      endDate
-      episodeCount
-      episodeLength
-      favoritesCount
-      id
-      nextRelease
-      posterImage {
-        views {
-          name
-          url
-        }
-      }
-      season
-      sfw
-      slug
-      startDate
-      status
-      synopsis {
-        locale
-        text
-      }
-      titles {
-        canonical
-      }
-      totalLength
-      userCount
-    }
-    pageInfo {
-      startCursor
-      endCursor
-      hasNextPage
-      hasPreviousPage
-    }
-  }
-`;
+import animeFields from '../../fragments/animeFields';
 
 const GET_ANIME_FORWARD = gql`
   query Anime($pageAmount: Int, $endCursor: String) {
