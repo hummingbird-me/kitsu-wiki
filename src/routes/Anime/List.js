@@ -6,6 +6,7 @@ import useLocalStorage from '../../util/localStorage';
 import Pagination from '../../components/Pagination';
 import ListControls from '../../components/ListControls';
 import AnimeList from '../../components/Anime/AnimeList';
+import { RouteSpinner } from '../../components/Spinner';
 import animeFields from '../../fragments/animeFields';
 
 const GET_ANIME_FORWARD = gql`
@@ -70,7 +71,7 @@ const List = ({ query }) => {
     suspend: false
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <RouteSpinner />;
   if (error) return <div>Error: {error}</div>;
 
   const {

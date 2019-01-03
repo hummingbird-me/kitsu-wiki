@@ -13,6 +13,12 @@ const client = new ApolloClient({
   onError: handleError
 });
 
+client.defaultOptions = {
+  watchQuery: {
+    notifyOnNetworkStatusChange: true
+  }
+};
+
 const App = () => {
   const routes = useRouter({
     '.': () => <Home />,
