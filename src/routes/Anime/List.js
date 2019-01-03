@@ -3,7 +3,6 @@ import gql from 'graphql-tag.macro';
 import { useQuery } from 'react-apollo-hooks';
 import useParams from '../../util/params';
 import useLocalStorage from '../../util/localStorage';
-import { changePage } from '../../util/paginate';
 import Pagination from '../../components/Pagination';
 import ListControls from '../../components/ListControls';
 import AnimeList from '../../components/Anime/AnimeList';
@@ -56,17 +55,18 @@ const animeFields = gql`
   }
 `;
 
-const GET_ANIME = gql`
-  query Anime(
-    $pageAmount: Int
-    $startCursor: String
-    $endCursor: String
-    $forward: Boolean!
-  ) {
-    anime(first: $pageAmount, after: $endCursor) @include(if: $forward) {
+const GET_ANIME_FORWARD = gql`
+  query Anime($pageAmount: Int, $endCursor: String) {
+    anime(first: $pageAmount, after: $endCursor) @connection(key: "anime") {
       ...animeFields
     }
-    anime(last: $pageAmount, before: $startCursor) @skip(if: $forward) {
+  }
+  ${animeFields}
+`;
+
+const GET_ANIME_BACKWARD = gql`
+  query Anime($pageAmount: Int, $startCursor: String) {
+    anime(last: $pageAmount, before: $startCursor) @connection(key: "anime") {
       ...animeFields
     }
   }
@@ -99,26 +99,20 @@ const List = ({ query }) => {
   const [columns, setColumns] = useLocalStorage('animeColumns', enabledColumns);
 
   const { before, after } = query;
-  const variables = { pageAmount: 20 };
+  const [, setParams] = useParams({ before, after });
+
+  const pageAmount = 20;
+  const variables = { pageAmount };
 
   if (before) {
     variables.startCursor = before;
-    variables.forward = false;
   } else {
     if (after) {
       variables.endCursor = after;
     }
-    variables.forward = true;
   }
 
-  const [, setParams] = useParams({ before, after });
-
-  const {
-    data: { anime },
-    error,
-    loading,
-    fetchMore
-  } = useQuery(GET_ANIME, {
+  const { data, error, loading, fetchMore } = useQuery(GET_ANIME_FORWARD, {
     variables,
     suspend: false
   });
@@ -126,21 +120,25 @@ const List = ({ query }) => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  const {
+    anime: { nodes: anime, pageInfo }
+  } = data;
+
   return (
     <div className="container-fluid">
       <ListControls type="anime" columns={columns} setColumns={setColumns} />
       <AnimeList
-        anime={anime.nodes}
+        anime={anime}
         columns={Object.keys(columns).filter(key => columns[key])}
       />
       <Pagination
-        onPrevPage={() =>
-          changePage(fetchMore, 'anime', anime, 'prev', setParams)
-        }
-        onNextPage={() =>
-          changePage(fetchMore, 'anime', anime, 'next', setParams)
-        }
-        pageInfo={anime.pageInfo}
+        fetchMore={fetchMore}
+        queryKey="anime"
+        pageAmount={pageAmount}
+        pageInfo={pageInfo}
+        forwardQuery={GET_ANIME_FORWARD}
+        backwardQuery={GET_ANIME_BACKWARD}
+        setParams={setParams}
       />
     </div>
   );

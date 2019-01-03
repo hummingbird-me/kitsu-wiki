@@ -1,36 +1,33 @@
-const changePage = (fetchMore, type, data, direction, setParams) => {
-  const variables = {};
+const changePage = ({
+  fetchMore,
+  query,
+  queryKey,
+  pageAmount,
+  pageInfo,
+  direction,
+  setParams
+}) => {
+  const variables = { pageAmount };
   const params = {};
 
-  if (direction === 'next') {
-    if (data.pageInfo.endCursor) {
-      variables.endCursor = data.pageInfo.endCursor;
-      variables.forward = true;
-      params.after = data.pageInfo.endCursor;
+  if (direction === 'forward') {
+    if (pageInfo.endCursor) {
+      variables.endCursor = pageInfo.endCursor;
+      params.after = pageInfo.endCursor;
     }
   } else {
-    // if (data.pageInfo.startCursor && data.pageInfo.hasPreviousPage) {
-    if (data.pageInfo.startCursor) {
-      variables.startCursor = data.pageInfo.startCursor;
-      variables.forward = false;
-      params.before = data.pageInfo.startCursor;
+    if (pageInfo.startCursor && pageInfo.hasPreviousPage) {
+      variables.startCursor = pageInfo.startCursor;
+      params.before = pageInfo.startCursor;
     }
   }
 
   fetchMore({
+    query,
     variables,
-    updateQuery: (previousResult, { fetchMoreResult }) => {
-      const { __typename } = previousResult[type];
-      const { nodes, pageInfo } = fetchMoreResult[type];
-
-      return {
-        [type]: {
-          __typename,
-          nodes,
-          pageInfo
-        }
-      };
-    }
+    updateQuery: (previousResult, { fetchMoreResult }) => ({
+      [queryKey]: fetchMoreResult[queryKey]
+    })
   });
 
   if (setParams) {

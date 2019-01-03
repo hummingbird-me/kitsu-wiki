@@ -1,4 +1,5 @@
 import React from 'react';
+import { changePage } from '../util/paginate';
 
 const PageButton = ({ enabled, onClick, children }) => (
   <li className={`page-item${enabled ? '' : ' disabled'}`}>
@@ -8,15 +9,45 @@ const PageButton = ({ enabled, onClick, children }) => (
   </li>
 );
 
-const Pagination = ({ pageInfo, onPrevPage, onNextPage }) => (
+const Pagination = ({
+  fetchMore,
+  queryKey,
+  pageAmount,
+  pageInfo,
+  forwardQuery,
+  backwardQuery,
+  setParams
+}) => (
   <nav>
     <ul className="pagination">
-      {/* <PageButton enabled={pageInfo.hasPreviousPage} onClick={onPrevPage}> */}
-      <PageButton enabled={true} onClick={onPrevPage}>
+      <PageButton
+        enabled={pageInfo.hasPreviousPage}
+        onClick={() =>
+          changePage({
+            fetchMore,
+            queryKey,
+            pageAmount,
+            pageInfo,
+            query: backwardQuery,
+            direction: 'backward',
+            setParams
+          })
+        }>
         Previous
       </PageButton>
-      {/* <PageButton enabled={pageInfo.hasNextPage} onClick={onNextPage}> */}
-      <PageButton enabled={true} onClick={onNextPage}>
+      <PageButton
+        enabled={pageInfo.hasNextPage}
+        onClick={() =>
+          changePage({
+            fetchMore,
+            queryKey,
+            pageAmount,
+            pageInfo,
+            query: forwardQuery,
+            direction: 'forward',
+            setParams
+          })
+        }>
         Next
       </PageButton>
     </ul>
