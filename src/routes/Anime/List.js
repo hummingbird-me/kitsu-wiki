@@ -53,7 +53,7 @@ const List = ({ query }) => {
   const [columns, setColumns] = useLocalStorage('animeColumns', enabledColumns);
 
   const { before, after } = query;
-  const [, setParams] = useParams({ before, after });
+  const [, setParams] = useParams(query);
 
   const pageAmount = 20;
   const variables = { pageAmount };

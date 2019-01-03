@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-const useParams = () => {
-  const [params, setParams] = useState({});
+const useParams = initialParams => {
+  const [params, setParams] = useState(initialParams);
 
   useEffect(
     () => {
