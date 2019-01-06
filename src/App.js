@@ -15,6 +15,7 @@ const client = new ApolloClient({
 
 client.defaultOptions = {
   watchQuery: {
+    fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true
   }
 };
