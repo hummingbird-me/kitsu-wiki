@@ -1,5 +1,5 @@
 import React from 'react';
-import { changePage } from '../util/paginate';
+import { changePage } from '../../util/paginate';
 
 const PageButton = ({ enabled, onClick, children }) => (
   <li className={`page-item${enabled ? '' : ' disabled'}`}>

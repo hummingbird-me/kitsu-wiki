@@ -7,6 +7,9 @@ const animeFields = gql`
       ageRatingGuide
       averageRating
       bannerImage {
+        original {
+          url
+        }
         views {
           name
           url
@@ -19,6 +22,9 @@ const animeFields = gql`
       id
       nextRelease
       posterImage {
+        original {
+          url
+        }
         views {
           name
           url
@@ -29,15 +35,31 @@ const animeFields = gql`
       slug
       startDate
       status
-      synopsis {
-        locale
-        text
-      }
+      synopsis
       titles {
         canonical
+        alternatives
+        localized
       }
       totalLength
       userCount
+      characters(first: 5) {
+        nodes {
+          character {
+            id
+            slug
+            image {
+              original {
+                url
+              }
+              views {
+                name
+                url
+              }
+            }
+          }
+        }
+      }
     }
     pageInfo {
       startCursor

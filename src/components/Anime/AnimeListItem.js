@@ -1,5 +1,5 @@
 import React from 'react';
-import ListItem from '../ListItem';
+import ListItem from '../ui/list/ListItem';
 import {
   Enum,
   Duration,
@@ -9,7 +9,7 @@ import {
   LocalizedString,
   TitlesList,
   Image
-} from '../ListField';
+} from '../ui/list/ListField';
 
 const AnimeColumn = ({ item, column }) => {
   if (column === 'posterImage' && item.posterImage) {

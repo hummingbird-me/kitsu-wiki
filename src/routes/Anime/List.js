@@ -3,10 +3,10 @@ import gql from 'graphql-tag.macro';
 import { useQuery } from 'react-apollo-hooks';
 import useParams from '../../util/params';
 import useLocalStorage from '../../util/localStorage';
-import Pagination from '../../components/Pagination';
-import ListControls from '../../components/ListControls';
+import Pagination from '../../components/ui/Pagination';
+import { RouteSpinner } from '../../components/ui/Spinner';
+import ListControls from '../../components/ui/list/ListControls';
 import AnimeList from '../../components/Anime/AnimeList';
-import { RouteSpinner } from '../../components/Spinner';
 import animeFields from '../../fragments/animeFields';
 
 const GET_ANIME_FORWARD = gql`

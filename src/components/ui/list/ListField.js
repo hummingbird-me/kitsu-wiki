@@ -1,6 +1,6 @@
 import React from 'react';
 import { UncontrolledTooltip as Tooltip } from 'reactstrap';
-import uniqueID from '../util/uniqueID';
+import uniqueID from '../../../util/uniqueID';
 
 const Enum = ({ value }) => (
   <span className="badge badge-secondary">{value}</span>

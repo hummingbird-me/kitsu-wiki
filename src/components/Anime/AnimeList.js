@@ -1,5 +1,5 @@
 import React from 'react';
-import ResourceList from '../ResourceList';
+import ResourceList from '../ui/list/ResourceList';
 import AnimeListItem from './AnimeListItem';
 
 const AnimeList = ({ anime, columns = ['posterImage', 'slug'] }) => (
