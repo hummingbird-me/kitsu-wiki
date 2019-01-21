@@ -4,9 +4,11 @@ import { Link } from '@reach/router/unstable-hooks';
 const ItemActions = ({ item }) => {
   const [open, setOpen] = useState(false);
 
+  const path = `/${item.__typename.toLowerCase()}/${item.id}`;
+
   return (
     <div className="btn-group">
-      <Link to={'/anime/' + item.id} className="btn btn-primary btn-sm">
+      <Link to={path} className="btn btn-primary btn-sm">
         Edit
       </Link>
       <button
@@ -16,9 +18,7 @@ const ItemActions = ({ item }) => {
       />
       <div className={`dropdown-menu${open ? ' show' : ''}`}>
         <a
-          href={`https://kitsu.io/${item['__typename'].toLowerCase()}/${
-            item.id
-          }`}
+          href={'https://kitsu.io' + path}
           target="_blank"
           rel="noopener noreferrer"
           className="dropdown-item">
