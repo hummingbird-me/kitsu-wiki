@@ -11,7 +11,7 @@ import FormActions from '../ui/edit/FormActions';
 
 const AnimeEdit = ({ anime }) => (
   <form>
-    <EditProvider value={anime}>
+    <EditProvider initialValue={anime}>
       <InputField readOnly field="id" type="text" />
       <InputField readOnly field="slug" type="text" />
       <TitlesField field="titles" />

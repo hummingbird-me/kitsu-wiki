@@ -34,10 +34,10 @@ const EditProvider = ({
   field,
   dispatch: parentDispatch,
   validate: parentValidate,
-  value,
+  initialValue,
   children
 }) => {
-  const initialState = Object.keys(value).reduce(
+  const initialState = Object.keys(initialValue).reduce(
     (acc, field) => ({
       dirty: { ...acc.dirty, [field]: false },
       errors: { ...acc.errors, [field]: [] }
@@ -45,7 +45,8 @@ const EditProvider = ({
     {}
   );
 
-  initialState.value = value;
+  initialState.value = initialValue;
+  initialState.initialValue = initialValue;
 
   const [state, dispatch] = useReducer(
     reducer(initialState, field, parentDispatch, parentValidate),

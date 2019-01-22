@@ -26,7 +26,8 @@ const KeyField = ({ readOnly, type, field, validate, onDelete }) => (
 const MapField = ({ readOnly, type, field, validate }) => {
   const {
     state: {
-      value: { [field]: value }
+      value: { [field]: value },
+      initialValue: { [field]: initialValue }
     },
     dispatch
   } = useContext(EditContext);
@@ -35,7 +36,10 @@ const MapField = ({ readOnly, type, field, validate }) => {
 
   return (
     <EditField field={field}>
-      <EditProvider value={value}>
+      <EditProvider
+        field={field}
+        initialValue={initialValue}
+        dispatch={dispatch}>
         {Object.keys(value).map(key => (
           <KeyField
             field={key}

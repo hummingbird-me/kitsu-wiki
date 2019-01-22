@@ -32,14 +32,15 @@ const ElementField = ({
 const ArrayField = ({ readOnly, type, field, validate }) => {
   const {
     state: {
-      value: { [field]: value }
+      value: { [field]: value },
+      initialValue: { [field]: initialValue }
     },
     dispatch
   } = useContext(EditContext);
 
   return (
     <EditField field={field}>
-      <EditProvider value={value}>
+      <EditProvider initialValue={initialValue}>
         {value.map((element, index) => (
           <ElementField
             readOnly={readOnly}

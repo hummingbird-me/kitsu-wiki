@@ -12,7 +12,7 @@ const EditField = ({ field, children }) => {
       {children}
       <small className="form-text text-muted">Help text.</small>
       {dirty && !valid && (
-        <div className="invalid-feedback">
+        <div className="invalid-feedback" style={{ display: 'block' }}>
           {errors.map((e, key) => (
             <div key={key} className="text-right">
               {e}
