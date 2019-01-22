@@ -21,7 +21,11 @@ const InputField = ({ type, readOnly, field, validate, withField = true }) => {
   const onChange = readOnly
     ? undefined
     : ({ target: { [valueKey]: value } }) =>
-        dispatch({ field, value, validate });
+        dispatch({
+          field,
+          value: type === 'number' ? parseInt(value) : value,
+          validate
+        });
 
   const inputProps = {
     type,

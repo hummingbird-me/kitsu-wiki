@@ -2,10 +2,14 @@ import React, { createContext, useReducer } from 'react';
 
 const EditContext = createContext({});
 
-const reducer = (initialValue, field, parentDispatch, parentValidate) => (
+const reducer = (initialState, field, parentDispatch, parentValidate) => (
   state,
   action
 ) => {
+  if (action === 'reset') {
+    return initialState;
+  }
+
   const { field: subField, value, validate } = action;
 
   if (field && parentDispatch) {
@@ -16,7 +20,7 @@ const reducer = (initialValue, field, parentDispatch, parentValidate) => (
     });
   }
 
-  const dirty = initialValue[subField] !== value;
+  const dirty = initialState.value[subField] !== value;
   const errors = validate ? validate(value) : [];
   return {
     ...state,
@@ -44,7 +48,7 @@ const EditProvider = ({
   initialState.value = value;
 
   const [state, dispatch] = useReducer(
-    reducer(value, field, parentDispatch, parentValidate),
+    reducer(initialState, field, parentDispatch, parentValidate),
     initialState
   );
 
