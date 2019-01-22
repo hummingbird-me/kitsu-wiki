@@ -15,7 +15,7 @@ const AnimeEdit = ({ anime }) => (
       <InputField readOnly field="id" type="text" />
       <InputField readOnly field="slug" type="text" />
       <TitlesField field="titles" />
-      <MapField field="synopsis" type="textarea" />
+      <MapField field="synopsis" keyName="Locale" type="textarea" />
       <ImageField field="posterImage" type="image" />
       <ImageField field="bannerImage" type="image" />
       <InputField

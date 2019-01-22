@@ -16,14 +16,25 @@ const KeyField = ({ readOnly, type, field, validate, onDelete }) => (
       withField={false}
     />
     <div className="input-group-append">
-      <div className="btn btn-outline-danger" onClick={() => onDelete()}>
+      <div className="btn btn-outline-danger" onClick={onDelete}>
         -
       </div>
     </div>
   </div>
 );
 
-const MapField = ({ readOnly, type, field, validate }) => {
+const defaultValidator = value =>
+  !!Object.keys(value).find(key => !value[key])
+    ? ['Value cannot be empty']
+    : [];
+
+const MapField = ({
+  readOnly,
+  type,
+  field,
+  keyName,
+  validate = defaultValidator
+}) => {
   const {
     state: {
       value: { [field]: value },
@@ -32,14 +43,15 @@ const MapField = ({ readOnly, type, field, validate }) => {
     dispatch
   } = useContext(EditContext);
 
-  const [locale, setLocale] = useState(undefined);
+  const [mapKey, setMapKey] = useState('');
 
   return (
     <EditField field={field}>
       <EditProvider
         field={field}
         initialValue={initialValue}
-        dispatch={dispatch}>
+        dispatch={dispatch}
+        validate={validate}>
         {Object.keys(value).map(key => (
           <KeyField
             field={key}
@@ -47,30 +59,34 @@ const MapField = ({ readOnly, type, field, validate }) => {
             key={key}
             onDelete={() => {
               delete value[key];
-              dispatch({ field, payload: { value } });
+              dispatch({ field, value, validate });
             }}
+            validate={value => (!value ? ['Value cannot be empty'] : [])}
           />
         ))}
       </EditProvider>
       <div className="input-group" style={{ width: '120px' }}>
         <input
           type="text"
-          placeholder="Locale"
+          placeholder={keyName}
           className="form-control"
-          onChange={({ target: { value } }) => setLocale(value)}
+          value={mapKey}
+          onChange={({ target: { value } }) => setMapKey(value)}
         />
         <div className="input-group-append">
-          <div
+          <button
             className="btn btn-secondary"
+            disabled={!mapKey}
             onClick={() => {
               dispatch({
                 field,
-                payload: { value: { ...value, [locale]: '' } }
+                value: { ...value, [mapKey]: '' },
+                validate
               });
-              setLocale('');
+              setMapKey('');
             }}>
             +
-          </div>
+          </button>
         </div>
       </div>
     </EditField>

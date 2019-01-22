@@ -21,8 +21,13 @@ const TitlesField = ({ readOnly, field, validate }) => {
           initialValue={initialValue}
           dispatch={dispatch}>
           <InputField field="canonical" type="text" readOnly={readOnly} />
-          <ArrayField field="alternatives" type="text" />
-          <MapField field="localized" type="text" />
+          <ArrayField field="alternatives" type="text" readOnly={readOnly} />
+          <MapField
+            field="localized"
+            keyName="Locale"
+            type="text"
+            readOnly={readOnly}
+          />
         </EditProvider>
       </div>
     </EditField>
