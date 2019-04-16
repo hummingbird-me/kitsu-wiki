@@ -955,15 +955,18 @@
     react-inspector "^2.3.0"
     uuid "^3.3.2"
 
-"@storybook/addon-links@^4.1.0-alpha.11":
-  version "4.1.0-alpha.11"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-4.1.0-alpha.11.tgz#5e7aed5a820786a6fe7fef04129247949f1f38bd"
+"@storybook/addon-links@^5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-5.0.8.tgz#2ab42a45641180677561ff8cb069c4bd0877b16a"
+  integrity sha512-KwEIfFgBNcxpTAu+o0L8DV4vg7HP740Fm5RSFH3APGCE8MrmRL+hVcMEcp9KmFf6FMD/V7y5nku4jhlbGjAi1w==
   dependencies:
-    "@storybook/addons" "4.1.0-alpha.11"
-    "@storybook/components" "4.1.0-alpha.11"
-    "@storybook/core-events" "4.1.0-alpha.11"
+    "@storybook/addons" "5.0.8"
+    "@storybook/core-events" "5.0.8"
+    common-tags "^1.8.0"
+    core-js "^2.6.5"
     global "^4.3.2"
     prop-types "^15.6.2"
+    qs "^6.5.2"
 
 "@storybook/addons@4.1.0-alpha.11", "@storybook/addons@^4.1.0-alpha.11":
   version "4.1.0-alpha.11"
@@ -971,6 +974,17 @@
   dependencies:
     "@storybook/channels" "4.1.0-alpha.11"
     "@storybook/components" "4.1.0-alpha.11"
+    global "^4.3.2"
+    util-deprecate "^1.0.2"
+
+"@storybook/addons@5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-5.0.8.tgz#9bca24ab8e95a36dc91e4e2855449e751702cdfb"
+  integrity sha512-Tl/ntlBt+KfAEaLyzfFTJsqmawtmKvrJDy8kqNM1oIfsOxig25T9eqU8RfWgK99bMdsbhA99P+cplk6LuVY1Ww==
+  dependencies:
+    "@storybook/channels" "5.0.8"
+    "@storybook/client-logger" "5.0.8"
+    core-js "^2.6.5"
     global "^4.3.2"
     util-deprecate "^1.0.2"
 
@@ -986,9 +1000,23 @@
   version "4.1.0-alpha.11"
   resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-4.1.0-alpha.11.tgz#6d2caf92453fc9479be68c8ecbf2b6c79016cda3"
 
+"@storybook/channels@5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-5.0.8.tgz#d44517cd6f19f87ccab5e899bd9b515a4395c97c"
+  integrity sha512-t0PVow9xxQMK04ltp1LtrACG5f63vUM/THtdtoucxepirpfTGr+9B2SP791ZDtpARp5sFqAB7CGN8zDGfZF7lQ==
+  dependencies:
+    core-js "^2.6.5"
+
 "@storybook/client-logger@4.1.0-alpha.11":
   version "4.1.0-alpha.11"
   resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-4.1.0-alpha.11.tgz#ed69ab930766cee37093d0aa3925337d7c89ae59"
+
+"@storybook/client-logger@5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-5.0.8.tgz#d37ee57f7d6ec207f60c3f87163d564427f5b82c"
+  integrity sha512-PKmSx6M7WNHwUUh4R9OluKWZfkHN7PztaRWrp9dvNy9rOd/c7vVWK1ekGRaMR06MHkszZ5boPerV8c9xEydEfg==
+  dependencies:
+    core-js "^2.6.5"
 
 "@storybook/components@4.1.0-alpha.11":
   version "4.1.0-alpha.11"
@@ -1008,6 +1036,13 @@
 "@storybook/core-events@4.1.0-alpha.11":
   version "4.1.0-alpha.11"
   resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-4.1.0-alpha.11.tgz#8ab7484aabc1ee047197480b57f4a11a5d532322"
+
+"@storybook/core-events@5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-5.0.8.tgz#9d941dd748590185d3a2e0a4aeb1365be1778c62"
+  integrity sha512-3sTAtkebvQOuu5OxHHPK3xGP1RBp65Nls3t3l3KAZEqQ5vQ0w30lbe0gEWMqLz4MMCy84E+Xz297G3a74eQ/xA==
+  dependencies:
+    core-js "^2.6.5"
 
 "@storybook/core@4.1.0-alpha.11":
   version "4.1.0-alpha.11"
@@ -3159,9 +3194,10 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "http://registry.npmjs.org/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0, core-js@^2.5.7:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.0.tgz#1e30793e9ee5782b307e37ffa22da0eacddd84d4"
+core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0, core-js@^2.5.7, core-js@^2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
+  integrity sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
