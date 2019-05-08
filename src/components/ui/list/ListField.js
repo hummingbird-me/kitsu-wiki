@@ -72,7 +72,13 @@ const TitlesList = ({ titles, length }) => (
 );
 
 const Image = ({ image, view }) => {
-  const url = image.views.find(({ name }) => name === view).url;
+  let url;
+  if (view === 'original') {
+    url = image.original.url;
+  } else {
+    url = image.views.find(({ name }) => name === view).url;
+  }
+
   if (!url || url.includes('missing.')) return null;
 
   return <img src={url} alt={view} height={40} />;

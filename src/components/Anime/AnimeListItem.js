@@ -13,11 +13,11 @@ import {
 
 const AnimeColumn = ({ item, column }) => {
   if (column === 'posterImage' && item.posterImage) {
-    return <Image image={item.posterImage} view={'tiny'} />;
+    return <Image image={item.posterImage} view="tiny" />;
   }
 
   if (column === 'bannerImage' && item.bannerImage) {
-    return <Image image={item.bannerImage} view={'tiny'} />;
+    return <Image image={item.bannerImage} view="tiny" />;
   }
 
   if (column === 'slug' && item.slug) {

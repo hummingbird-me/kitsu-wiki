@@ -4,14 +4,25 @@ import { useQuery } from 'react-apollo-hooks';
 import AnimeEdit from '../../components/Anime/AnimeEdit';
 import { RouteSpinner } from '../../components/ui/Spinner';
 import animeFields from '../../fragments/animeFields';
+import characterFields from '../../fragments/characterFields';
 
 const GET_ANIME = gql`
   query Anime($id: [String!]) {
     anime(id: $id) {
-      ...animeFields
+      nodes {
+        ...animeFields
+        characters {
+          nodes {
+            character {
+              ...characterFields
+            }
+          }
+        }
+      }
     }
   }
   ${animeFields}
+  ${characterFields}
 `;
 
 const Edit = ({ id }) => {
@@ -29,7 +40,7 @@ const Edit = ({ id }) => {
     <div className="container mb-3">
       <div className="row justify-content-center">
         <div className="col-md-8">
-          <AnimeEdit anime={anime} />
+          <AnimeEdit anime={anime} onSave={console.log} />
         </div>
       </div>
     </div>

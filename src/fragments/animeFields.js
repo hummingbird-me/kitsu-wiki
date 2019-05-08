@@ -1,72 +1,47 @@
 import gql from 'graphql-tag.macro';
 
 const animeFields = gql`
-  fragment animeFields on AnimeConnection {
-    nodes {
-      ageRating
-      ageRatingGuide
-      averageRating
-      bannerImage {
-        original {
-          url
-        }
-        views {
-          name
-          url
-        }
+  fragment animeFields on Anime {
+    id
+    slug
+    titles {
+      localized
+      canonical
+      # alternatives
+    }
+    synopsis
+    posterImage {
+      original {
+        url
       }
-      endDate
-      episodeCount
-      episodeLength
-      favoritesCount
-      id
-      nextRelease
-      posterImage {
-        original {
-          url
-        }
-        views {
-          name
-          url
-        }
-      }
-      season
-      sfw
-      slug
-      startDate
-      status
-      synopsis
-      titles {
-        canonical
-        alternatives
-        localized
-      }
-      totalLength
-      userCount
-      characters(first: 5) {
-        nodes {
-          character {
-            id
-            slug
-            image {
-              original {
-                url
-              }
-              views {
-                name
-                url
-              }
-            }
-          }
-        }
+      views {
+        name
+        url
       }
     }
-    pageInfo {
-      startCursor
-      endCursor
-      hasNextPage
-      hasPreviousPage
+    bannerImage {
+      original {
+        url
+      }
+      views {
+        name
+        url
+      }
     }
+    sfw
+    ageRating
+    ageRatingGuide
+    season
+    status
+    startDate
+    endDate
+    nextRelease
+    episodeCount
+    episodeLength
+    totalLength
+    userCount
+    favoritesCount
+    averageRating
   }
 `;
 

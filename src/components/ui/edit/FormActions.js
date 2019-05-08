@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { EditContext } from './EditProvider';
 
-const FormActions = ({ onSave, onDelete }) => {
+const FormActions = ({ onReset, onSave, onDelete }) => {
   const { state, dispatch } = useContext(EditContext);
 
   const dirty = !!Object.keys(state.dirty).find(field => state.dirty[field]);
@@ -10,15 +10,13 @@ const FormActions = ({ onSave, onDelete }) => {
   );
 
   return (
-    <div className="row justify-content-between">
+    <div className="row justify-content-between mb-3">
       <div className="col-md-auto">
         <button
           type="reset"
           className="btn btn-warning mr-2"
           disabled={!dirty}
-          onClick={() => {
-            dispatch('reset');
-          }}>
+          onClick={() => (onReset ? onReset() : dispatch('reset'))}>
           Reset
         </button>
       </div>
