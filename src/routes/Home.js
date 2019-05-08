@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from '@reach/router/unstable-hooks';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [addDropdownOpen, setAddDropdownOpen] = useState(false);
@@ -11,9 +11,9 @@ const Home = () => {
         <h1 className="display-4">What would you like to do?</h1>
         <p className="lead">Select an action below to get started.</p>
         <hr className="my-4" />
-        <div class="btn-group">
+        <div className="btn-group">
           <button
-            class="btn btn-primary btn-lg dropdown-toggle mr-3"
+            className="btn btn-primary btn-lg dropdown-toggle mr-3"
             onClick={() => setAddDropdownOpen(!addDropdownOpen)}>
             Add
           </button>
@@ -23,9 +23,9 @@ const Home = () => {
             </Link>
           </div>
         </div>
-        <div class="btn-group">
+        <div className="btn-group">
           <button
-            class="btn btn-info btn-lg dropdown-toggle"
+            className="btn btn-info btn-lg dropdown-toggle"
             onClick={() => setEditDropdownOpen(!editDropdownOpen)}>
             Edit
           </button>

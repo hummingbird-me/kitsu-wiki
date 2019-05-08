@@ -1,17 +1,22 @@
 import React from 'react';
-import { useRouter } from '@reach/router/unstable-hooks';
+import { Route } from 'react-router-dom';
 import { parse as queryParse } from 'query-string';
 import List from './List';
 import Edit from './Edit';
 
-const Anime = () => {
-  const routes = useRouter({
-    '.': ({ location }) => <List query={queryParse(location.search)} />,
-    '/:id': ({ id }) => <Edit id={id} />,
-    '/add': () => <Edit />
-  });
-
-  return routes;
-};
+const Anime = ({ match, location }) => (
+  <>
+    <Route
+      path={match.path}
+      exact
+      render={() => <List query={queryParse(location.search)} />}
+    />
+    <Route
+      path={`${match.path}/:id`}
+      render={({ match }) => <Edit id={match.params.id} />}
+    />
+    <Route path={`${match.path}/add`} component={Edit} />
+  </>
+);
 
 export default Anime;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from '@reach/router/unstable-hooks';
+import { Link } from 'react-router-dom';
 
 const ItemActions = ({ item, inlineEdit, onEdit, onRemove }) => {
   const [open, setOpen] = useState(false);
