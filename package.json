@@ -23,7 +23,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.1",
     "reactstrap": "^6.5.0",
-    "webpack": "4.19.1"
+    "webpack": "4.30.0"
   },
   "scripts": {
     "start": "react-scripts start",
