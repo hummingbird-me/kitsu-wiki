@@ -4854,9 +4854,10 @@ graphql-anywhere@^4.1.0-alpha.0:
   dependencies:
     apollo-utilities "^1.0.26"
 
-graphql-tag.macro@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/graphql-tag.macro/-/graphql-tag.macro-2.0.0.tgz#b06276ac7f5499150efd8b240c2cae7bbe0f44e5"
+graphql-tag.macro@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/graphql-tag.macro/-/graphql-tag.macro-2.1.0.tgz#442e10f766c92411a4627ff9dbb136019b40242f"
+  integrity sha512-hH+8bnhgFz2sWPsKAGDhCJ6QHGQxxI2AyzgZUQ9eWNF3aIeSUbSheP+0Fh0FSTVu6NDBVpM0Iq7TBItTQQsVWA==
   dependencies:
     babel-literal-to-ast "^2.0.0"
     babel-plugin-macros "^2.4.2"
