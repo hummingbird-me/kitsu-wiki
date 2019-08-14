@@ -11,7 +11,7 @@
     "bootstrap": "^4.1.2",
     "graphql": "^14.4.2",
     "graphql-tag.macro": "^2.1.0",
-    "husky": "^1.2.0",
+    "husky": "^3.0.3",
     "lint-staged": "^8.1.0",
     "prettier": "^1.16.4",
     "query-string": "^6.2.0",
@@ -20,7 +20,7 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.1.1",
-    "reactstrap": "^6.5.0"
+    "reactstrap": "^8.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
