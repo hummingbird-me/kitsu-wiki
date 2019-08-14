@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo-hooks';
+import { ApolloProvider } from 'react-apollo';
 import { Home, Anime } from './routes';
 
 const handleError = ({ networkError }) => {

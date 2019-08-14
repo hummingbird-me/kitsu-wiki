@@ -1,6 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag.macro';
-import { useQuery } from 'react-apollo-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import AnimeEdit from '../../components/Anime/AnimeEdit';
 import { RouteSpinner } from '../../components/ui/Spinner';
 import animeFields from '../../fragments/animeFields';

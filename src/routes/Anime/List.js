@@ -1,6 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag.macro';
-import { useQuery } from 'react-apollo-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import useParams from '../../util/params';
 import useLocalStorage from '../../util/localStorage';
 import Pagination from '../../components/ui/Pagination';
