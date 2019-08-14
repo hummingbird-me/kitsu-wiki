@@ -5,12 +5,9 @@ const useLocalStorage = (key, initialState) => {
   const columns = storedVal ? JSON.parse(storedVal) : initialState;
   const [state, setState] = useState(columns);
 
-  useEffect(
-    () => {
-      localStorage.setItem(key, JSON.stringify(state));
-    },
-    [state]
-  );
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [key, state]);
 
   return [state, setState];
 };

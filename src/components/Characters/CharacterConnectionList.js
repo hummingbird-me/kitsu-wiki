@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Collapse } from 'reactstrap';
 import CharacterEdit from './CharacterEdit';
-import EditProvider, { EditContext } from '../ui/edit/EditProvider';
+import { EditContext } from '../ui/edit/EditProvider';
 import ResourceList from '../ui/list/ResourceList';
 import CharacterListItem from './CharacterListItem';
 

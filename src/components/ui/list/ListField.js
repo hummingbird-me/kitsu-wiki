@@ -63,8 +63,7 @@ const TruncatedString = ({ value, length, wrap }) => {
 };
 
 const LocalizedString = ({ values, length }) => {
-  const en = values.find(val => val.locale === 'en').text;
-  return <TruncatedString value={en} length={length} wrap />;
+  return <TruncatedString value={values['en']} length={length} wrap />;
 };
 
 const TitlesList = ({ titles, length }) => (

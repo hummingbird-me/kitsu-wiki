@@ -7,15 +7,15 @@ import Edit from './Edit';
 const Anime = ({ match, location }) => (
   <>
     <Route
-      path={match.path}
       exact
+      path={match.path}
       render={() => <List query={queryParse(location.search)} />}
     />
+    <Route exact path={`${match.path}/add`} component={Edit} />
     <Route
       path={`${match.path}/:id`}
       render={({ match }) => <Edit id={match.params.id} />}
     />
-    <Route path={`${match.path}/add`} component={Edit} />
   </>
 );
 
