@@ -6,7 +6,7 @@
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.1.11",
-    "@storybook/react": "^5.3.19",
+    "@storybook/react": "^6.0.5",
     "apollo-boost": "^0.4.9",
     "bootstrap": "^4.5.2",
     "graphql": "^14.7.0",
