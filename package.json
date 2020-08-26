@@ -13,7 +13,7 @@
     "graphql-tag.macro": "^2.1.0",
     "husky": "^3.0.3",
     "lint-staged": "^8.1.0",
-    "prettier": "^1.16.4",
+    "prettier": "^2.1.1",
     "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-apollo": "^3.0.0",
