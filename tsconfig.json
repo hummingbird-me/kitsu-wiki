@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    // "lib": ["dom", "esnext"],
+    "target": "ES2019",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "app/*": ["./src/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./custom_typings"]
+  }
+}
