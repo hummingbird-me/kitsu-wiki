@@ -1,19 +1,31 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "jsx": "react",
-    // "lib": ["dom", "esnext"],
+    "jsx": "react-jsx",
     "target": "ES2019",
-    "module": "CommonJS",
+    "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
     "baseUrl": ".",
-    "paths": {
-      "app/*": ["./src/*"]
-    },
-    "typeRoots": ["./node_modules/@types", "./custom_typings"]
-  }
+    "typeRoots": [
+      "./node_modules/@types",
+      "./custom_typings"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "src"
+  ]
 }
