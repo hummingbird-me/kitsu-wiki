@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "dependencies": {
     "@apollo/client": "^3.2.7",
+    "bootstrap": "^4.5.3",
     "graphql": "^15.4.0",
     "graphql.macro": "^1.4.2",
     "query-string": "^6.13.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1"
+    "react-scripts": "4.0.1",
+    "reactstrap": "^8.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.8",
@@ -38,7 +40,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "generate-graphql-types": "graphql-codegen --config codegen.yml",
-    "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet --fix"
   },
   "eslintConfig": {
