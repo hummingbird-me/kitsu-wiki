@@ -6,8 +6,10 @@ import {
   Route,
   Link,
   RouteComponentProps,
+  Switch,
 } from 'react-router-dom';
 import { Anime, Home } from './routes';
+import Media from './components/media';
 
 const App = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -30,16 +32,20 @@ const App = () => {
               <div
                 className={`dropdown-menu${dropdownOpen ? ' show' : ''}`}
                 onClick={() => setDropdownOpen(false)}>
-                <Link to="/anime" className="dropdown-item">
-                  Anime
+                <Link to="/media" className="dropdown-item">
+                  Media
                 </Link>
               </div>
             </li>
           </ul>
         </nav>
         <div style={{ paddingTop: '75px' }}>
-          <Route path="/" exact component={Home} />
-          <Route path="/anime" component={Anime} />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/media">
+              <Media />
+            </Route>
+          </Switch>
         </div>
       </Router>
     </ApolloProvider>

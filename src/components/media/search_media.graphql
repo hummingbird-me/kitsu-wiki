@@ -1,0 +1,19 @@
+query SearchMediaByTitle(
+  $first: Int!
+  $title: String!
+  $media_type: MediaTypeEnum
+) {
+  searchMediaByTitle(first: $first, mediaType: $media_type, title: $title) {
+    nodes {
+      ...searchMediaFields
+    }
+  }
+}
+
+fragment searchMediaFields on Media {
+  id
+  type
+  titles {
+    canonical
+  }
+}
