@@ -42,6 +42,7 @@ const App = () => {
         <div style={{ paddingTop: '75px' }}>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/media/anime" component={Anime} />
             <Route path="/media">
               <Media />
             </Route>

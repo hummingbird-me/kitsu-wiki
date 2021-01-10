@@ -41,7 +41,11 @@ const SearchMedia = (): ReactElement => {
         />
       </div>
       <MediaDropdown />
+
       <div>
+        <Link key={1} to={'/media/anime/1'}>
+          {'Something'}
+        </Link>
         {data?.searchMediaByTitle?.nodes?.map((media) => (
           <Link key={media?.id} to={`/${media?.type}/${media?.id}`} />
         ))}

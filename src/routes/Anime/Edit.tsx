@@ -1,46 +1,30 @@
 import React, { ReactElement } from 'react';
-// import gql from 'graphql-tag.macro';
-// import { useQuery } from '@apollo/react-hooks';
-// import AnimeEdit from '../../components/Anime/AnimeEdit';
+import { loader } from 'graphql.macro';
+import { useQuery } from '@apollo/client';
+import AnimeEdit from 'src/components/anime/AnimeEdit';
 import { RouteSpinner } from '../../components/ui/Spinner';
-// import animeFields from '../../fragments/animeFields';
-// import characterFields from '../../fragments/characterFields';
+import {
+  FindAnimeByIdQuery,
+  FindAnimeByIdQueryVariables,
+} from './findAnimeById.types';
 
-// const GET_ANIME = gql`
-//   query Anime($id: [String!]) {
-//     anime(id: $id) {
-//       nodes {
-//         ...animeFields
-//         characters {
-//           nodes {
-//             character {
-//               ...characterFields
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-//   ${animeFields}
-//   ${characterFields}
-// `;
+const FIND_ANIME_BY_ID = loader('./findAnimeById.graphql');
 
 const Edit = ({ id }: { id: string }): ReactElement => {
-  // const { data, error, loading } = useQuery(GET_ANIME, {
-  //   variables: { id },
-  //   suspend: false,
-  // });
+  const findAnimeByIdVariables: FindAnimeByIdQueryVariables = { id: id };
+  const { data, error, loading } = useQuery<FindAnimeByIdQuery>(
+    FIND_ANIME_BY_ID,
+    { variables: findAnimeByIdVariables }
+  );
 
-  // if (loading) return <RouteSpinner />;
-  // if (error) return <div>Error: {error}</div>;
-
-  // const anime = data.anime.nodes[0];
+  if (loading) return <RouteSpinner />;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="container mb-3">
       <div className="row justify-content-center">
         <div className="col-md-8">
-          {/* <AnimeEdit anime={anime} onSave={console.log} /> */}
+          <AnimeEdit anime={data?.findAnimeById} onSave={console.log} />
         </div>
       </div>
     </div>

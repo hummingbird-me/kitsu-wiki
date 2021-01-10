@@ -1,0 +1,9 @@
+query FindAnimeById($id: ID!) {
+  findAnimeById(id: $id) {
+    ...findAnimeFields
+  }
+}
+
+fragment findAnimeFields on Anime {
+  id
+}
