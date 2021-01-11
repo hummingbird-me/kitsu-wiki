@@ -27,7 +27,7 @@ const SEARCH_MEDIA_QUERY = loader('./search_media.graphql');
 
 const SearchMedia = (): ReactElement => {
   const [searchTitle, setSearchTitle] = useState('');
-  const [media, MediaDropdown] = useDropdown('', MediaTypeEnum.Anime, [
+  const [media, MediaDropdown] = useDropdown('Media', MediaTypeEnum.Anime, [
     MediaTypeEnum.Anime,
     MediaTypeEnum.Manga,
   ]);
@@ -52,7 +52,11 @@ const SearchMedia = (): ReactElement => {
           <MediaDropdown />
         </div>
         <div className="searchbox">
+          <label htmlFor="media-searchbar">
+            Search for selected media type
+          </label>
           <Input
+            id="media-searchbar"
             type="search"
             placeholder="Search"
             onChange={(e) => {

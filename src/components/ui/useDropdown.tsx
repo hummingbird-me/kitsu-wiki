@@ -14,8 +14,8 @@ const useDropdown = (
   const id = `use-dropdown-${label.replace(' ', '').toLowerCase()}`;
 
   const Dropdown = (): ReactElement => (
-    <label htmlFor={id}>
-      {label}
+    <>
+      <label htmlFor={id}>{label}</label>
       <MediaSelector
         id={id}
         value={state}
@@ -29,7 +29,7 @@ const useDropdown = (
         ))}
       </MediaSelector>
       <CaretDownFill />
-    </label>
+    </>
   );
 
   return [state, Dropdown, setState];

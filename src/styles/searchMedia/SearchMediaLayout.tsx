@@ -31,6 +31,13 @@ const SearchMediaLayout = styled.div`
     align-content: center;
     justify-content: center;
 
+    label {
+      /* visibility: hidden; */
+      height: 0;
+      width: 0;
+      font-size: 0;
+    }
+
     @media screen and (max-width: 600px) {
       grid-template-columns: 0 repeat(8, 1fr) 0;
       gap: 10px;
