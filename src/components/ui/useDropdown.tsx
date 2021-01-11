@@ -1,5 +1,10 @@
 import React, { ReactElement, useState } from 'react';
 
+// Styles
+import { MediaSelector } from '../../styles/components/select';
+// Media
+import { ReactComponent as CaretDownFill } from '../../assets/caretDownFill.svg';
+
 const useDropdown = (
   label: string,
   defaultState: string,
@@ -11,7 +16,7 @@ const useDropdown = (
   const Dropdown = (): ReactElement => (
     <label htmlFor={id}>
       {label}
-      <select
+      <MediaSelector
         id={id}
         value={state}
         onChange={(e) => setState(e.target.value)}
@@ -19,10 +24,11 @@ const useDropdown = (
         disabled={options.length === 0}>
         {options.map((item) => (
           <option key={item} value={item}>
-            {item}
+            {item.toLowerCase().replace(/^\w/, (c) => c.toUpperCase())}
           </option>
         ))}
-      </select>
+      </MediaSelector>
+      <CaretDownFill />
     </label>
   );
 
