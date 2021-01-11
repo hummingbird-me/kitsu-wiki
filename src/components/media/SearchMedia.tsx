@@ -46,6 +46,11 @@ const SearchMedia = (): ReactElement => {
         <div className="logo">
           <KitsuDatabaseTools />
         </div>
+        <AddEntryButton className="new-entry">Add New Entry</AddEntryButton>
+
+        <div className="media-type-dropdown">
+          <MediaDropdown />
+        </div>
         <div className="searchbox">
           <Input
             type="search"
@@ -59,11 +64,6 @@ const SearchMedia = (): ReactElement => {
             }}
           />
           <SearchIcon />
-        </div>
-        <AddEntryButton className="new-entry">Add New Entry</AddEntryButton>
-
-        <div className="media-type-dropdown">
-          <MediaDropdown />
         </div>
 
         {/* <div>
