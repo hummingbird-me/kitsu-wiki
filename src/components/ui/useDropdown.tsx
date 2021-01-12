@@ -3,7 +3,8 @@ import React, { ReactElement, useState } from 'react';
 // Styles
 import { MediaSelector } from '../../styles/components/select';
 // Media
-import { ReactComponent as CaretDownFill } from '../../assets/caretDownFill.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const useDropdown = (
   label: string,
@@ -28,7 +29,7 @@ const useDropdown = (
           </option>
         ))}
       </MediaSelector>
-      <CaretDownFill />
+      <FontAwesomeIcon icon={faCaretDown} />
     </>
   );
 

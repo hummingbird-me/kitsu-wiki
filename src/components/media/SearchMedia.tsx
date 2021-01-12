@@ -19,7 +19,8 @@ import Input from '../../styles/components/input';
 
 // Media
 import { ReactComponent as KitsuDatabaseTools } from '../../assets/kitsuDatabaseTools.svg';
-import { ReactComponent as SearchIcon } from '../../assets/searchIcon.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 /* end imports */
 
@@ -67,7 +68,7 @@ const SearchMedia = (): ReactElement => {
               });
             }}
           />
-          <SearchIcon />
+          <FontAwesomeIcon icon={faSearch} />
         </div>
 
         {/* <div>

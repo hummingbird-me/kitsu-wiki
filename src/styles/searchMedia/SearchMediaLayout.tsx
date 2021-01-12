@@ -105,7 +105,7 @@ const SearchMediaLayout = styled.div`
       top: 53%;
       left: 15px;
       transform: translateY(-50%);
-      fill: var(--secondary-text);
+      color: var(--secondary-text);
     }
 
     &:focus-within {
@@ -116,7 +116,7 @@ const SearchMediaLayout = styled.div`
         border-radius: var(--rounded-input) var(--rounded-input) 0 0;
       }
       svg {
-        fill: var(--main-text) !important;
+        color: var(--main-text) !important;
       }
     }
   }
@@ -141,7 +141,7 @@ const SearchMediaLayout = styled.div`
       top: 50%;
       left: 15px;
       transform: translateY(-50%);
-      fill: var(--placeholder-text);
+      color: var(--placeholder-text);
     }
     &:focus-within {
       input {
@@ -159,7 +159,7 @@ const SearchMediaLayout = styled.div`
         }
       }
       svg {
-        fill: var(--main-text) !important;
+        color: var(--main-text) !important;
       }
     }
   }
