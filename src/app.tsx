@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import client from './client';
-import { ApolloProvider } from '@apollo/client';
+import { Anime } from './routes';
 import {
   BrowserRouter as Router,
   Route,
@@ -8,16 +7,24 @@ import {
   RouteComponentProps,
   Switch,
 } from 'react-router-dom';
-import { Anime, Home } from './routes';
+
+import { ApolloProvider } from '@apollo/client';
+import client from './client';
+
 import Media from './components/media';
+
+import 'normalize.css';
+import GlobalStyles from './styles/GlobalStyles';
 
 const App = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+    <>
+      <GlobalStyles />
+      <ApolloProvider client={client}>
+        <Router>
+          {/* <nav className="navbar navbar-expand-lg navbar-light fixed-top bg-light">
           <Link to="/" className="navbar-brand">
             Kitsu Database
           </Link>
@@ -38,18 +45,18 @@ const App = () => {
               </div>
             </li>
           </ul>
-        </nav>
-        <div style={{ paddingTop: '75px' }}>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/media/anime" component={Anime} />
-            <Route path="/media">
-              <Media />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </ApolloProvider>
+        </nav> */}
+          <div>
+            <Switch>
+              <Route path="/media/anime" component={Anime} />
+              <Route exact path="/">
+                <Media />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </ApolloProvider>
+    </>
   );
 };
 
