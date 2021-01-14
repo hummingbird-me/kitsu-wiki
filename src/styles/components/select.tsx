@@ -1,13 +1,11 @@
 import styled from 'styled-components';
+import generalStylesInteractions from './generalStylesInteractions';
 
-const Select = styled.select`
-  height: 3.5em;
-  @media screen and (max-width: 600px) {
-    font-size: var(--font-me);
-    height: 3.2em;
-  }
+// Media
+import { faCaretDown, faSearch } from '@fortawesome/free-solid-svg-icons';
+
+export const Select = styled.select`
+  ${generalStylesInteractions}
 `;
-
-export const MediaSelector = styled(Select)``;
 
 export default Select;

@@ -1,11 +1,8 @@
 import styled from 'styled-components';
+import generalStylesInteractions from './generalStylesInteractions';
 
 const Input = styled.input`
-  height: 3.5em;
-  @media screen and (max-width: 600px) {
-    font-size: var(--font-me);
-    height: 3.2em;
-  }
+  ${generalStylesInteractions}
 `;
 
 export default Input;

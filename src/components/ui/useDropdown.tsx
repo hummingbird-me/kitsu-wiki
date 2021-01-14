@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 
 // Styles
-import { MediaSelector } from '../../styles/components/select';
+import { Select } from '../../styles/components/select';
 // Media
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,7 @@ const useDropdown = (
   const Dropdown = (): ReactElement => (
     <>
       <label htmlFor={id}>{label}</label>
-      <MediaSelector
+      <Select
         id={id}
         value={state}
         onChange={(e) => setState(e.target.value)}
@@ -28,7 +28,7 @@ const useDropdown = (
             {item.toLowerCase().replace(/^\w/, (c) => c.toUpperCase())}
           </option>
         ))}
-      </MediaSelector>
+      </Select>
       <FontAwesomeIcon icon={faCaretDown} />
     </>
   );

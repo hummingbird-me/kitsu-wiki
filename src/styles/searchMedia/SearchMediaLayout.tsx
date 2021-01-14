@@ -80,9 +80,6 @@ const SearchMediaLayout = styled.div`
 
   .media-type-dropdown {
     position: relative;
-    background-color: var(--foreground-background-color);
-    border-radius: var(--rounded-input);
-    box-sizing: border-box;
     transition-property: transform;
     transition-duration: 0.1s;
 
@@ -109,12 +106,6 @@ const SearchMediaLayout = styled.div`
     }
 
     &:focus-within {
-      select {
-        padding-left: 38px;
-        border: 2px solid var(--links-text);
-        outline: none;
-        border-radius: var(--rounded-input) var(--rounded-input) 0 0;
-      }
       svg {
         color: var(--main-text) !important;
       }
@@ -122,9 +113,6 @@ const SearchMediaLayout = styled.div`
   }
   .searchbox {
     position: relative;
-    background-color: var(--foreground-background-color);
-    border-radius: var(--rounded-input);
-    box-sizing: border-box;
 
     input {
       width: 100%;
@@ -145,12 +133,6 @@ const SearchMediaLayout = styled.div`
     }
     &:focus-within {
       input {
-        padding-left: 38px;
-        border: 2px solid var(--links-text);
-        outline: none;
-        padding-top: 0px;
-        padding-bottom: 0px;
-
         &:hover:not(:focus) {
           filter: brightness(110%);
         }

@@ -17,6 +17,10 @@ const GlobalStyles = createGlobalStyle`
 		--secondary-text: #ddd;
 		--placeholder-text: #ccc;
 		--links-text: #ff8c7c;
+
+		// Focus highlights
+		--focus-highlight: #ff8c7c;
+		--unfocused-highlights: #ff8c7c00;
 		
 		// Border-Radius
 		--rounded-input: 7px;
@@ -59,28 +63,6 @@ const GlobalStyles = createGlobalStyle`
 	}
 
 	// Generic styling for various elements
-	input,
-	button,
-	select {
-		appearance: none!important;
-		margin: 0;
-		padding: 0;
-		border-radius: var(--rounded-input);
-		border: none;
-		background-color: var(--foreground-background-color);
-		color: var(--main-text);
-
-
-		&::placeholder {
-			text-transform: capitalize;
-			color: var(--placeholder-text);
-			opacity: 1;
-		}
-		&:focus {
-			border: 2px solid var(--links-text);
-			outline: none;
-		}
-	}
 	option {
 		text-transform: capitalize;
 	}
