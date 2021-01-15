@@ -2,12 +2,13 @@ import React, { ReactElement, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // GraphQl
-import { MediaTypeEnum } from 'src/types/graphql';
+import { Maybe, MediaTypeEnum } from 'src/types/graphql';
 import { loader } from 'graphql.macro';
 import { useLazyQuery } from '@apollo/client';
 import {
   SearchMediaByTitleQuery,
   SearchMediaByTitleQueryVariables,
+  SearchMediaFieldsFragment,
 } from './search_media.types';
 
 // Components
@@ -75,9 +76,13 @@ const SearchMedia = (): ReactElement => {
         </div>
 
         <div>
-          {data?.searchMediaByTitle?.nodes?.map((media) => {
-            return <Link key={media?.id} to={`/${media?.type}/${media?.id}`} />;
-          })}
+          {data?.searchMediaByTitle?.nodes?.map(
+            (media: Maybe<SearchMediaFieldsFragment>) => {
+              return (
+                <Link key={media?.id} to={`/${media?.type}/${media?.id}`} />
+              );
+            }
+          )}
         </div>
       </div>
     </SearchMediaLayout>
