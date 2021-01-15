@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import generalStylesInteractions from './generalStylesInteractions';
+import generalStylesInteractions from './multi-use/generalStylesInteractions';
 
 // Media
 import { faCaretDown, faSearch } from '@fortawesome/free-solid-svg-icons';
