@@ -10,28 +10,38 @@ export type SearchMediaByTitleQuery = { __typename?: 'Query' } & {
     nodes?: Types.Maybe<
       Array<
         Types.Maybe<
-          | ({ __typename?: 'Anime' } & SearchMediaFields_Anime_Fragment)
-          | ({ __typename?: 'Manga' } & SearchMediaFields_Manga_Fragment)
+          | ({ __typename?: 'Anime' } & Pick<
+              Types.Anime,
+              'id' | 'type' | 'description' | 'startDate' | 'tba'
+            > & {
+                titles: { __typename?: 'TitlesList' } & Pick<
+                  Types.TitlesList,
+                  'canonical'
+                >;
+                posterImage: { __typename?: 'Image' } & {
+                  original: { __typename?: 'ImageView' } & Pick<
+                    Types.ImageView,
+                    'url'
+                  >;
+                };
+              })
+          | ({ __typename?: 'Manga' } & Pick<
+              Types.Manga,
+              'id' | 'type' | 'description' | 'startDate' | 'tba'
+            > & {
+                titles: { __typename?: 'TitlesList' } & Pick<
+                  Types.TitlesList,
+                  'canonical'
+                >;
+                posterImage: { __typename?: 'Image' } & {
+                  original: { __typename?: 'ImageView' } & Pick<
+                    Types.ImageView,
+                    'url'
+                  >;
+                };
+              })
         >
       >
     >;
   };
 };
-
-export type SearchMediaFields_Anime_Fragment = { __typename?: 'Anime' } & Pick<
-  Types.Anime,
-  'id' | 'type'
-> & {
-    titles: { __typename?: 'TitlesList' } & Pick<Types.TitlesList, 'canonical'>;
-  };
-
-export type SearchMediaFields_Manga_Fragment = { __typename?: 'Manga' } & Pick<
-  Types.Manga,
-  'id' | 'type'
-> & {
-    titles: { __typename?: 'TitlesList' } & Pick<Types.TitlesList, 'canonical'>;
-  };
-
-export type SearchMediaFieldsFragment =
-  | SearchMediaFields_Anime_Fragment
-  | SearchMediaFields_Manga_Fragment;
