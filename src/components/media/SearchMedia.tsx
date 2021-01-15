@@ -60,6 +60,7 @@ const SearchMedia = (): ReactElement => {
             id="media-searchbar"
             type="search"
             placeholder="Search"
+            autoComplete="off"
             onChange={(e) => {
               setSearchTitle(e.target.value);
 
