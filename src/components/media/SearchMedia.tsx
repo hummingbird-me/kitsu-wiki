@@ -110,7 +110,7 @@ const SearchMedia = (): ReactElement => {
       <SearchResultLayout>
         <div className="search-results">
           {!data && loading ? (
-            <Loading>loading</Loading>
+            <Loading></Loading>
           ) : error ? (
             <span className="search-error">error</span>
           ) : data ? (
@@ -136,7 +136,7 @@ const SearchMedia = (): ReactElement => {
               );
             })
           ) : (
-            <span>no search performed yet</span>
+            <div></div>
           )}
         </div>
       </SearchResultLayout>
