@@ -4,6 +4,7 @@ const SearchResults = styled.div`
   padding: 10px;
   margin: 10px;
   max-height: 300px;
+  border-radius: var(--rounded-input);
   background-color: var(--foreground-background-color);
 
   display: grid;
