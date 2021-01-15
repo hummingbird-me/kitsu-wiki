@@ -3,7 +3,6 @@ import * as Types from '../../types/graphql';
 export type SearchMediaByTitleQueryVariables = Types.Exact<{
   first: Types.Scalars['Int'];
   title: Types.Scalars['String'];
-  media_type?: Types.Maybe<Types.MediaTypeEnum>;
 }>;
 
 export type SearchMediaByTitleQuery = { __typename?: 'Query' } & {

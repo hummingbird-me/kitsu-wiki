@@ -32,13 +32,15 @@ const SearchMedia = (): ReactElement => {
     MediaTypeEnum.Anime,
     MediaTypeEnum.Manga,
   ]);
-  const [executeSearch, { data }] = useLazyQuery<SearchMediaByTitleQuery>(
-    SEARCH_MEDIA_QUERY
-  );
+
+  const [executeSearch, { data }] = useLazyQuery<
+    SearchMediaByTitleQuery,
+    SearchMediaByTitleQueryVariables
+  >(SEARCH_MEDIA_QUERY);
+
   const searchTitleVariables: SearchMediaByTitleQueryVariables = {
-    first: 20,
+    first: 5,
     title: searchTitle,
-    media_type: media as MediaTypeEnum,
   };
 
   return (
@@ -72,14 +74,11 @@ const SearchMedia = (): ReactElement => {
           <FontAwesomeIcon icon={faSearch} />
         </div>
 
-        {/* <div>
-          <Link key={1} to={'/media/anime/1'}>
-            {'Something'}
-          </Link>
-          {data?.searchMediaByTitle?.nodes?.map((media) => (
-            <Link key={media?.id} to={`/${media?.type}/${media?.id}`} />
-          ))}
-        </div> */}
+        <div>
+          {data?.searchMediaByTitle?.nodes?.map((media) => {
+            return <Link key={media?.id} to={`/${media?.type}/${media?.id}`} />;
+          })}
+        </div>
       </div>
     </SearchMediaLayout>
   );

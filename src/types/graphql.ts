@@ -2377,7 +2377,7 @@ export type Query = {
   readonly searchAnimeByTitle: AnimeConnection;
   /** Search for Manga by title using Algolia. The most relevant results will be at the top. */
   readonly searchMangaByTitle: MangaConnection;
-  /** Search for any media (Anime, Manga) by title using Algolia. If no media_type is supplied, it will search for both. The most relevant results will be at the top. */
+  /** Search for any media (Anime, Manga) by title using Algolia. The most relevant results will be at the top. */
   readonly searchMediaByTitle: MediaConnection;
   /** Search for User by username using Algolia. The most relevant results will be at the top. */
   readonly searchProfileByUsername?: Maybe<ProfileConnection>;
@@ -2554,7 +2554,6 @@ export type QuerySearchMediaByTitleArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   title: Scalars['String'];
-  mediaType?: Maybe<MediaTypeEnum>;
 };
 
 export type QuerySearchProfileByUsernameArgs = {
