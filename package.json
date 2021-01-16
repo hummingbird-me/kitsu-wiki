@@ -15,10 +15,12 @@
     "query-string": "^6.13.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-hook-form": "^6.14.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "reactstrap": "^8.8.1",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "ts-debounce": "^2.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.8",
@@ -29,6 +31,7 @@
     "@graphql-codegen/near-operation-file-preset": "^1.17.12",
     "@graphql-codegen/typescript": "^1.17.11",
     "@graphql-codegen/typescript-operations": "^1.17.10",
+    "@types/debounce": "^1.2.0",
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -48,7 +51,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "generate-graphql-types": "graphql-codegen --config codegen.yml",
+    "cg": "graphql-codegen --config codegen.yml",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet --fix"
   },
