@@ -1,5 +1,9 @@
-query SearchMediaByTitle($first: Int!, $title: String!) {
-  searchMediaByTitle(first: $first, title: $title) {
+query SearchMediaByTitle(
+  $first: Int!
+  $title: String!
+  $media_type: MediaTypeEnum
+) {
+  searchMediaByTitle(first: $first, title: $title, mediaType: $media_type) {
     nodes {
       id
       type

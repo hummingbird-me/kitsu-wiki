@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { debounce } from 'ts-debounce';
 
 // GraphQl
-import { Maybe, MediaTypeEnum } from 'src/types/graphql';
+import { MediaTypeEnum } from 'src/types/graphql';
 import { loader } from 'graphql.macro';
 import { useLazyQuery } from '@apollo/client';
 import {
@@ -44,14 +44,11 @@ const SearchMedia = (): ReactElement => {
     SearchMediaByTitleQueryVariables
   >(SEARCH_MEDIA_QUERY);
 
-  /* const searchTitleVariables: SearchMediaByTitleQueryVariables = {
+  const searchTitleVariables: SearchMediaByTitleQueryVariables = {
     first: 5,
     title: searchTitle,
-  }; */
-
-  if (data) {
-    console.log(data);
-  }
+    media_type: media as MediaTypeEnum,
+  };
 
   // Debounce search so it won't fire immediately
   const debouncedSearch = useCallback(
@@ -59,10 +56,7 @@ const SearchMedia = (): ReactElement => {
       // Only fire if there's a search query
       if (nextValue) {
         executeSearch({
-          variables: {
-            first: 5,
-            title: nextValue,
-          },
+          variables: searchTitleVariables,
         });
       }
     }, 700),
@@ -70,7 +64,7 @@ const SearchMedia = (): ReactElement => {
   );
 
   // Handle the debouncing
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value: nextValue } = event.target;
     // Lowercase search query for caching purposes
     setSearchTitle(nextValue.toLowerCase());
@@ -98,10 +92,7 @@ const SearchMedia = (): ReactElement => {
               type="search"
               placeholder="Search"
               autoComplete="off"
-              /* onChange={(e) => {
-                setSearchTitle(e.target.value);
-              }} */
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
             <FontAwesomeIcon icon={faSearch} />
           </div>
