@@ -1,7 +1,9 @@
 import React, { ReactElement, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import { debounce } from 'ts-debounce';
+
+// Logical components
+import { seasonYear } from '../../logic/dateFunctions';
 
 // GraphQl
 import { MediaTypeEnum } from 'src/types/graphql';
@@ -20,6 +22,8 @@ import SearchResultLayout from '../../styles/layouts/SearchResultLayout';
 import Loading from '../../styles/components/ui/Loading';
 import { AddEntryButton } from '../../styles/components/ui/button';
 import Input from '../../styles/components/ui/input';
+import Title from '../../styles/components/Title';
+import { SubtypeTag } from '../../styles/components/Tag';
 
 // Media
 import { ReactComponent as KitsuDatabaseTools } from '../../assets/kitsuDatabaseTools.svg';
@@ -45,7 +49,7 @@ const SearchMedia = (): ReactElement => {
   >(SEARCH_MEDIA_QUERY);
 
   const searchTitleVariables: SearchMediaByTitleQueryVariables = {
-    first: 5,
+    first: 15,
     title: searchTitle,
     media_type: media as MediaTypeEnum,
   };
@@ -108,21 +112,30 @@ const SearchMedia = (): ReactElement => {
             data?.searchMediaByTitle?.nodes?.map((media) => {
               return (
                 <SearchResults key={media?.id}>
-                  <Poster
-                    className="poster-image"
-                    style={{
-                      backgroundImage:
-                        'url(' + media?.posterImage.original.url + ')',
-                    }}
-                  />
                   <Link
-                    className="media-title"
+                    className="media-link"
                     to={`/${media?.type}/${media?.id}`}>
-                    {media?.titles.canonical}
+                    <Poster
+                      className="poster-image"
+                      style={{
+                        backgroundImage:
+                          'url(' + media?.posterImage.original.url + ')',
+                      }}
+                    />
+                    <Title className="media-title">
+                      {media?.titles.canonical}
+                    </Title>
+                    {/* TODO: Change media.type to media.subtype */}
+                    <SubtypeTag className="subtype-tag">
+                      {media?.type}
+                    </SubtypeTag>
+                    <div className="season-date">
+                      {seasonYear(media?.startDate)}
+                    </div>
+                    <div className="search-description">
+                      <span>{media?.description.en}</span>
+                    </div>
                   </Link>
-                  <div className="search-description">
-                    <span>{media?.description.en}</span>
-                  </div>
                 </SearchResults>
               );
             })
