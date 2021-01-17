@@ -42,26 +42,30 @@ const SearchMedia = (): ReactElement => {
     MediaTypeEnum.Anime,
     MediaTypeEnum.Manga,
   ]);
+  const [showResults, setShowResults] = useState(false);
 
   const [executeSearch, { data, loading, error }] = useLazyQuery<
     SearchMediaByTitleQuery,
     SearchMediaByTitleQueryVariables
   >(SEARCH_MEDIA_QUERY);
 
-  const searchTitleVariables: SearchMediaByTitleQueryVariables = {
-    first: 15,
-    title: searchTitle,
-    media_type: media as MediaTypeEnum,
-  };
-
   // Debounce search so it won't fire immediately
   const debouncedSearch = useCallback(
     debounce((nextValue) => {
       // Only fire if there's a search query
+      const searchTitleVariables: SearchMediaByTitleQueryVariables = {
+        first: 15,
+        title: nextValue,
+        media_type: media as MediaTypeEnum,
+      };
+
       if (nextValue) {
+        setShowResults(true);
         executeSearch({
           variables: searchTitleVariables,
         });
+      } else {
+        setShowResults(false);
       }
     }, 700),
     []
@@ -108,6 +112,8 @@ const SearchMedia = (): ReactElement => {
             <Loading></Loading>
           ) : error ? (
             <span className="search-error">error</span>
+          ) : !showResults ? (
+            <span></span>
           ) : data ? (
             data?.searchMediaByTitle?.nodes?.map((media) => {
               return (
