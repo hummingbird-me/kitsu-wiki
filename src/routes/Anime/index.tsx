@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Edit from './Edit';
+import EditId from './EditId';
+import EditSlug from './EditSlug';
 
 const Anime = ({
   match,
@@ -12,13 +13,13 @@ const Anime = ({
   <>
     <Switch>
       <Route
-        path={`${match.path}/:id`}
-        render={({ match }) => <Edit id={match.params.id} />}
+        path={`${match.path}/:id(\\d+)`}
+        render={({ match }) => <EditId id={match.params.id} />}
       />
-      {/* <Route
+      <Route
         path={`${match.path}/:slug`}
-        render={({ match }) => <Edit slug={match.params.slug} />}
-      /> */}
+        render={({ match }) => <EditSlug slug={match.params.slug} />}
+      />
     </Switch>
   </>
 );

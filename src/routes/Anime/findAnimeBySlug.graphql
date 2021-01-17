@@ -1,0 +1,9 @@
+query FindAnimeBySlug($slug: String!) {
+  findAnimeBySlug(slug: $slug) {
+    ...findAnimeFields
+  }
+}
+
+fragment findAnimeFields on Anime {
+  id
+}
