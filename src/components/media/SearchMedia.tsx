@@ -42,6 +42,7 @@ const SearchMedia = (): ReactElement => {
     MediaTypeEnum.Anime,
     MediaTypeEnum.Manga,
   ]);
+  const [showResults, setShowResults] = useState(false);
 
   const [executeSearch, { data, loading, error }] = useLazyQuery<
     SearchMediaByTitleQuery,
@@ -59,9 +60,12 @@ const SearchMedia = (): ReactElement => {
       };
 
       if (nextValue) {
+        setShowResults(true);
         executeSearch({
           variables: searchTitleVariables,
         });
+      } else {
+        setShowResults(false);
       }
     }, 700),
     []
@@ -108,6 +112,8 @@ const SearchMedia = (): ReactElement => {
             <Loading></Loading>
           ) : error ? (
             <span className="search-error">error</span>
+          ) : !showResults ? (
+            <span></span>
           ) : data ? (
             data?.searchMediaByTitle?.nodes?.map((media) => {
               return (
