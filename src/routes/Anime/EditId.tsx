@@ -10,7 +10,7 @@ import {
 
 const FIND_ANIME_BY_ID = loader('./findAnimeById.graphql');
 
-const Edit = ({ id }: { id: string }): ReactElement => {
+const EditId = ({ id }: { id: string }): ReactElement => {
   const findAnimeByIdVariables: FindAnimeByIdQueryVariables = { id: id };
   const { data, error, loading } = useQuery<FindAnimeByIdQuery>(
     FIND_ANIME_BY_ID,
@@ -20,15 +20,7 @@ const Edit = ({ id }: { id: string }): ReactElement => {
   if (loading) return <RouteSpinner />;
   if (error) return <div>Error: {error}</div>;
 
-  return (
-    <div className="container mb-3">
-      <div className="row justify-content-center">
-        <div className="col-md-8">
-          <AnimeEdit anime={data?.findAnimeById} onSave={console.log} />
-        </div>
-      </div>
-    </div>
-  );
+  return <AnimeEdit anime={data?.findAnimeById} onSave={console.log} />;
 };
 
-export default Edit;
+export default EditId;

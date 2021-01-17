@@ -48,7 +48,7 @@ const App = () => {
         </nav> */}
           <div>
             <Switch>
-              <Route path="/media/anime" component={Anime} />
+              <Route path="/anime" component={Anime} />
               <Route exact path="/">
                 <Media />
               </Route>
