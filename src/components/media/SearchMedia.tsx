@@ -48,16 +48,16 @@ const SearchMedia = (): ReactElement => {
     SearchMediaByTitleQueryVariables
   >(SEARCH_MEDIA_QUERY);
 
-  const searchTitleVariables: SearchMediaByTitleQueryVariables = {
-    first: 15,
-    title: searchTitle,
-    media_type: media as MediaTypeEnum,
-  };
-
   // Debounce search so it won't fire immediately
   const debouncedSearch = useCallback(
     debounce((nextValue) => {
       // Only fire if there's a search query
+      const searchTitleVariables: SearchMediaByTitleQueryVariables = {
+        first: 15,
+        title: nextValue,
+        media_type: media as MediaTypeEnum,
+      };
+
       if (nextValue) {
         executeSearch({
           variables: searchTitleVariables,
