@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@types/node": "^14.14.20",
     "bootstrap": "^4.5.3",
+    "date-fns": "^2.16.1",
     "graphql": "^15.4.0",
     "graphql.macro": "^1.4.2",
     "normalize.css": "^8.0.1",
