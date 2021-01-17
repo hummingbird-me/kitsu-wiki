@@ -18,6 +18,10 @@ const GlobalStyles = createGlobalStyle`
 		--placeholder-text: #ccc;
 		--links-text: #ff8c7c;
 
+		// Tags
+		--generic-tag: #576163;
+		--media-subtype-tag: var(--generic-tag);
+
 		// Focus highlights
 		--focus-highlight: #ff8c7c;
 		--unfocused-highlights: #ff8c7c00;
@@ -60,6 +64,7 @@ const GlobalStyles = createGlobalStyle`
 	body {
 		font-family: "Open Sans", sans-serif;
 		background-color: var(--secondary-background-color);
+		color: var(--main-text);
 	}
 
 	// Generic styling for various elements

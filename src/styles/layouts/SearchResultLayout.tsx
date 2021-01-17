@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
 const SearchResultLayout = styled.div`
-  position: absolute;
-  top: 600px;
-  width: 100%;
+  .search-results {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 export default SearchResultLayout;

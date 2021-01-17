@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
-const SearchMediaLayout = styled.div`
-  position: absolute;
+const screenWidth = '640px';
 
-  height: 100%;
-  width: 100%;
+const SearchMediaLayout = styled.div`
   min-height: 30rem;
   top: 0;
   left: 0;
@@ -17,7 +15,7 @@ const SearchMediaLayout = styled.div`
   align-content: center;
   justify-content: center;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${screenWidth}) {
     grid-template-columns: 0 6fr 0;
   }
   .search-layout {
@@ -38,7 +36,7 @@ const SearchMediaLayout = styled.div`
       font-size: 0;
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: ${screenWidth}) {
       grid-template-columns: 0 repeat(8, 1fr) 0;
       gap: 10px;
     }
@@ -48,7 +46,7 @@ const SearchMediaLayout = styled.div`
       grid-row: 1;
       margin-bottom: 30px;
 
-      @media screen and (max-width: 600px) {
+      @media screen and (max-width: ${screenWidth}) {
         margin: 20px;
         margin-bottom: 40px;
         grid-column: 3 / span 6;
@@ -58,21 +56,21 @@ const SearchMediaLayout = styled.div`
     .new-entry {
       grid-column: 1 / span 7;
       grid-row: 2;
-      @media screen and (max-width: 600px) {
+      @media screen and (max-width: ${screenWidth}) {
         grid-column: 2 / span 5;
       }
     }
     .media-type-dropdown {
       grid-column: span 3 / 11;
       grid-row: 2;
-      @media screen and (max-width: 600px) {
+      @media screen and (max-width: ${screenWidth}) {
         grid-column: span 3 / 10;
       }
     }
     .searchbox {
       grid-row: 3;
       grid-column: 1 / span 10;
-      @media screen and (max-width: 600px) {
+      @media screen and (max-width: ${screenWidth}) {
         grid-column: 2 / span 8;
       }
     }
