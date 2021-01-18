@@ -74,6 +74,8 @@ const SearchMedia = (): ReactElement => {
   // Handle the debouncing
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value: nextValue } = event.target;
+    // HACK: we want to most likely modify the useDropDown to accept some type of way to modify
+    // the onChange.
     const mediaType = media as MediaTypeEnum;
     // Lowercase search query for caching purposes
     setSearchTitle(nextValue.toLowerCase());
