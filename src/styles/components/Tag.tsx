@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export const Tag = styled.div`
-  --tag-padding: 5px;
+  --tag-padding: 6px;
   background-color: var(--generic-tag);
+  font-weight: var(--bold);
 
-  padding: var(--tag-padding);
+  padding: var(--tag-padding) calc(var(--tag-padding) + 2px);
   border-radius: var(--rounded-input);
   vertical-align: middle;
 `;

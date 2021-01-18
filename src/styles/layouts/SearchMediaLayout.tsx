@@ -45,6 +45,7 @@ const SearchMediaLayout = styled.div`
       grid-column: 3 / span 6;
       grid-row: 1;
       margin-bottom: 30px;
+      /* transition: width, height, 0.5s; */
 
       @media screen and (max-width: ${screenWidth}) {
         margin: 20px;
