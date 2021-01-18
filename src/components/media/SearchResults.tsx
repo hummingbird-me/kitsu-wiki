@@ -35,7 +35,7 @@ export default function SearchResults({ data }: Props): ReactElement {
                       className="poster-image"
                       style={{
                         backgroundImage:
-                          'url(' + media?.posterImage.original.url + ')',
+                          'url(' + media?.posterImage?.original.url + ')',
                       }}
                     />
                     <Title className="media-title">
