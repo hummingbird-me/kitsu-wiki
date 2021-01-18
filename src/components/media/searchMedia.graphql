@@ -5,19 +5,24 @@ query SearchMediaByTitle(
 ) {
   searchMediaByTitle(first: $first, title: $title, mediaType: $media_type) {
     nodes {
-      id
-      type
-      titles {
-        canonical
-      }
-      description(locales: "en")
-      startDate
-      tba
-      posterImage {
-        original {
-          url
-        }
-      }
+      ...media
+    }
+  }
+}
+
+fragment media on Media {
+  id
+  slug
+  type
+  titles {
+    canonical
+  }
+  description(locales: "en")
+  startDate
+  tba
+  posterImage {
+    original {
+      url
     }
   }
 }

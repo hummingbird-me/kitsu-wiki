@@ -5,7 +5,11 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 
-const cache = new InMemoryCache();
+import generatedIntrospection from './possibleTypes.json';
+
+const cache = new InMemoryCache({
+  possibleTypes: generatedIntrospection.possibleTypes,
+});
 const link = new HttpLink({ uri: 'https://kitsu.io/api/graphql' });
 const defaultOptions: DefaultOptions = {
   watchQuery: {
