@@ -12,7 +12,7 @@ import { useLazyQuery } from '@apollo/client';
 import {
   SearchMediaByTitleQuery,
   SearchMediaByTitleQueryVariables,
-} from './search_media.types';
+} from './searchMedia.types';
 
 // Components
 import useDropdown from '../ui/useDropdown';
@@ -34,7 +34,7 @@ import Poster from 'src/styles/components/Poster';
 
 /* end imports */
 
-const SEARCH_MEDIA_QUERY = loader('./search_media.graphql');
+const SEARCH_MEDIA_QUERY = loader('./searchMedia.graphql');
 
 const SearchMedia = (): ReactElement => {
   const [searchTitle, setSearchTitle] = useState('');
@@ -125,11 +125,11 @@ const SearchMedia = (): ReactElement => {
                       className="poster-image"
                       style={{
                         backgroundImage:
-                          'url(' + media?.posterImage.original.url + ')',
+                          'url(' + media?.posterImage?.original.url + ')',
                       }}
                     />
                     <Title className="media-title">
-                      {media?.titles.canonical}
+                      {media?.titles?.canonical}
                     </Title>
                     {/* TODO: Change media.type to media.subtype */}
                     <SubtypeTag className="subtype-tag">
@@ -139,7 +139,7 @@ const SearchMedia = (): ReactElement => {
                       {seasonYear(media?.startDate)}
                     </div>
                     <div className="search-description">
-                      <span>{media?.description.en}</span>
+                      <span>{media?.description?.en}</span>
                     </div>
                   </Link>
                 </SearchResults>
