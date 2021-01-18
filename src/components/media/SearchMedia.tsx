@@ -51,12 +51,12 @@ const SearchMedia = (): ReactElement => {
 
   // Debounce search so it won't fire immediately
   const debouncedSearch = useCallback(
-    debounce((nextValue) => {
+    debounce((nextValue: string, mediaType: MediaTypeEnum) => {
       // Only fire if there's a search query
       const searchTitleVariables: SearchMediaByTitleQueryVariables = {
         first: 15,
         title: nextValue,
-        media_type: media as MediaTypeEnum,
+        media_type: mediaType,
       };
 
       if (nextValue) {
@@ -74,9 +74,10 @@ const SearchMedia = (): ReactElement => {
   // Handle the debouncing
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value: nextValue } = event.target;
+    const mediaType = media as MediaTypeEnum;
     // Lowercase search query for caching purposes
     setSearchTitle(nextValue.toLowerCase());
-    debouncedSearch(nextValue.toLowerCase());
+    debouncedSearch(nextValue.toLowerCase(), mediaType);
   };
 
   return (
