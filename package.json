@@ -2,7 +2,7 @@
   "name": "kitsu-wiki",
   "version": "0.1.0",
   "dependencies": {
-    "@apollo/client": "^3.2.7",
+    "@apollo/client": "^3.3.0",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
@@ -21,7 +21,7 @@
     "react-scripts": "4.0.1",
     "reactstrap": "^8.8.1",
     "styled-components": "^5.2.1",
-    "ts-debounce": "^2.2.0"
+    "ts-debounce": "^2.2.0",
   },
   "devDependencies": {
     "@babel/core": "^7.12.8",
@@ -29,6 +29,7 @@
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
     "@graphql-codegen/cli": "^1.19.2",
+    "@graphql-codegen/fragment-matcher": "^2.0.1",
     "@graphql-codegen/near-operation-file-preset": "^1.17.12",
     "@graphql-codegen/typescript": "^1.17.11",
     "@graphql-codegen/typescript-operations": "^1.17.10",
