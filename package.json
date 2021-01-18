@@ -21,7 +21,7 @@
     "react-scripts": "4.0.1",
     "reactstrap": "^8.8.1",
     "styled-components": "^5.2.1",
-    "ts-debounce": "^2.2.0",
+    "ts-debounce": "^2.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.8",
