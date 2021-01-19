@@ -10,7 +10,7 @@ query SearchMediaByTitle(
   }
 }
 
-fragment media on Media {
+fragment mediaSearchFields on Media {
   id
   slug
   type
@@ -20,7 +20,6 @@ fragment media on Media {
   description(locales: "en")
   startDate
   tba
-  favoritesCount
   posterImage {
     blurhash
     original {
