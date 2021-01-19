@@ -14,14 +14,14 @@ import {
 } from './searchMedia.types';
 
 // Components
-import useDropdown from '../ui/useDropdown';
-import SearchResults from './SearchResults';
+import useDropdown from '../../components/ui/useDropdown';
+import SearchResults from '../../components/media/SearchResults';
 // Styled-components
 import SearchMediaLayout from '../../styles/layouts/SearchMediaLayout';
 import SearchResultLayout from '../../styles/layouts/SearchResultLayout';
 import Loading from '../../styles/components/ui/Loading';
-import { AddEntryButton } from '../../styles/components/ui/button';
-import Input from '../../styles/components/ui/input';
+import { AddEntryButton } from '../../styles/components/jsx/button';
+import Input from '../../styles/components/jsx/input';
 
 // Media
 import { ReactComponent as KitsuDatabaseTools } from '../../assets/kitsuDatabaseTools.svg';

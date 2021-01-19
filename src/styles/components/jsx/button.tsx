@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import generalStyleInteractions from './multi-use/generalStylesInteractions';
+import generalStyleInteractions from '../../reuse/generalStylesInteractions';
 
 export const Button = styled.button`
   ${generalStyleInteractions}

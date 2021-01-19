@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 
 // Styles
-import { Select } from '../../styles/components/ui/select';
+import { Select } from '../../styles/components/jsx/select';
 // Media
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faSearch } from '@fortawesome/free-solid-svg-icons';

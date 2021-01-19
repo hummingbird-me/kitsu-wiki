@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import generalStylesInteractions from './multi-use/generalStylesInteractions';
+import generalStylesInteractions from '../../reuse/generalStylesInteractions';
 
 const Input = styled.input`
   ${generalStylesInteractions}

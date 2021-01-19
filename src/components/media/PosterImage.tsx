@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import Poster, { PosterImg } from '../../styles/components/Poster';
+import Poster, { PosterImg } from '../../styles/components/media/Poster';
 import { Blurhash } from 'react-blurhash';
 import LazyLoad from 'react-lazyload';
 

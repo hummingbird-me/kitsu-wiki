@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { seasonYear } from '../../logic/dateFunctions';
 
 // GraphQL
-import { SearchMediaByTitleQuery } from './searchMedia.types';
+import { SearchMediaByTitleQuery } from '../../routes/Home/searchMedia.types';
 
 // Components
-import Title from '../../styles/components/Title';
-import { SubtypeTag } from '../../styles/components/Tag';
+import Title from '../../styles/components/media/Title';
+import { SubtypeTag } from '../../styles/components/ui/Tag';
 import Search from 'src/styles/layouts/Search';
 import PosterImage from 'src/components/media/PosterImage';
 

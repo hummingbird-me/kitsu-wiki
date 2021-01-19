@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { highlightsWithin } from '../components/ui/multi-use/highlights';
+import { highlightsWithin } from '../reuse/highlights';
 
 export const Search = styled.li`
   --line-height: calc(var(--font-me) + 0.4rem);
