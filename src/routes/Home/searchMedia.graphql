@@ -5,7 +5,7 @@ query SearchMediaByTitle(
 ) {
   searchMediaByTitle(first: $first, title: $title, mediaType: $media_type) {
     nodes {
-      ...media
+      ...mediaSearchFields
     }
   }
 }
