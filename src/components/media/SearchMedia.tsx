@@ -2,6 +2,7 @@ import React, { ReactElement, useState, useCallback } from 'react';
 import { debounce } from 'ts-debounce';
 
 // Logical components
+import useDelayUnmount from 'src/logic/useDelayUnmount';
 
 // GraphQl
 import { MediaTypeEnum } from 'src/types/graphql';
@@ -32,14 +33,19 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 const SEARCH_MEDIA_QUERY = loader('./searchMedia.graphql');
 
 const SearchMedia = (): ReactElement => {
-  const [searchTitle, setSearchTitle] = useState('');
   const [media, MediaDropdown] = useDropdown('Media', MediaTypeEnum.Anime, [
     MediaTypeEnum.Anime,
     MediaTypeEnum.Manga,
   ]);
-  const [showResults, setShowResults] = useState(false);
 
-  const [executeSearch, { called, loading, error, data }] = useLazyQuery<
+  // Show/hide search results
+  const [showResults, setShowResults] = useState(false);
+  // Handle fading in/out animation for search results
+  const searchIsRendered = useDelayUnmount(showResults, 50);
+  const fadeIn = { animation: 'fadeIn 50ms ease-in' };
+  const fadeOut = { animation: 'fadeOut 60ms ease-in' };
+
+  const [executeSearch, { loading, error, data }] = useLazyQuery<
     SearchMediaByTitleQuery,
     SearchMediaByTitleQueryVariables
   >(SEARCH_MEDIA_QUERY);
@@ -47,13 +53,13 @@ const SearchMedia = (): ReactElement => {
   // Debounce search so it won't fire immediately
   const debouncedSearch = useCallback(
     debounce((nextValue: string, mediaType: MediaTypeEnum) => {
-      // Only fire if there's a search query
       const searchTitleVariables: SearchMediaByTitleQueryVariables = {
         first: 15,
         title: nextValue,
         media_type: mediaType,
       };
 
+      // Only search if there's text in the searchbox
       if (nextValue) {
         setShowResults(true);
         executeSearch({
@@ -73,7 +79,6 @@ const SearchMedia = (): ReactElement => {
     // the onChange.
     const mediaType = media as MediaTypeEnum;
     // Lowercase search query for caching purposes
-    setSearchTitle(nextValue.toLowerCase());
     debouncedSearch(nextValue.toLowerCase(), mediaType);
   };
 
@@ -105,19 +110,21 @@ const SearchMedia = (): ReactElement => {
         </div>
       </SearchMediaLayout>
       <SearchResultLayout>
-        <div className="search-results">
-          {loading ? (
-            <Loading></Loading>
-          ) : error ? (
-            <span className="search-error">error</span>
-          ) : !showResults ? (
-            <span></span>
-          ) : !loading && data ? (
+        {loading ? (
+          <Loading></Loading>
+        ) : error ? (
+          <span className="search-error">error</span>
+        ) : !searchIsRendered ? (
+          <></>
+        ) : !loading && data && searchIsRendered ? (
+          <div
+            className="search-results"
+            style={showResults ? fadeIn : fadeOut}>
             <SearchResults data={data} />
-          ) : (
-            <div></div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </SearchResultLayout>
     </>
   );
