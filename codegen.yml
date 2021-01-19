@@ -16,7 +16,7 @@ generates:
     plugins:
       - typescript-operations
 
-  src/possibleTypes.json:
+  src/types/possibleTypes.json:
     plugins:
       - fragment-matcher
     config:
