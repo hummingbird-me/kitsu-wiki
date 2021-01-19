@@ -5,7 +5,7 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 
-import generatedIntrospection from './possibleTypes.json';
+import generatedIntrospection from './types/possibleTypes.json';
 
 const cache = new InMemoryCache({
   possibleTypes: generatedIntrospection.possibleTypes,

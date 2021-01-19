@@ -20,7 +20,9 @@ fragment media on Media {
   description(locales: "en")
   startDate
   tba
+  favoritesCount
   posterImage {
+    blurhash
     original {
       url
     }

@@ -21,22 +21,34 @@ export type SearchMediaByTitleQuery = { __typename?: 'Query' } & {
 
 export type Media_Anime_Fragment = { __typename?: 'Anime' } & Pick<
   Types.Anime,
-  'id' | 'slug' | 'type' | 'description' | 'startDate' | 'tba'
+  | 'id'
+  | 'slug'
+  | 'type'
+  | 'description'
+  | 'startDate'
+  | 'tba'
+  | 'favoritesCount'
 > & {
     titles: { __typename?: 'TitlesList' } & Pick<Types.TitlesList, 'canonical'>;
-    posterImage: { __typename?: 'Image' } & {
-      original: { __typename?: 'ImageView' } & Pick<Types.ImageView, 'url'>;
-    };
+    posterImage: { __typename?: 'Image' } & Pick<Types.Image, 'blurhash'> & {
+        original: { __typename?: 'ImageView' } & Pick<Types.ImageView, 'url'>;
+      };
   };
 
 export type Media_Manga_Fragment = { __typename?: 'Manga' } & Pick<
   Types.Manga,
-  'id' | 'slug' | 'type' | 'description' | 'startDate' | 'tba'
+  | 'id'
+  | 'slug'
+  | 'type'
+  | 'description'
+  | 'startDate'
+  | 'tba'
+  | 'favoritesCount'
 > & {
     titles: { __typename?: 'TitlesList' } & Pick<Types.TitlesList, 'canonical'>;
-    posterImage: { __typename?: 'Image' } & {
-      original: { __typename?: 'ImageView' } & Pick<Types.ImageView, 'url'>;
-    };
+    posterImage: { __typename?: 'Image' } & Pick<Types.Image, 'blurhash'> & {
+        original: { __typename?: 'ImageView' } & Pick<Types.ImageView, 'url'>;
+      };
   };
 
 export type MediaFragment = Media_Anime_Fragment | Media_Manga_Fragment;
