@@ -1,29 +1,33 @@
-export const highlights = `
-border: 4px solid var(--unfocused-highlights);
+import { css } from 'styled-components';
 
-&:focus {
-  border: 4px solid var(--focus-highlight);
-  outline: none;
-}
-&:hover:not(:active) {
-  filter: brightness(110%);
-}
-&:active {
-  filter: brightness(90%);
-}`;
+export const highlights = css`
+  border: 4px solid var(--unfocused-highlights);
 
-export const highlightsWithin = `
-border: 4px solid var(--unfocused-highlights);
+  &:focus {
+    border: 4px solid var(--focus-highlight);
+    outline: none;
+  }
+  &:hover:not(:active) {
+    filter: brightness(110%);
+  }
+  &:active {
+    filter: brightness(90%);
+  }
+`;
 
-&:focus-within {
-  border: 4px solid var(--focus-highlight);
-  outline: none;
-}
-&:hover:not(:active) {
-  filter: brightness(110%);
-}
-&:active {
-  filter: brightness(90%);
-}`;
+export const highlightsWithin = css`
+  border: 4px solid var(--unfocused-highlights);
+
+  &:focus-within {
+    border: 4px solid var(--focus-highlight);
+    outline: none;
+  }
+  &:hover:not(:active) {
+    filter: brightness(110%);
+  }
+  &:active {
+    filter: brightness(90%);
+  }
+`;
 
 export default highlights;

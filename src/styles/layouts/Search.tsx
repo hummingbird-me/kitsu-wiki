@@ -124,8 +124,8 @@ export const Search = styled.li`
     position: relative;
     display: table;
     margin: 0 auto;
-    margin-top: -15px;
-    margin-bottom: 20px;
+    margin-top: -25px;
+    margin-bottom: auto;
 
     z-index: 10;
 

@@ -59,6 +59,25 @@ const GlobalStyles = createGlobalStyle`
 		--breakpoint-lg: 992px;
 		--breakpoint-xl: 1200px;
 	}
+	
+	// Global-scoped animations
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+	@keyframes fadeOut {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+
 
 	// border-box
 	// dangerous setting of transitions
