@@ -1,9 +1,8 @@
 import React, { ReactElement, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { debounce } from 'ts-debounce';
 
 // Logical components
-import { seasonYear } from '../../logic/dateFunctions';
+import useDelayUnmount from 'src/logic/useDelayUnmount';
 
 // GraphQl
 import { MediaTypeEnum } from 'src/types/graphql';
@@ -15,36 +14,38 @@ import {
 } from './searchMedia.types';
 
 // Components
-import useDropdown from '../ui/useDropdown';
+import useDropdown from '../../components/ui/useDropdown';
+import SearchResults from '../../components/media/SearchResults';
 // Styled-components
 import SearchMediaLayout from '../../styles/layouts/SearchMediaLayout';
 import SearchResultLayout from '../../styles/layouts/SearchResultLayout';
 import Loading from '../../styles/components/ui/Loading';
-import { AddEntryButton } from '../../styles/components/ui/button';
-import Input from '../../styles/components/ui/input';
-import Title from '../../styles/components/Title';
-import { SubtypeTag } from '../../styles/components/Tag';
+import { AddEntryButton } from '../../styles/components/jsx/button';
+import Input from '../../styles/components/jsx/input';
 
 // Media
 import { ReactComponent as KitsuDatabaseTools } from '../../assets/kitsuDatabaseTools.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import SearchResults from 'src/styles/layouts/SearchResults';
-import Poster from 'src/styles/components/Poster';
 
 /* end imports */
 
 const SEARCH_MEDIA_QUERY = loader('./searchMedia.graphql');
 
 const SearchMedia = (): ReactElement => {
-  const [searchTitle, setSearchTitle] = useState('');
   const [media, MediaDropdown] = useDropdown('Media', MediaTypeEnum.Anime, [
     MediaTypeEnum.Anime,
     MediaTypeEnum.Manga,
   ]);
-  const [showResults, setShowResults] = useState(false);
 
-  const [executeSearch, { data, loading, error }] = useLazyQuery<
+  // Show/hide search results
+  const [showResults, setShowResults] = useState(false);
+  // Handle fading in/out animation for search results
+  const searchIsRendered = useDelayUnmount(showResults, 50);
+  const fadeIn = { animation: 'fadeIn 50ms ease-in' };
+  const fadeOut = { animation: 'fadeOut 60ms ease-in' };
+
+  const [executeSearch, { loading, error, data }] = useLazyQuery<
     SearchMediaByTitleQuery,
     SearchMediaByTitleQueryVariables
   >(SEARCH_MEDIA_QUERY);
@@ -52,13 +53,13 @@ const SearchMedia = (): ReactElement => {
   // Debounce search so it won't fire immediately
   const debouncedSearch = useCallback(
     debounce((nextValue: string, mediaType: MediaTypeEnum) => {
-      // Only fire if there's a search query
       const searchTitleVariables: SearchMediaByTitleQueryVariables = {
         first: 15,
         title: nextValue,
         media_type: mediaType,
       };
 
+      // Only search if there's text in the searchbox
       if (nextValue) {
         setShowResults(true);
         executeSearch({
@@ -78,7 +79,6 @@ const SearchMedia = (): ReactElement => {
     // the onChange.
     const mediaType = media as MediaTypeEnum;
     // Lowercase search query for caching purposes
-    setSearchTitle(nextValue.toLowerCase());
     debouncedSearch(nextValue.toLowerCase(), mediaType);
   };
 
@@ -110,48 +110,21 @@ const SearchMedia = (): ReactElement => {
         </div>
       </SearchMediaLayout>
       <SearchResultLayout>
-        <div className="search-results">
-          {!data && loading ? (
-            <Loading></Loading>
-          ) : error ? (
-            <span className="search-error">error</span>
-          ) : !showResults ? (
-            <span></span>
-          ) : data ? (
-            data?.searchMediaByTitle?.nodes?.map((media) => {
-              return (
-                <SearchResults key={media?.id}>
-                  <Link
-                    className="media-link"
-                    to={`/${media?.type}/${media?.id}`}>
-                    <Poster
-                      className="poster-image"
-                      style={{
-                        backgroundImage:
-                          'url(' + media?.posterImage?.original.url + ')',
-                      }}
-                    />
-                    <Title className="media-title">
-                      {media?.titles?.canonical}
-                    </Title>
-                    {/* TODO: Change media.type to media.subtype */}
-                    <SubtypeTag className="subtype-tag">
-                      {media?.type}
-                    </SubtypeTag>
-                    <div className="season-date">
-                      {seasonYear(media?.startDate)}
-                    </div>
-                    <div className="search-description">
-                      <span>{media?.description?.en}</span>
-                    </div>
-                  </Link>
-                </SearchResults>
-              );
-            })
-          ) : (
-            <div></div>
-          )}
-        </div>
+        {loading ? (
+          <Loading></Loading>
+        ) : error ? (
+          <span className="search-error">error</span>
+        ) : !searchIsRendered ? (
+          <></>
+        ) : !loading && data && searchIsRendered ? (
+          <div
+            className="search-results"
+            style={showResults ? fadeIn : fadeOut}>
+            <SearchResults data={data} />
+          </div>
+        ) : (
+          <div></div>
+        )}
       </SearchResultLayout>
     </>
   );

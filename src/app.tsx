@@ -11,7 +11,7 @@ import {
 import { ApolloProvider } from '@apollo/client';
 import client from './client';
 
-import Media from './components/media';
+import Media from './routes/Home/index';
 
 import 'normalize.css';
 import GlobalStyles from './styles/GlobalStyles';

@@ -1,0 +1,29 @@
+query SearchMediaByTitle(
+  $first: Int!
+  $title: String!
+  $media_type: MediaTypeEnum
+) {
+  searchMediaByTitle(first: $first, title: $title, mediaType: $media_type) {
+    nodes {
+      ...mediaSearchFields
+    }
+  }
+}
+
+fragment mediaSearchFields on Media {
+  id
+  slug
+  type
+  titles {
+    canonical
+  }
+  description(locales: "en")
+  startDate
+  tba
+  posterImage {
+    blurhash
+    original {
+      url
+    }
+  }
+}

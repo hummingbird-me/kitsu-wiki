@@ -15,3 +15,9 @@ generates:
       baseTypesPath: types/graphql.ts
     plugins:
       - typescript-operations
+
+  src/types/possibleTypes.json:
+    plugins:
+      - fragment-matcher
+    config:
+      module: commonjs

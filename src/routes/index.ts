@@ -1,4 +1,4 @@
-import Home from './Home';
+import Media from './Home/index';
 import Anime from './Anime';
 
-export { Home, Anime };
+export { Media, Anime };
