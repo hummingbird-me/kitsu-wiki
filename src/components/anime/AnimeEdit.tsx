@@ -1,57 +1,43 @@
-import React, { ReactElement } from 'react';
-import { FindAnimeFieldsFragment } from 'src/types/graphql';
-import EditProvider from '../ui/edit/EditProvider';
-import InputField from '../ui/edit/InputField';
-import SelectField from '../ui/edit/SelectField';
-import ImageField from '../ui/edit/ImageField';
-import TitlesField from '../ui/edit/TitlesField';
-import MapField from '../ui/edit/MapField';
-import FormActions from '../ui/edit/FormActions';
+import React, { ReactElement, useReducer, useState } from 'react';
+import { FindAnimeFieldsFragment } from '../../routes/Anime/findAnimeById.types';
 import { Maybe } from 'src/types/graphql';
+import { MediaChange } from 'src/types/mediaChange';
+import TextInput from '../ui/input/TextInput';
 
-const AnimeEdit = ({
+const reducer = (state: MediaChange, action: any) => {
+  switch (action.type) {
+    default:
+      return {
+        ...state,
+        [action.type.toLowerCase()]: action.payload,
+      };
+  }
+};
+
+export default function AnimeEdit({
   anime,
-  onSave,
 }: {
   anime: Maybe<FindAnimeFieldsFragment | undefined>;
-  onSave: any;
-}): ReactElement => {
-  return <div>Hello</div>;
-};
-// <form>
-// <EditProvider initialValue={anime}>
-//   <InputField readOnly field="id" type="text" />
-//   <InputField readOnly field="slug" type="text" />
-//   <TitlesField field="titles" />
-//   <MapField field="synopsis" keyName="Locale" type="textarea" />
-//   <ImageField field="posterImage" type="image" />
-//   <ImageField field="bannerImage" type="image" />
-//   <InputField
-//     field="sfw"
-//     type="checkbox"
-//     validate={() => ['error1', 'error2']}
-//   />
-//   <SelectField field="ageRating" options={['G', 'PG', 'R', 'R18']} />
-//   <InputField field="ageRatingGuide" type="text" />
-//   <SelectField
-//     field="season"
-//     options={['WINTER', 'SPRING', 'SUMMER', 'FALL']}
-//   />
-//   <SelectField
-//     field="status"
-//     options={['TBA', 'FINISHED', 'CURRENT', 'UPCOMING', 'UNRELEASED']}
-//   />
-//   <InputField field="startDate" type="date" />
-//   <InputField field="endDate" type="date" />
-//   <InputField readOnly field="nextRelease" type="datetime-local" />
-//   <InputField field="episodeCount" type="number" />
-//   <InputField field="episodeLength" type="number" />
-//   <InputField readOnly field="totalLength" type="text" />
-//   <InputField readOnly field="userCount" type="text" />
-//   <InputField readOnly field="favoritesCount" type="text" />
-//   <InputField readOnly field="averageRating" type="text" />
-//   <FormActions onSave={onSave} />
-// </EditProvider>
-// </form>
+}): ReactElement {
+  const changes: MediaChange = {};
+  const [original, _setData] = useState(anime);
+  const [update, dispatch] = useReducer(reducer, changes);
 
-export default AnimeEdit;
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    console.log(original);
+    console.log({ ...original, ...update });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* figure out how to make parentDispatch optional when readOnly is supplied  */}
+      <TextInput readOnly fieldType='id' initialValue={original?.id} parentDispatch={dispatch} />
+
+      <TextInput fieldType='slug' initialValue={original?.slug} parentDispatch={dispatch} />
+
+      <input type='submit' value='Submit' />
+    </form>
+  );
+}

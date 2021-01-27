@@ -17,7 +17,7 @@ const EditSlug = ({ slug }: { slug: string }): ReactElement => {
   if (loading) return <RouteSpinner />;
   if (error) return <div>Error: {error}</div>;
 
-  return <AnimeEdit anime={data?.findAnimeBySlug} onSave={console.log} />;
+  return <AnimeEdit anime={data?.findAnimeBySlug} />;
 };
 
 export default EditSlug;

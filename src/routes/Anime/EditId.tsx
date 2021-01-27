@@ -17,7 +17,7 @@ const EditId = ({ id }: { id: string }): ReactElement => {
   if (loading) return <RouteSpinner />;
   if (error) return <div>Error: {error}</div>;
 
-  return <AnimeEdit anime={data?.findAnimeById} onSave={console.log} />;
+  return <AnimeEdit anime={data?.findAnimeById} />;
 };
 
 export default EditId;
