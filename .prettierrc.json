@@ -1,4 +1,11 @@
 {
   "singleQuote": true,
-  "jsxBracketSameLine": true
+  "jsxSingleQuote": true,
+  "jsxBracketSameLine": true,
+  "packageManager": "yarn",
+  "printWidth": 80,
+  "semi": true,
+  "tabWidth": 2,
+  "useTabs": true,
+  "trailingComma": "es5"
 }
