@@ -6,12 +6,13 @@ import useDelayUnmount from 'src/logic/useDelayUnmount';
 
 // GraphQl
 import {
-	MediaTypeEnum,
-	useSearchMediaByTitleLazyQuery,
-	SearchMediaByTitleQueryVariables,
+  MediaTypeEnum,
+  useSearchMediaByTitleLazyQuery,
+  SearchMediaByTitleQueryVariables,
+  MediaSearchFieldsFragment,
 } from 'src/types/graphql';
-import { loader } from 'graphql.macro';
-import { useLazyQuery } from '@apollo/client';
+/* import { loader } from 'graphql.macro';
+import { useLazyQuery } from '@apollo/client'; */
 /* import {
 	SearchMediaByTitleQuery,
 	SearchMediaByTitleQueryVariables,
@@ -37,99 +38,101 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 /* const SEARCH_MEDIA_QUERY = loader('./searchMedia.graphql'); */
 
 export default function SearchMedia(): ReactElement {
-	const [media, MediaDropdown] = useDropdown('Media', MediaTypeEnum.Anime, [
-		MediaTypeEnum.Anime,
-		MediaTypeEnum.Manga,
-	]);
+  const [media, MediaDropdown] = useDropdown('Media', MediaTypeEnum.Anime, [
+    MediaTypeEnum.Anime,
+    MediaTypeEnum.Manga,
+  ]);
 
-	// Show/hide search results
-	const [showResults, setShowResults] = useState(false);
-	// Handle fading in/out animation for search results
-	const searchIsRendered = useDelayUnmount(showResults, 50);
-	const fadeIn = { animation: 'fadeIn 50ms ease-in' };
-	const fadeOut = { animation: 'fadeOut 60ms ease-in' };
+  // Show/hide search results
+  const [showResults, setShowResults] = useState(false);
+  // Handle fading in/out animation for search results
+  const searchIsRendered = useDelayUnmount(showResults, 50);
+  const fadeIn = { animation: 'fadeIn 50ms ease-in' };
+  const fadeOut = { animation: 'fadeOut 60ms ease-in' };
 
-	const [
-		executeSearch,
-		{ loading, error, data },
-	] = useSearchMediaByTitleLazyQuery();
+  const [
+    executeSearch,
+    { loading, error, data },
+  ] = useSearchMediaByTitleLazyQuery();
 
-	// Debounce search so it won't fire immediately
-	const debouncedSearch = useCallback(
-		debounce((nextValue: string, mediaType: MediaTypeEnum) => {
-			const searchTitleVariables: SearchMediaByTitleQueryVariables = {
-				first: 15,
-				title: nextValue,
-				media_type: mediaType,
-			};
+  // Debounce search so it won't fire immediately
+  const debouncedSearch = useCallback(
+    debounce((nextValue: string, mediaType: MediaTypeEnum) => {
+      const searchTitleVariables: SearchMediaByTitleQueryVariables = {
+        first: 15,
+        title: nextValue,
+        media_type: mediaType,
+      };
 
-			// Only search if there's text in the searchbox
-			if (nextValue) {
-				setShowResults(true);
-				executeSearch({
-					variables: searchTitleVariables,
-				});
-			} else {
-				setShowResults(false);
-			}
-		}, 700),
-		[]
-	);
+      // Only search if there's text in the searchbox
+      if (nextValue) {
+        setShowResults(true);
+        executeSearch({
+          variables: searchTitleVariables,
+        });
+      } else {
+        setShowResults(false);
+      }
+    }, 700),
+    []
+  );
 
-	// Handle the debouncing
-	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { value: nextValue } = event.target;
-		// HACK: we want to most likely modify the useDropDown to accept some type of way to modify
-		// the onChange.
-		const mediaType = media as MediaTypeEnum;
-		// Lowercase search query for caching purposes
-		debouncedSearch(nextValue.toLowerCase(), mediaType);
-	};
+  // Handle the debouncing
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value: nextValue } = event.target;
+    // HACK: we want to most likely modify the useDropDown to accept some type of way to modify
+    // the onChange.
+    const mediaType = media as MediaTypeEnum;
+    // Lowercase search query for caching purposes
+    debouncedSearch(nextValue.toLowerCase(), mediaType);
+  };
 
-	return (
-		<>
-			<SearchMediaLayout>
-				<div className='search-layout'>
-					<div className='logo'>
-						<KitsuDatabaseTools />
-					</div>
-					<AddEntryButton className='new-entry'>Add New Entry</AddEntryButton>
+  return (
+    <>
+      <SearchMediaLayout>
+        <div className='search-layout'>
+          <div className='logo'>
+            <KitsuDatabaseTools />
+          </div>
+          <AddEntryButton className='new-entry'>Add New Entry</AddEntryButton>
 
-					<div className='media-type-dropdown'>
-						<MediaDropdown />
-					</div>
-					<div className='searchbox'>
-						<label htmlFor='media-searchbar'>
-							Search for selected media type
-						</label>
-						<Input
-							id='media-searchbar'
-							type='search'
-							placeholder='Search'
-							autoComplete='off'
-							onChange={handleInputChange}
-						/>
-						<FontAwesomeIcon icon={faSearch} />
-					</div>
-				</div>
-			</SearchMediaLayout>
-			<SearchResultLayout>
-				{loading ? (
-					<Loading></Loading>
-				) : error ? (
-					<span className='search-error'>error</span>
-				) : !searchIsRendered ? (
-					<></>
-				) : !loading && data && searchIsRendered ? (
-					<div
-						className='search-results'
-						style={showResults ? fadeIn : fadeOut}>
-						<SearchResults data={data} />
-					</div>
-				) : (
-					<div></div>
-				)}
-			</SearchResultLayout>
-		</>
-	);
+          <div className='media-type-dropdown'>
+            <MediaDropdown />
+          </div>
+          <div className='searchbox'>
+            <label htmlFor='media-searchbar'>
+              Search for selected media type
+            </label>
+            <Input
+              id='media-searchbar'
+              type='search'
+              placeholder='Search'
+              autoComplete='off'
+              onChange={handleInputChange}
+            />
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
+        </div>
+      </SearchMediaLayout>
+      <SearchResultLayout>
+        {loading ? (
+          <Loading></Loading>
+        ) : error ? (
+          <span className='search-error'>error</span>
+        ) : !searchIsRendered ? (
+          <></>
+        ) : !loading && data && searchIsRendered ? (
+          <div
+            className='search-results'
+            style={showResults ? fadeIn : fadeOut}>
+            {data?.searchMediaByTitle?.nodes?.map((media) => {
+              return <SearchResults data={media} />;
+            })}
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </SearchResultLayout>
+    </>
+  );
 }

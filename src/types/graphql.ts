@@ -3124,27 +3124,6 @@ export type FindAnimeBySlugQuery = (
   )> }
 );
 
-export type SearchMediaByTitleQueryVariables = Exact<{
-  first: Scalars['Int'];
-  title: Scalars['String'];
-  media_type?: Maybe<MediaTypeEnum>;
-}>;
-
-
-export type SearchMediaByTitleQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly searchMediaByTitle: (
-    { readonly __typename?: 'MediaConnection' }
-    & { readonly nodes?: Maybe<ReadonlyArray<Maybe<(
-      { readonly __typename?: 'Anime' }
-      & MediaSearchFields_Anime_Fragment
-    ) | (
-      { readonly __typename?: 'Manga' }
-      & MediaSearchFields_Manga_Fragment
-    )>>> }
-  ) }
-);
-
 type MediaSearchFields_Anime_Fragment = (
   { readonly __typename?: 'Anime' }
   & Pick<Anime, 'id' | 'slug' | 'type' | 'description' | 'startDate' | 'tba'>
@@ -3178,6 +3157,27 @@ type MediaSearchFields_Manga_Fragment = (
 );
 
 export type MediaSearchFieldsFragment = MediaSearchFields_Anime_Fragment | MediaSearchFields_Manga_Fragment;
+
+export type SearchMediaByTitleQueryVariables = Exact<{
+  first: Scalars['Int'];
+  title: Scalars['String'];
+  media_type?: Maybe<MediaTypeEnum>;
+}>;
+
+
+export type SearchMediaByTitleQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly searchMediaByTitle: (
+    { readonly __typename?: 'MediaConnection' }
+    & { readonly nodes?: Maybe<ReadonlyArray<Maybe<(
+      { readonly __typename?: 'Anime' }
+      & MediaSearchFields_Anime_Fragment
+    ) | (
+      { readonly __typename?: 'Manga' }
+      & MediaSearchFields_Manga_Fragment
+    )>>> }
+  ) }
+);
 
 export const FindAnimeFieldsFragmentDoc = gql`
     fragment findAnimeFields on Anime {
