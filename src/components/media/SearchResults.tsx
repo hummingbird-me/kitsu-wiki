@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import { seasonYear } from '../../logic/dateFunctions';
 
 // GraphQL
-import { SearchMediaByTitleQuery } from '../../routes/Home/searchMedia.types';
+/* import { SearchMediaByTitleQuery } from '../../routes/Home/searchMedia.types'; */
+import { SearchMediaByTitleQuery } from 'src/types/graphql';
 
 // Components
 import Title from '../../styles/components/media/Title';

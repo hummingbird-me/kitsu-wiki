@@ -5,13 +5,17 @@ import { debounce } from 'ts-debounce';
 import useDelayUnmount from 'src/logic/useDelayUnmount';
 
 // GraphQl
-import { MediaTypeEnum } from 'src/types/graphql';
+import {
+	MediaTypeEnum,
+	useSearchMediaByTitleLazyQuery,
+	SearchMediaByTitleQueryVariables,
+} from 'src/types/graphql';
 import { loader } from 'graphql.macro';
 import { useLazyQuery } from '@apollo/client';
-import {
+/* import {
 	SearchMediaByTitleQuery,
 	SearchMediaByTitleQueryVariables,
-} from './searchMedia.types';
+} from './searchMedia.types'; */
 
 // Components
 import useDropdown from '../../components/ui/useDropdown';
@@ -30,7 +34,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 /* end imports */
 
-const SEARCH_MEDIA_QUERY = loader('./searchMedia.graphql');
+/* const SEARCH_MEDIA_QUERY = loader('./searchMedia.graphql'); */
 
 export default function SearchMedia(): ReactElement {
 	const [media, MediaDropdown] = useDropdown('Media', MediaTypeEnum.Anime, [
@@ -45,10 +49,10 @@ export default function SearchMedia(): ReactElement {
 	const fadeIn = { animation: 'fadeIn 50ms ease-in' };
 	const fadeOut = { animation: 'fadeOut 60ms ease-in' };
 
-	const [executeSearch, { loading, error, data }] = useLazyQuery<
-		SearchMediaByTitleQuery,
-		SearchMediaByTitleQueryVariables
-	>(SEARCH_MEDIA_QUERY);
+	const [
+		executeSearch,
+		{ loading, error, data },
+	] = useSearchMediaByTitleLazyQuery();
 
 	// Debounce search so it won't fire immediately
 	const debouncedSearch = useCallback(

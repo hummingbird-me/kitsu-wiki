@@ -4,17 +4,11 @@ documents: 'src/**/*.graphql'
 generates:
   src/types/graphql.ts:
     plugins:
-      - 'typescript'
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
     config:
       immutableTypes: true
-
-  src/:
-    preset: near-operation-file
-    presetConfig:
-      extension: .types.ts
-      baseTypesPath: types/graphql.ts
-    plugins:
-      - typescript-operations
 
   src/types/possibleTypes.json:
     plugins:
