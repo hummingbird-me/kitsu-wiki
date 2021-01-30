@@ -1,4 +1,9 @@
 {
   "singleQuote": true,
-  "jsxBracketSameLine": true
+  "jsxSingleQuote": true,
+  "jsxBracketSameLine": false,
+  "packageManager": "yarn",
+  "printWidth": 100,
+  "semi": true,
+  "trailingComma": "es5"
 }

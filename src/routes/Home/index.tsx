@@ -1,12 +1,10 @@
 import React, { ReactElement } from 'react';
 import SearchMedia from './SearchMedia';
 
-const Media = (): ReactElement => {
+export default function Media(): ReactElement {
   return (
     <div>
       <SearchMedia />
     </div>
   );
-};
-
-export default Media;
+}

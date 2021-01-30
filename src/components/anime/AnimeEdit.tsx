@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { FindAnimeFieldsFragment } from '../../routes/Anime/findAnimeById.types';
+import { FindAnimeFieldsFragment } from 'src/types/graphql';
 import EditProvider from '../ui/edit/EditProvider';
 import InputField from '../ui/edit/InputField';
 import SelectField from '../ui/edit/SelectField';

@@ -9,7 +9,11 @@ interface Props {
   blurhash?: string | null;
 }
 
-const PosterImage = ({ className, imgSrc, blurhash }: Props): ReactElement => {
+export default function PosterImage({
+  className,
+  imgSrc,
+  blurhash,
+}: Props): ReactElement {
   const [loaded, setLoaded] = useState(false);
 
   const onLoad = () => {
@@ -26,13 +30,11 @@ const PosterImage = ({ className, imgSrc, blurhash }: Props): ReactElement => {
       <LazyLoad once={true}>
         <PosterImg
           src={imgSrc}
-          alt="poster"
+          alt='poster'
           onLoad={onLoad}
           style={{ opacity: loaded ? '1' : '0' }}
         />
       </LazyLoad>
     </Poster>
   );
-};
-
-export default PosterImage;
+}

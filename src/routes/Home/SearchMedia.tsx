@@ -5,13 +5,11 @@ import { debounce } from 'ts-debounce';
 import useDelayUnmount from 'src/logic/useDelayUnmount';
 
 // GraphQl
-import { MediaTypeEnum } from 'src/types/graphql';
-import { loader } from 'graphql.macro';
-import { useLazyQuery } from '@apollo/client';
 import {
-  SearchMediaByTitleQuery,
+  MediaTypeEnum,
+  useSearchMediaByTitleLazyQuery,
   SearchMediaByTitleQueryVariables,
-} from './searchMedia.types';
+} from 'src/types/graphql';
 
 // Components
 import useDropdown from '../../components/ui/useDropdown';
@@ -30,9 +28,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 /* end imports */
 
-const SEARCH_MEDIA_QUERY = loader('./searchMedia.graphql');
-
-const SearchMedia = (): ReactElement => {
+export default function SearchMedia(): ReactElement {
   const [media, MediaDropdown] = useDropdown('Media', MediaTypeEnum.Anime, [
     MediaTypeEnum.Anime,
     MediaTypeEnum.Manga,
@@ -45,10 +41,10 @@ const SearchMedia = (): ReactElement => {
   const fadeIn = { animation: 'fadeIn 50ms ease-in' };
   const fadeOut = { animation: 'fadeOut 60ms ease-in' };
 
-  const [executeSearch, { loading, error, data }] = useLazyQuery<
-    SearchMediaByTitleQuery,
-    SearchMediaByTitleQueryVariables
-  >(SEARCH_MEDIA_QUERY);
+  const [
+    executeSearch,
+    { loading, error, data },
+  ] = useSearchMediaByTitleLazyQuery();
 
   // Debounce search so it won't fire immediately
   const debouncedSearch = useCallback(
@@ -85,24 +81,24 @@ const SearchMedia = (): ReactElement => {
   return (
     <>
       <SearchMediaLayout>
-        <div className="search-layout">
-          <div className="logo">
+        <div className='search-layout'>
+          <div className='logo'>
             <KitsuDatabaseTools />
           </div>
-          <AddEntryButton className="new-entry">Add New Entry</AddEntryButton>
+          <AddEntryButton className='new-entry'>Add New Entry</AddEntryButton>
 
-          <div className="media-type-dropdown">
+          <div className='media-type-dropdown'>
             <MediaDropdown />
           </div>
-          <div className="searchbox">
-            <label htmlFor="media-searchbar">
+          <div className='searchbox'>
+            <label htmlFor='media-searchbar'>
               Search for selected media type
             </label>
             <Input
-              id="media-searchbar"
-              type="search"
-              placeholder="Search"
-              autoComplete="off"
+              id='media-searchbar'
+              type='search'
+              placeholder='Search'
+              autoComplete='off'
               onChange={handleInputChange}
             />
             <FontAwesomeIcon icon={faSearch} />
@@ -113,14 +109,16 @@ const SearchMedia = (): ReactElement => {
         {loading ? (
           <Loading></Loading>
         ) : error ? (
-          <span className="search-error">error</span>
+          <span className='search-error'>error</span>
         ) : !searchIsRendered ? (
           <></>
         ) : !loading && data && searchIsRendered ? (
           <div
-            className="search-results"
+            className='search-results'
             style={showResults ? fadeIn : fadeOut}>
-            <SearchResults data={data} />
+            {data?.searchMediaByTitle?.nodes?.map((media) => {
+              return <SearchResults data={media} />;
+            })}
           </div>
         ) : (
           <div></div>
@@ -128,6 +126,4 @@ const SearchMedia = (): ReactElement => {
       </SearchResultLayout>
     </>
   );
-};
-
-export default SearchMedia;
+}

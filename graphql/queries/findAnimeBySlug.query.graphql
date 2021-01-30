@@ -3,7 +3,3 @@ query FindAnimeBySlug($slug: String!) {
     ...findAnimeFields
   }
 }
-
-fragment findAnimeFields on Anime {
-  id
-}

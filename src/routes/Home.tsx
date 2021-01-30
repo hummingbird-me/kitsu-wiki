@@ -13,14 +13,14 @@ const Home = (): ReactElement => {
         <hr />
         <div>
           <div className={`dropdown-menu${addDropdownOpen ? ' show' : ''}`}>
-            <Link to="/anime/add" className="dropdown-item">
+            <Link to='/anime/add' className='dropdown-item'>
               Anime
             </Link>
           </div>
         </div>
         <div>
           <div className={`dropdown-menu${editDropdownOpen ? ' show' : ''}`}>
-            <Link to="/media" className="dropdown-item">
+            <Link to='/media' className='dropdown-item'>
               Media
             </Link>
           </div>

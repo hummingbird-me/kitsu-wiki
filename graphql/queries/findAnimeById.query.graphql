@@ -3,7 +3,3 @@ query FindAnimeById($id: ID!) {
     ...findAnimeFields
   }
 }
-
-fragment findAnimeFields on Anime {
-  id
-}

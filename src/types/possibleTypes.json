@@ -1,10 +1,25 @@
 {
   "possibleTypes": {
-    "AmountConsumed": ["AnimeAmountConsumed", "MangaAmountConsumed"],
-    "Base": ["Generic"],
-    "CategoryBreakdown": ["AnimeCategoryBreakdown", "MangaCategoryBreakdown"],
-    "Episodic": ["Anime"],
-    "FavoriteItemUnion": ["Anime", "Character", "Manga", "Person"],
+    "AmountConsumed": [
+      "AnimeAmountConsumed",
+      "MangaAmountConsumed"
+    ],
+    "Base": [
+      "Generic"
+    ],
+    "CategoryBreakdown": [
+      "AnimeCategoryBreakdown",
+      "MangaCategoryBreakdown"
+    ],
+    "Episodic": [
+      "Anime"
+    ],
+    "FavoriteItemUnion": [
+      "Anime",
+      "Character",
+      "Manga",
+      "Person"
+    ],
     "MappingItemUnion": [
       "Anime",
       "Category",
@@ -14,9 +29,18 @@
       "Person",
       "Producer"
     ],
-    "Media": ["Anime", "Manga"],
-    "Streamable": ["StreamingLink", "Video"],
-    "Unit": ["Chapter", "Episode"],
+    "Media": [
+      "Anime",
+      "Manga"
+    ],
+    "Streamable": [
+      "StreamingLink",
+      "Video"
+    ],
+    "Unit": [
+      "Chapter",
+      "Episode"
+    ],
     "WithTimestamps": [
       "Account",
       "Anime",

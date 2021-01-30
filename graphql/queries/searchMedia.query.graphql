@@ -9,21 +9,3 @@ query SearchMediaByTitle(
     }
   }
 }
-
-fragment mediaSearchFields on Media {
-  id
-  slug
-  type
-  titles {
-    canonical
-  }
-  description(locales: "en")
-  startDate
-  tba
-  posterImage {
-    blurhash
-    original {
-      url
-    }
-  }
-}
