@@ -1,7 +1,7 @@
 overwrite: true
 watch: true
 schema: 'https://kitsu.io/api/graphql'
-documents: 'src/**/*.graphql'
+documents: 'graphql/**/*.graphql'
 generates:
   src/types/graphql.ts:
     plugins:

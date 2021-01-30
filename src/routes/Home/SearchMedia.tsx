@@ -9,14 +9,7 @@ import {
   MediaTypeEnum,
   useSearchMediaByTitleLazyQuery,
   SearchMediaByTitleQueryVariables,
-  MediaSearchFieldsFragment,
 } from 'src/types/graphql';
-/* import { loader } from 'graphql.macro';
-import { useLazyQuery } from '@apollo/client'; */
-/* import {
-	SearchMediaByTitleQuery,
-	SearchMediaByTitleQueryVariables,
-} from './searchMedia.types'; */
 
 // Components
 import useDropdown from '../../components/ui/useDropdown';
@@ -34,8 +27,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 /* end imports */
-
-/* const SEARCH_MEDIA_QUERY = loader('./searchMedia.graphql'); */
 
 export default function SearchMedia(): ReactElement {
   const [media, MediaDropdown] = useDropdown('Media', MediaTypeEnum.Anime, [

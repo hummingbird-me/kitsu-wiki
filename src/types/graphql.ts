@@ -3093,35 +3093,9 @@ export type WithTimestamps = {
   readonly updatedAt: Scalars['ISO8601DateTime'];
 };
 
-export type FindAnimeByIdQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type FindAnimeByIdQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly findAnimeById?: Maybe<(
-    { readonly __typename?: 'Anime' }
-    & FindAnimeFieldsFragment
-  )> }
-);
-
 export type FindAnimeFieldsFragment = (
   { readonly __typename?: 'Anime' }
-  & Pick<Anime, 'id'>
-);
-
-export type FindAnimeBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
-}>;
-
-
-export type FindAnimeBySlugQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly findAnimeBySlug?: Maybe<(
-    { readonly __typename?: 'Anime' }
-    & FindAnimeFieldsFragment
-  )> }
+  & Pick<Anime, 'id' | 'slug'>
 );
 
 type MediaSearchFields_Anime_Fragment = (
@@ -3158,6 +3132,32 @@ type MediaSearchFields_Manga_Fragment = (
 
 export type MediaSearchFieldsFragment = MediaSearchFields_Anime_Fragment | MediaSearchFields_Manga_Fragment;
 
+export type FindAnimeByIdQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type FindAnimeByIdQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly findAnimeById?: Maybe<(
+    { readonly __typename?: 'Anime' }
+    & FindAnimeFieldsFragment
+  )> }
+);
+
+export type FindAnimeBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type FindAnimeBySlugQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly findAnimeBySlug?: Maybe<(
+    { readonly __typename?: 'Anime' }
+    & FindAnimeFieldsFragment
+  )> }
+);
+
 export type SearchMediaByTitleQueryVariables = Exact<{
   first: Scalars['Int'];
   title: Scalars['String'];
@@ -3182,6 +3182,7 @@ export type SearchMediaByTitleQuery = (
 export const FindAnimeFieldsFragmentDoc = gql`
     fragment findAnimeFields on Anime {
   id
+  slug
 }
     `;
 export const MediaSearchFieldsFragmentDoc = gql`

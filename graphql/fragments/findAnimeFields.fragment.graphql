@@ -1,0 +1,4 @@
+fragment findAnimeFields on Anime {
+  id
+  slug
+}

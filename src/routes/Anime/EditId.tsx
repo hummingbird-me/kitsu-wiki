@@ -1,21 +1,18 @@
 import React, { ReactElement } from 'react';
-import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/client';
 import AnimeEdit from 'src/components/anime/AnimeEdit';
 import { RouteSpinner } from '../../components/ui/Spinner';
-import {
-  FindAnimeByIdQuery,
-  FindAnimeByIdQueryVariables,
-} from './findAnimeById.types';
 
-const FIND_ANIME_BY_ID = loader('./findAnimeById.graphql');
+// GraphQL
+import {
+  useFindAnimeByIdQuery,
+  FindAnimeByIdQueryVariables,
+} from 'src/types/graphql';
 
 const EditId = ({ id }: { id: string }): ReactElement => {
   const findAnimeByIdVariables: FindAnimeByIdQueryVariables = { id: id };
-  const { data, error, loading } = useQuery<FindAnimeByIdQuery>(
-    FIND_ANIME_BY_ID,
-    { variables: findAnimeByIdVariables }
-  );
+  const { data, error, loading } = useFindAnimeByIdQuery({
+    variables: findAnimeByIdVariables,
+  });
 
   if (loading) return <RouteSpinner />;
   if (error) return <div>Error: {error}</div>;
