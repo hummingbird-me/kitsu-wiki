@@ -3,10 +3,7 @@ import AnimeEdit from 'src/components/anime/AnimeEdit';
 import { RouteSpinner } from '../../components/ui/Spinner';
 
 // GraphQL
-import {
-  useFindAnimeByIdQuery,
-  FindAnimeByIdQueryVariables,
-} from 'src/types/graphql';
+import { useFindAnimeByIdQuery, FindAnimeByIdQueryVariables } from 'src/types/graphql';
 
 const EditId = ({ id }: { id: string }): ReactElement => {
   const findAnimeByIdVariables: FindAnimeByIdQueryVariables = { id: id };
@@ -15,9 +12,9 @@ const EditId = ({ id }: { id: string }): ReactElement => {
   });
 
   if (loading) return <RouteSpinner />;
-  if (error) return <div>Error: {error}</div>;
+  if (!data || !data.findAnimeById || error) return <div>Error: {error}</div>;
 
-  return <AnimeEdit anime={data?.findAnimeById} />;
+  return <AnimeEdit anime={data.findAnimeById} />;
 };
 
 export default EditId;

@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 
 interface InputFields {
   fieldType: string;
-  initialValue?: string;
+  initialValue?: string | null;
   readOnly?: boolean;
   parentDispatch: React.Dispatch<any>;
 }
@@ -21,13 +21,12 @@ export default function TextInput({
     parentDispatch({ type: fieldType, payload: updatedValue });
   };
   const onChange = readOnly ? undefined : handleChange;
-
   return (
     <input
       readOnly={readOnly}
       key={fieldType}
-      type="text"
-      value={value}
+      type='text'
+      value={value || ''}
       onChange={onChange}
     />
   );
