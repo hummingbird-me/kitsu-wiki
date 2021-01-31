@@ -1,27 +1,25 @@
 import React, { ReactElement, useReducer, useState } from 'react';
+import { TitleState } from 'src/logic/reducer_state/title_state';
 import { FindAnimeFieldsFragment, Maybe } from 'src/types/graphql';
 import { MediaChange } from 'src/types/mediaChange';
 import TextInput from '../ui/input/TextInput';
 import TitlesInput from '../ui/input/TitlesInput';
 
-const reducer = (state: MediaChange, action: any) => {
-  switch (action.type) {
-    case 'titles[canonical]':
-      return {
-        ...state,
-        titles: {
-          ...state.titles,
-          canonical: action.payload,
-        },
-      };
-    case 'titles[canonicalLocale]':
-      return {
-        ...state,
-        titles: {
-          ...state.titles,
-          canonicalLocale: action.payload,
-        },
-      };
+interface ActionInterface {
+  type: string;
+  payload: any;
+}
+
+const reducer = (state: MediaChange, action: ActionInterface) => {
+  const splitActions = action.type.split('.');
+
+  switch (splitActions[0]) {
+    case 'titles': {
+      const fieldName = splitActions.slice(-1)[0];
+      const titleState = new TitleState(state, fieldName, action.payload);
+
+      return titleState.update();
+    }
     default:
       return {
         ...state,
@@ -42,8 +40,7 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
     e.preventDefault();
 
     console.log(original);
-    // does shallow merges only :sob:
-    console.log({ ...original, ...update });
+    console.log(update);
   };
 
   return (

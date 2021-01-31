@@ -20,7 +20,7 @@ type SetChange = {
 type ImageUpload = string;
 type DateString = string;
 
-type TitlesChange = {
+export type TitlesChange = {
   alternatives?: SetChange;
   canonical?: string;
   // localized?: HashChange;
