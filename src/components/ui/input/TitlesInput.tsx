@@ -17,10 +17,10 @@ export default function TitlesInput({
 }: Props): ReactElement {
   return (
     <div className='titles'>
-      {/* <TextInput fieldType='titles[canonical]' initialValue={canonical} parentDispatch={dispatch} /> */}
+      {/* <TextInput fieldType='titles.canonical' initialValue={canonical} parentDispatch={dispatch} /> */}
 
       <TextInput
-        fieldType='titles[canonicalLocale]'
+        fieldType='titles.canonicalLocale'
         initialValue={canonicalLocale}
         parentDispatch={dispatch}
       />
