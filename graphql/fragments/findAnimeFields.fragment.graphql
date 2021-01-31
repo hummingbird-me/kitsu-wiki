@@ -2,9 +2,6 @@ fragment findAnimeFields on Anime {
   id
   slug
   titles {
-    canonical
-    alternatives
-    canonicalLocale
-    localized(locales: "en")
+    ...animeTitles
   }
 }

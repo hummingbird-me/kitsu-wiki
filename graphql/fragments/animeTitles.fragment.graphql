@@ -1,0 +1,6 @@
+fragment animeTitles on TitlesList {
+  canonical
+  alternatives
+  canonicalLocale
+  localized
+}

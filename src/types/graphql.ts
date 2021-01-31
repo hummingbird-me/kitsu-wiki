@@ -3093,9 +3093,18 @@ export type WithTimestamps = {
   readonly updatedAt: Scalars['ISO8601DateTime'];
 };
 
+export type AnimeTitlesFragment = (
+  { readonly __typename?: 'TitlesList' }
+  & Pick<TitlesList, 'canonical' | 'alternatives' | 'canonicalLocale' | 'localized'>
+);
+
 export type FindAnimeFieldsFragment = (
   { readonly __typename?: 'Anime' }
   & Pick<Anime, 'id' | 'slug'>
+  & { readonly titles: (
+    { readonly __typename?: 'TitlesList' }
+    & AnimeTitlesFragment
+  ) }
 );
 
 type MediaSearchFields_Anime_Fragment = (
@@ -3179,12 +3188,23 @@ export type SearchMediaByTitleQuery = (
   ) }
 );
 
+export const AnimeTitlesFragmentDoc = gql`
+    fragment animeTitles on TitlesList {
+  canonical
+  alternatives
+  canonicalLocale
+  localized
+}
+    `;
 export const FindAnimeFieldsFragmentDoc = gql`
     fragment findAnimeFields on Anime {
   id
   slug
+  titles {
+    ...animeTitles
+  }
 }
-    `;
+    ${AnimeTitlesFragmentDoc}`;
 export const MediaSearchFieldsFragmentDoc = gql`
     fragment mediaSearchFields on Media {
   id

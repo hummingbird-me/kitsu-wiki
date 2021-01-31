@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { TitlesListInput } from 'src/types/graphql';
+import { AnimeTitlesFragment } from 'src/types/graphql';
 import TextInput from './TextInput';
 
 // interface Props extends TitlesListInput {
@@ -7,7 +7,7 @@ import TextInput from './TextInput';
 // }
 
 interface Props {
-  titles: TitlesListInput;
+  titles: AnimeTitlesFragment;
   dispatch: React.Dispatch<any>;
 }
 
