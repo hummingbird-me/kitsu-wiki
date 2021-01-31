@@ -30,4 +30,8 @@ const Loading = styled.div`
   }
 `;
 
+export const LoadingFullscreen = styled(Loading)`
+  top: 50%;
+`;
+
 export default Loading;

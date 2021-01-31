@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import AnimeEdit from 'src/components/anime/AnimeEdit';
-import { RouteSpinner } from '../../components/ui/Spinner';
+/* import { RouteSpinner } from '../../components/ui/Spinner'; */
+import { LoadingFullscreen } from 'src/styles/components/ui/Loading';
 
 // GraphQL
 import { useFindAnimeByIdQuery, FindAnimeByIdQueryVariables } from 'src/types/graphql';
@@ -11,7 +12,7 @@ const EditId = ({ id }: { id: string }): ReactElement => {
     variables: findAnimeByIdVariables,
   });
 
-  if (loading) return <RouteSpinner />;
+  if (loading) return <LoadingFullscreen />;
   if (!data || !data.findAnimeById || error) return <div>Error: {error}</div>;
 
   return <AnimeEdit anime={data.findAnimeById} />;
