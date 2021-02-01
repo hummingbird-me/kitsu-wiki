@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useCallback } from 'react';
-import { debounce } from 'ts-debounce';
+import { debounce } from 'lodash';
 
 // Logical components
 import useDelayUnmount from 'src/logic/useDelayUnmount';
@@ -41,10 +41,7 @@ export default function SearchMedia(): ReactElement {
   const fadeIn = { animation: 'fadeIn 50ms ease-in' };
   const fadeOut = { animation: 'fadeOut 60ms ease-in' };
 
-  const [
-    executeSearch,
-    { loading, error, data },
-  ] = useSearchMediaByTitleLazyQuery();
+  const [executeSearch, { loading, error, data }] = useSearchMediaByTitleLazyQuery();
 
   // Debounce search so it won't fire immediately
   const debouncedSearch = useCallback(
@@ -91,9 +88,7 @@ export default function SearchMedia(): ReactElement {
             <MediaDropdown />
           </div>
           <div className='searchbox'>
-            <label htmlFor='media-searchbar'>
-              Search for selected media type
-            </label>
+            <label htmlFor='media-searchbar'>Search for selected media type</label>
             <Input
               id='media-searchbar'
               type='search'
@@ -113,9 +108,7 @@ export default function SearchMedia(): ReactElement {
         ) : !searchIsRendered ? (
           <></>
         ) : !loading && data && searchIsRendered ? (
-          <div
-            className='search-results'
-            style={showResults ? fadeIn : fadeOut}>
+          <div className='search-results' style={showResults ? fadeIn : fadeOut}>
             {data?.searchMediaByTitle?.nodes?.map((media) => {
               return <SearchResults data={media} />;
             })}
