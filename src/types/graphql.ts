@@ -2972,6 +2972,7 @@ export type TitlesListLocalizedArgs = {
 };
 
 export type TitlesListInput = {
+  readonly canonical?: Maybe<Scalars['String']>;
   readonly localized?: Maybe<Scalars['Map']>;
   readonly alternatives?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly canonicalLocale?: Maybe<Scalars['String']>;
