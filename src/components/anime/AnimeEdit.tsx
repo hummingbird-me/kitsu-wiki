@@ -4,6 +4,7 @@ import { FindAnimeFieldsFragment, Maybe } from 'src/types/graphql';
 import { MediaChange } from 'src/types/mediaChange';
 import TextInput from '../ui/input/TextInput';
 import TitlesInput from '../ui/input/TitlesInput';
+import Sidebar from 'src/components/ui/Sidebar';
 
 interface ActionInterface {
   type: string;
@@ -44,14 +45,17 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* figure out how to make parentDispatch optional when readOnly is supplied  */}
-      <TextInput readOnly fieldType='id' initialValue={original.id} parentDispatch={dispatch} />
+    <>
+      <Sidebar />
+      <form onSubmit={handleSubmit}>
+        {/* figure out how to make parentDispatch optional when readOnly is supplied  */}
+        <TextInput readOnly fieldType='id' initialValue={original.id} parentDispatch={dispatch} />
 
-      <TextInput fieldType='slug' initialValue={original.slug} parentDispatch={dispatch} />
-      <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
+        <TextInput fieldType='slug' initialValue={original.slug} parentDispatch={dispatch} />
+        <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
 
-      <input type='submit' value='Submit' />
-    </form>
+        <input type='submit' value='Submit' />
+      </form>
+    </>
   );
 }

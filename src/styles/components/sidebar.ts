@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const Sidenav = styled.div`
+  display: block;
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   background-color: var(--secondary-background-color);
@@ -10,7 +12,7 @@ export const Sidenav = styled.div`
   box-shadow: 0 0 10px black;
 
   @media screen and (max-width: 1400px) {
-    display: none;
+    display: var(--show-sidebar, none);
   }
 
   .main-navigation {
@@ -18,7 +20,7 @@ export const Sidenav = styled.div`
       list-style: none;
       margin-bottom: 30px;
       .active-tab {
-        color: $highlighted-text;
+        color: var(--link-color);
       }
       a {
         text-decoration: none;
