@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import AnimeEdit from 'src/components/anime/AnimeEdit';
-/* import { RouteSpinner } from '../../components/ui/Spinner'; */
 import { LoadingFullscreen } from 'src/styles/components/ui/Loading';
 
 // GraphQL

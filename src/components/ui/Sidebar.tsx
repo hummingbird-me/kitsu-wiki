@@ -4,11 +4,7 @@ import Sidenav, { Nav } from 'src/styles/components/sidebar';
 import { ReactComponent as KitsuDatabaseTools } from 'src/assets/kitsuDatabaseTools.svg';
 import HamburgerMenu from './HamburgerMenu';
 
-/* interface Props {
-  
-} */
-
-export default function Sidebar(/* {}: Props */): ReactElement {
+export default function Sidebar(): ReactElement {
   const [open, setOpen] = useState(false);
 
   let openSesame: CSSProperties;

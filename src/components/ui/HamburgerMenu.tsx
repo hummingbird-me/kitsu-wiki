@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactElement } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface HamburgerTypes {
   open?: boolean;
