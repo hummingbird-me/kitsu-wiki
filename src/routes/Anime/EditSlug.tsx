@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import AnimeEdit from 'src/components/anime/AnimeEdit';
-import { LoadingFullscreen } from 'src/styles/components/ui/Loading';
+import { LoadingFullscreen } from 'src/components/ui/Loading/Loading';
 
 // GraphQl
 import { useFindAnimeBySlugQuery, FindAnimeBySlugQueryVariables } from 'src/types/graphql';

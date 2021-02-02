@@ -12,13 +12,13 @@ import {
 } from 'src/types/graphql';
 
 // Components
-import useDropdown from '../../components/ui/useDropdown';
-import SearchResults from '../../components/media/SearchResults';
+import useDropdown from '../ui/useDropdown';
+import SearchResults from './SearchResults';
 // Styled-components
-import SearchMediaLayout from '../../styles/layouts/SearchMediaLayout';
-import SearchResultLayout from '../../styles/layouts/SearchResultLayout';
-import Loading from '../../styles/components/ui/Loading';
-import AddNewLink from 'src/styles/components/jsx/AddNewLink';
+import SearchMediaLayout from './Styles/SearchMediaLayout';
+import SearchResultLayout from './Styles/SearchResultLayout';
+import Loading from '../ui/Loading/Loading';
+import AddNewLink from 'src/components/search/Styles/AddNewLink';
 import Input from '../../styles/components/jsx/input';
 
 // Media

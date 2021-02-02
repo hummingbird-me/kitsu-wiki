@@ -4,7 +4,7 @@ import { FindAnimeFieldsFragment, Maybe } from 'src/types/graphql';
 import { MediaChange } from 'src/types/mediaChange';
 import TextInput from '../ui/input/TextInput';
 import TitlesInput from '../ui/input/TitlesInput';
-import Sidebar from 'src/components/ui/Sidebar';
+import Sidebar from 'src/components/ui/Navigation/Styles/Sidebar';
 
 interface ActionInterface {
   type: string;

@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import Poster, { PosterImg } from '../../styles/components/media/Poster';
+import Poster, { PosterImg } from './Styles/Poster';
 import { Blurhash } from 'react-blurhash';
 import LazyLoad from 'react-lazyload';
 
@@ -9,11 +9,7 @@ interface Props {
   blurhash?: string | null;
 }
 
-export default function PosterImage({
-  className,
-  imgSrc,
-  blurhash,
-}: Props): ReactElement {
+export default function PosterImage({ className, imgSrc, blurhash }: Props): ReactElement {
   const [loaded, setLoaded] = useState(false);
 
   const onLoad = () => {
@@ -22,11 +18,7 @@ export default function PosterImage({
 
   return (
     <Poster className={className}>
-      {blurhash ? (
-        <Blurhash hash={blurhash} resolutionX={32} resolutionY={32} punch={1} />
-      ) : (
-        <></>
-      )}
+      {blurhash ? <Blurhash hash={blurhash} resolutionX={32} resolutionY={32} punch={1} /> : <></>}
       <LazyLoad once={true}>
         <PosterImg
           src={imgSrc}

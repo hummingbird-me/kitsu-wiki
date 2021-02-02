@@ -1,8 +1,8 @@
 import React, { CSSProperties, ReactElement, useState } from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import Sidenav, { Nav } from 'src/styles/components/sidebar';
+import Sidenav, { Nav } from 'src/components/ui/Navigation/sidebar';
 import { ReactComponent as KitsuDatabaseTools } from 'src/assets/kitsuDatabaseTools.svg';
-import HamburgerMenu from './HamburgerMenu';
+import HamburgerMenu from '../HamburgerMenu';
 
 export default function Sidebar(): ReactElement {
   const [open, setOpen] = useState(false);
