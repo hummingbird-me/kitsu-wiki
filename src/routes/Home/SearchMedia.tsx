@@ -18,7 +18,7 @@ import SearchResults from '../../components/media/SearchResults';
 import SearchMediaLayout from '../../styles/layouts/SearchMediaLayout';
 import SearchResultLayout from '../../styles/layouts/SearchResultLayout';
 import Loading from '../../styles/components/ui/Loading';
-import { AddEntryButton } from '../../styles/components/jsx/button';
+import AddNewLink from 'src/styles/components/jsx/AddNewLink';
 import Input from '../../styles/components/jsx/input';
 
 // Media
@@ -82,17 +82,19 @@ export default function SearchMedia(): ReactElement {
           <div className='logo'>
             <KitsuDatabaseTools />
           </div>
-          <AddEntryButton className='new-entry'>Add New Entry</AddEntryButton>
+          <AddNewLink to={`/${media.toLowerCase()}/new`} className='new-entry'>
+            Add New {media.toLowerCase().replace(/^\w/, (c) => c.toUpperCase())}
+          </AddNewLink>
 
           <div className='media-type-dropdown'>
             <MediaDropdown />
           </div>
           <div className='searchbox'>
-            <label htmlFor='media-searchbar'>Search for selected media type</label>
+            <label htmlFor='media-searchbar'>Search for {media.toLowerCase()}</label>
             <Input
               id='media-searchbar'
               type='search'
-              placeholder='Search'
+              placeholder={'Search ' + media.toLowerCase()}
               autoComplete='off'
               onChange={handleInputChange}
             />
