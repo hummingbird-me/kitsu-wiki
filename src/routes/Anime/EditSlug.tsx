@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import AnimeEdit from 'src/components/anime/AnimeEdit';
-import { RouteSpinner } from '../../components/ui/Spinner';
+import { LoadingFullscreen } from 'src/styles/components/ui/Loading';
 
 // GraphQl
 import { useFindAnimeBySlugQuery, FindAnimeBySlugQueryVariables } from 'src/types/graphql';
@@ -11,7 +11,7 @@ const EditSlug = ({ slug }: { slug: string }): ReactElement => {
     variables: findAnimeBySlug,
   });
 
-  if (loading) return <RouteSpinner />;
+  if (loading) return <LoadingFullscreen />;
   if (!data || !data.findAnimeBySlug || error) return <div>Error: {error}</div>;
 
   if (error) return <div>Error: {error}</div>;
