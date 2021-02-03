@@ -2112,11 +2112,6 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/debounce@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@types/debounce/-/debounce-1.2.0.tgz#9ee99259f41018c640b3929e1bb32c3dcecdb192"
-  integrity sha512-bWG5wapaWgbss9E238T0R6bfo5Fh3OkeoSt245CM7JJwVwpw6MEBCbIxLq5z8KzsE3uJhzcIuQkyiZmzV3M/Dw==
-
 "@types/eslint@^7.2.4":
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-7.2.6.tgz#5e9aff555a975596c03a98b59ecd103decc70c3c"
@@ -12698,11 +12693,6 @@ tryer@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
-
-ts-debounce@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/ts-debounce/-/ts-debounce-2.2.0.tgz#2c415c5281b3578138be591330c31def802d1049"
-  integrity sha512-TsrY1lxPA1XIkF+75pd1XmAVAdjr+dGREi8GhIQvU+kL9Eyr0oCi7jrt11OGe4bLxebxXH5t9RYxbY+fufnfmQ==
 
 ts-invariant@^0.6.0:
   version "0.6.0"

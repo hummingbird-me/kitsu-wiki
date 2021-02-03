@@ -12,6 +12,7 @@ const Poster = styled.div`
 
   width: var(--poster-width);
   height: var(--poster-height);
+  background-color: var(--secondary-foreground-background-color);
   border-radius: var(--rounded-input);
 
   img,

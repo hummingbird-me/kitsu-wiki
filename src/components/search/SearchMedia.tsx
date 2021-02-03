@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useCallback } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { debounce } from 'lodash';
 
 // Logical components
@@ -44,26 +44,23 @@ export default function SearchMedia(): ReactElement {
   const [executeSearch, { loading, error, data }] = useSearchMediaByTitleLazyQuery();
 
   // Debounce search so it won't fire immediately
-  const debouncedSearch = useCallback(
-    debounce((nextValue: string, mediaType: MediaTypeEnum) => {
-      const searchTitleVariables: SearchMediaByTitleQueryVariables = {
-        first: 15,
-        title: nextValue,
-        media_type: mediaType,
-      };
+  const debouncedSearch = debounce((nextValue: string, mediaType: MediaTypeEnum) => {
+    const searchTitleVariables: SearchMediaByTitleQueryVariables = {
+      first: 15,
+      title: nextValue,
+      media_type: mediaType,
+    };
 
-      // Only search if there's text in the searchbox
-      if (nextValue) {
-        setShowResults(true);
-        executeSearch({
-          variables: searchTitleVariables,
-        });
-      } else {
-        setShowResults(false);
-      }
-    }, 700),
-    []
-  );
+    // Only search if there's text in the searchbox
+    if (nextValue) {
+      setShowResults(true);
+      executeSearch({
+        variables: searchTitleVariables,
+      });
+    } else {
+      setShowResults(false);
+    }
+  }, 700);
 
   // Handle the debouncing
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

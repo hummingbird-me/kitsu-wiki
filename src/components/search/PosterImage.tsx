@@ -19,7 +19,7 @@ export default function PosterImage({ className, imgSrc, blurhash }: Props): Rea
   return (
     <Poster className={className}>
       {blurhash ? <Blurhash hash={blurhash} resolutionX={32} resolutionY={32} punch={1} /> : <></>}
-      <LazyLoad once={true}>
+      <LazyLoad once={true} offset={100}>
         <PosterImg
           src={imgSrc}
           alt='poster'
