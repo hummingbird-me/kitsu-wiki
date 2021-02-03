@@ -1,4 +1,3 @@
-import { Media } from 'reactstrap';
 import { cloneDeep } from 'lodash';
 import { MediaChange, TitlesChange } from 'src/types/mediaChange';
 
