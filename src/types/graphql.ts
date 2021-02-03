@@ -3101,7 +3101,7 @@ export type AnimeTitlesFragment = (
 
 export type FindAnimeFieldsFragment = (
   { readonly __typename?: 'Anime' }
-  & Pick<Anime, 'id' | 'slug'>
+  & Pick<Anime, 'id' | 'slug' | 'description' | 'ageRating' | 'ageRatingGuide' | 'sfw' | 'startDate' | 'endDate' | 'nextRelease' | 'status' | 'tba'>
   & { readonly titles: (
     { readonly __typename?: 'TitlesList' }
     & AnimeTitlesFragment
@@ -3204,6 +3204,15 @@ export const FindAnimeFieldsFragmentDoc = gql`
   titles {
     ...animeTitles
   }
+  description
+  ageRating
+  ageRatingGuide
+  sfw
+  startDate
+  endDate
+  nextRelease
+  status
+  tba
 }
     ${AnimeTitlesFragmentDoc}`;
 export const MediaSearchFieldsFragmentDoc = gql`

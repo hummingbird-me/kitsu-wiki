@@ -50,9 +50,26 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
       <form onSubmit={handleSubmit}>
         {/* figure out how to make parentDispatch optional when readOnly is supplied  */}
         <TextInput readOnly fieldType='id' initialValue={original.id} parentDispatch={dispatch} />
-
         <TextInput fieldType='slug' initialValue={original.slug} parentDispatch={dispatch} />
+
         <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
+
+        {/* description (Map)*/}
+        {/* ageRating (Enum) Do as select options */}
+
+        <TextInput
+          fieldType='age_rating_guide'
+          initialValue={original.ageRatingGuide}
+          parentDispatch={dispatch}
+        />
+
+        {/* sfw Boolean */}
+        {/* startDate (Some date picker) */}
+        {/* endDate (some date picker) */}
+        {/* nextRelease (datetime picker) */}
+        {/* status (enum) */}
+
+        <TextInput fieldType='tba' initialValue={original.tba} parentDispatch={dispatch} />
 
         <input type='submit' value='Submit' />
       </form>

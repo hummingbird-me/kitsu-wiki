@@ -4,4 +4,13 @@ fragment findAnimeFields on Anime {
   titles {
     ...animeTitles
   }
+  description
+  ageRating
+  ageRatingGuide
+  sfw
+  startDate
+  endDate
+  nextRelease
+  status
+  tba
 }
