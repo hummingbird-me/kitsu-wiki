@@ -1,9 +1,11 @@
 import React, { CSSProperties, ReactElement, useState } from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import Sidenav, { Nav } from 'src/components/ui/Navigation/sidebar';
+import Sidenav, { Nav } from 'src/components/ui/Navigation/Styles/sidebar';
 import { ReactComponent as KitsuDatabaseTools } from 'src/assets/kitsuDatabaseTools.svg';
-import HamburgerMenu from '../HamburgerMenu';
+import HamburgerMenu from './HamburgerMenu';
 
+// TODO: make it exitable on very small screens
+// TODO: consider an in-between state using icons for tablets
 export default function Sidebar(): ReactElement {
   const [open, setOpen] = useState(false);
 

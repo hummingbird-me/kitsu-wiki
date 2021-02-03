@@ -4,7 +4,7 @@ import { AgeRatingEnum, FindAnimeFieldsFragment, ReleaseStatusEnum } from 'src/t
 import { MediaChange } from 'src/types/mediaChange';
 import TextInput from '../ui/input/TextInput';
 import TitlesInput from '../ui/input/TitlesInput';
-import Sidebar from 'src/components/ui/Navigation/Styles/Sidebar';
+import Sidebar from '../ui/Navigation';
 import SingleSelectInput from '../ui/input/SingleSelectInput';
 
 interface ActionInterface {
