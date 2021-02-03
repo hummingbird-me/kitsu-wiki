@@ -29,7 +29,7 @@ export default function SingleSelectInput<O>({
 
   return (
     <div>
-      <label htmlFor={fieldType}>{formattedLabel}:</label>
+      <label htmlFor={fieldType}>{formattedLabel}</label>
       <select key={fieldType} value={value || undefined} onChange={handleChange}>
         {options.map((option) => (
           <option key={String(option)} value={String(option)}>

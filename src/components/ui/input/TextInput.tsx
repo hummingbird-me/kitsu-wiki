@@ -1,5 +1,6 @@
 import { startCase } from 'lodash';
 import React, { ReactElement, useState } from 'react';
+import { Input, InputGroup } from './styles';
 
 interface InputFields {
   fieldType: string;
@@ -28,15 +29,15 @@ export default function TextInput({
   const formattedLabel = label ?? startCase(fieldType.split('.').slice(-1)[0]);
 
   return (
-    <div>
-      <label htmlFor={fieldType}>{formattedLabel}:</label>
-      <input
+    <InputGroup>
+      <label htmlFor={fieldType}>{formattedLabel}</label>
+      <Input
         readOnly={readOnly}
         key={fieldType}
         type='text'
         value={value || ''}
         onChange={onChange}
       />
-    </div>
+    </InputGroup>
   );
 }

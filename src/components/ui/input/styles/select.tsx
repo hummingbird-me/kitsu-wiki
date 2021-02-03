@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import generalStylesInteractions from '../../reuse/generalStylesInteractions';
+import { generalStyleInteractions, frontPageSizes } from './';
 
 // Media
 import { faCaretDown, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export const Select = styled.select`
-  ${generalStylesInteractions}
+  ${generalStyleInteractions}
+  ${frontPageSizes}
 `;
 
 export default Select;

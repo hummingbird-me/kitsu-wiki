@@ -19,7 +19,7 @@ import SearchMediaLayout from './Styles/SearchMediaLayout';
 import SearchResultLayout from './Styles/SearchResultLayout';
 import Loading from '../ui/Loading/Loading';
 import AddNewLink from 'src/components/search/Styles/AddNewLink';
-import Input from '../../styles/components/jsx/input';
+import { SearchInput } from '../ui/input/styles/input';
 
 // Media
 import { ReactComponent as KitsuDatabaseTools } from '../../assets/kitsuDatabaseTools.svg';
@@ -88,7 +88,7 @@ export default function SearchMedia(): ReactElement {
           </div>
           <div className='searchbox'>
             <label htmlFor='media-searchbar'>Search for {media.toLowerCase()}</label>
-            <Input
+            <SearchInput
               id='media-searchbar'
               type='search'
               placeholder={'Search ' + media.toLowerCase()}

@@ -3,15 +3,13 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
 	// Variables
 	:root {
+		/* --------- Colours --------- */
 		// Base Colours
 		--background-color: #161116ff;
 		--secondary-background-color: #312631ff;
 		--foreground-background-color: #453345ff;
 		--secondary-foreground-background-color: #6F5C6Fff;
 		--cta-accept-color: #236147ff;
-
-		// Shadow Colours
-		--foreground-shadow: #16111688;
 
 		// Gradient Invisible
 		--gradient-background-color: #16111600;
@@ -30,12 +28,22 @@ const GlobalStyles = createGlobalStyle`
 		--generic-tag: #576163;
 		--media-subtype-tag: #382938;
 
+		// Forms
+		--form-group-background-color: #433443;
+		--home-page-input: #453345ff;
+		--input-color:  #312631;
+
+		// Shadow Colours
+		--foreground-shadow: #16111688;
+
 		// Focus highlights
 		--focus-highlight: #ff8c7c;
 		--unfocused-highlights: #ff8c7c00;
 		
+		/* --------- Units --------- */
 		// Border-Radius
 		--rounded-input: 7px;
+		--rounded-input-group: 7px;
 
 		// Font Sizes
 		--font-xs: 0.6rem;
@@ -59,8 +67,35 @@ const GlobalStyles = createGlobalStyle`
 		--breakpoint-lg: 992px;
 		--breakpoint-xl: 1200px;
 	}
-	
-	// Global-scoped animations
+
+	/* --------- Scrollbar --------- */
+	* {
+		scrollbar-color: var(--secondary-foreground-background-color) #0000;
+		scrollbar-width: thin;
+	}
+	::-webkit-scrollbar {
+		width: 4px;
+		height: 8px;
+	}
+
+	::-webkit-scrollbar-button {
+		display: none;
+	}
+
+	::-webkit-scrollbar-track {
+		background-color: #1110;
+		width: 0px;
+	}
+
+	::-webkit-scrollbar-track-piece {
+		display: none;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: var(--secondary-foreground-background-color);
+	}
+
+	/* --------- Global-scoped animations --------- */
 	@keyframes fadeIn {
 		from {
 			opacity: 0;
@@ -78,7 +113,7 @@ const GlobalStyles = createGlobalStyle`
 		}
 	}
 
-
+	/* --------- Generics --------- */
 	// border-box
 	// dangerous setting of transitions
 	// TODO: Move transitions to where it's needed only
@@ -90,7 +125,7 @@ const GlobalStyles = createGlobalStyle`
 	// General font
 	body {
 		font-family: "Open Sans", sans-serif;
-		background-color: var(--secondary-background-color);
+		background-color: var(--background-color);
 		color: var(--main-text);
 	}
 
@@ -105,6 +140,7 @@ const GlobalStyles = createGlobalStyle`
 	li {
 		list-style: none;
 	}
+
 `;
 
 export default GlobalStyles;

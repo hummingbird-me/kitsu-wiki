@@ -6,6 +6,7 @@ import TextInput from '../ui/input/TextInput';
 import TitlesInput from '../ui/input/TitlesInput';
 import Sidebar from '../ui/Navigation';
 import SingleSelectInput from '../ui/input/SingleSelectInput';
+import EditGroup from '../Media/EditGroup';
 
 interface ActionInterface {
   type: string;
@@ -49,40 +50,60 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
     <>
       <Sidebar />
       <form onSubmit={handleSubmit}>
-        {/* figure out how to make parentDispatch optional when readOnly is supplied  */}
-        <TextInput readOnly fieldType='id' initialValue={original.id} parentDispatch={dispatch} />
-        <TextInput fieldType='slug' initialValue={original.slug} parentDispatch={dispatch} />
+        <EditGroup title='Mods Only'>
+          <>
+            {/* figure out how to make parentDispatch optional when readOnly is supplied  */}
+            <TextInput
+              readOnly
+              fieldType='id'
+              initialValue={original.id}
+              parentDispatch={dispatch}
+            />
+            <TextInput fieldType='slug' initialValue={original.slug} parentDispatch={dispatch} />
+          </>
+        </EditGroup>
 
-        <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
-
+        <EditGroup title='Titles'>
+          <>
+            <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
+          </>
+        </EditGroup>
         {/* description (Map)*/}
 
-        <SingleSelectInput<AgeRatingEnum>
-          fieldType='ageRating'
-          initialValue={original.ageRating}
-          options={Object.values(AgeRatingEnum)}
-          parentDispatch={dispatch}
-        />
+        <EditGroup title='Age Rating'>
+          <>
+            <SingleSelectInput<AgeRatingEnum>
+              fieldType='ageRating'
+              initialValue={original.ageRating}
+              options={Object.values(AgeRatingEnum)}
+              parentDispatch={dispatch}
+            />
 
-        <TextInput
-          fieldType='ageRatingGuide'
-          initialValue={original.ageRatingGuide}
-          parentDispatch={dispatch}
-        />
+            <TextInput
+              fieldType='ageRatingGuide'
+              initialValue={original.ageRatingGuide}
+              parentDispatch={dispatch}
+            />
+          </>
+        </EditGroup>
 
         {/* sfw Boolean */}
         {/* startDate (Some date picker) */}
         {/* endDate (some date picker) */}
         {/* nextRelease (datetime picker) */}
 
-        <SingleSelectInput<ReleaseStatusEnum>
-          fieldType='release'
-          initialValue={original.status}
-          options={Object.values(ReleaseStatusEnum)}
-          parentDispatch={dispatch}
-        />
+        <EditGroup title='Release'>
+          <>
+            <SingleSelectInput<ReleaseStatusEnum>
+              fieldType='release'
+              initialValue={original.status}
+              options={Object.values(ReleaseStatusEnum)}
+              parentDispatch={dispatch}
+            />
 
-        <TextInput fieldType='tba' initialValue={original.tba} parentDispatch={dispatch} />
+            <TextInput fieldType='tba' initialValue={original.tba} parentDispatch={dispatch} />
+          </>
+        </EditGroup>
 
         <input type='submit' value='Submit' />
       </form>
