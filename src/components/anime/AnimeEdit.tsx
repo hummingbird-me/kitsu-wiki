@@ -1,5 +1,5 @@
 import React, { ReactElement, useReducer, useState } from 'react';
-import { TitleState } from 'src/logic/reducer_state/title_state';
+import { TitleState } from 'src/logic/reducer_state/titleState';
 import { FindAnimeFieldsFragment, Maybe } from 'src/types/graphql';
 import { MediaChange } from 'src/types/mediaChange';
 import TextInput from '../ui/input/TextInput';
