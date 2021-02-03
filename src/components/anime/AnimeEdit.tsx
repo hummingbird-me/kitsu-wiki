@@ -1,10 +1,11 @@
 import React, { ReactElement, useReducer, useState } from 'react';
 import { TitleState } from 'src/logic/reducer_state/titleState';
-import { FindAnimeFieldsFragment, Maybe } from 'src/types/graphql';
+import { AgeRatingEnum, FindAnimeFieldsFragment, ReleaseStatusEnum } from 'src/types/graphql';
 import { MediaChange } from 'src/types/mediaChange';
 import TextInput from '../ui/input/TextInput';
 import TitlesInput from '../ui/input/TitlesInput';
 import Sidebar from 'src/components/ui/Navigation/Styles/Sidebar';
+import SingleSelectInput from '../ui/input/SingleSelectInput';
 
 interface ActionInterface {
   type: string;
@@ -24,7 +25,7 @@ const reducer = (state: MediaChange, action: ActionInterface) => {
     default:
       return {
         ...state,
-        [action.type.toLowerCase()]: action.payload,
+        [action.type]: action.payload,
       };
   }
 };
@@ -55,10 +56,16 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
         <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
 
         {/* description (Map)*/}
-        {/* ageRating (Enum) Do as select options */}
+
+        <SingleSelectInput<AgeRatingEnum>
+          fieldType='ageRating'
+          initialValue={original.ageRating}
+          options={Object.values(AgeRatingEnum)}
+          parentDispatch={dispatch}
+        />
 
         <TextInput
-          fieldType='age_rating_guide'
+          fieldType='ageRatingGuide'
           initialValue={original.ageRatingGuide}
           parentDispatch={dispatch}
         />
@@ -67,7 +74,13 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
         {/* startDate (Some date picker) */}
         {/* endDate (some date picker) */}
         {/* nextRelease (datetime picker) */}
-        {/* status (enum) */}
+
+        <SingleSelectInput<ReleaseStatusEnum>
+          fieldType='release'
+          initialValue={original.status}
+          options={Object.values(ReleaseStatusEnum)}
+          parentDispatch={dispatch}
+        />
 
         <TextInput fieldType='tba' initialValue={original.tba} parentDispatch={dispatch} />
 
