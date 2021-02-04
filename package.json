@@ -22,6 +22,7 @@
     "react-lazyload": "^3.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-select": "^4.0.2",
     "reactstrap": "^8.8.1",
     "styled-components": "^5.2.1"
   },
@@ -43,6 +44,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-lazyload": "^3.0.0",
     "@types/react-router-dom": "^5.1.6",
+    "@types/react-select": "^4.0.12",
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",

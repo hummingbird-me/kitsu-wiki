@@ -1,5 +1,6 @@
 import { startCase } from 'lodash';
 import React, { ReactElement, useState } from 'react';
+import Select from 'react-select';
 
 interface InputFields<O> {
   fieldType: string;
@@ -17,26 +18,34 @@ export default function SingleSelectInput<O>({
   parentDispatch,
 }: InputFields<O>): ReactElement {
   const [value, setValue] = useState(initialValue);
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const updatedValue = event.target.value;
-
-    setValue(updatedValue);
-    parentDispatch({ type: fieldType, payload: updatedValue });
-  };
 
   // Move this formatter to some type of method. Splitting fieldType seems to be common.
   const formattedLabel = label ?? startCase(fieldType.split('.').slice(-1)[0]);
+  const formattedOptions = options.map((option) => ({
+    value: String(option),
+    label: String(option),
+  }));
+
+  const formattedValue = {
+    value: value,
+    label: value,
+  };
 
   return (
     <div>
       <label htmlFor={fieldType}>{formattedLabel}</label>
-      <select key={fieldType} value={value || undefined} onChange={handleChange}>
-        {options.map((option) => (
-          <option key={String(option)} value={String(option)}>
-            {option}
-          </option>
-        ))}
-      </select>
+      <Select
+        options={formattedOptions}
+        value={formattedValue}
+        isClearable={true}
+        isSearchable={true}
+        onChange={(event) => {
+          const updatedValue = event?.value;
+
+          setValue(updatedValue);
+          parentDispatch({ type: fieldType, payload: updatedValue });
+        }}
+      />
     </div>
   );
 }

@@ -68,7 +68,7 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
             <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
           </>
         </EditGroup>
-        {/* description (Map)*/}
+        {/* description (en)*/}
 
         <EditGroup title='Age Rating'>
           <>
@@ -87,7 +87,6 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
           </>
         </EditGroup>
 
-        {/* sfw Boolean */}
         {/* startDate (Some date picker) */}
         {/* endDate (some date picker) */}
         {/* nextRelease (datetime picker) */}
