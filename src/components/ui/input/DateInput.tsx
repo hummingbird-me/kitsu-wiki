@@ -1,6 +1,7 @@
 import { startCase } from 'lodash';
 import React, { ReactElement, useState } from 'react';
 import DatePicker from 'react-date-picker';
+import LabelInput from './LabelInput';
 
 interface DateInputFields {
   fieldType: string;
@@ -16,7 +17,6 @@ export default function DateInput({
   parentDispatch,
 }: DateInputFields): ReactElement {
   const [value, setValue] = useState(new Date(initialValue));
-  const formattedLabel = label ?? startCase(fieldType.split('.').slice(-1)[0]);
   // I'd like to figure out how to make this date a type.
   // I know it will always be a date object (or undefined).
   const handleChange = (date: any) => {
@@ -28,7 +28,7 @@ export default function DateInput({
 
   return (
     <div>
-      <label htmlFor={fieldType}>{formattedLabel}</label>
+      <LabelInput fieldType={fieldType} label={label} />
       <DatePicker onChange={handleChange} value={value} />
     </div>
   );

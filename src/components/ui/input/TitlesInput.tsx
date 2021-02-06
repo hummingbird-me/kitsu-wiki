@@ -2,10 +2,6 @@ import React, { ReactElement } from 'react';
 import { AnimeTitlesFragment } from 'src/types/graphql';
 import TextInput from './TextInput';
 
-// interface Props extends TitlesListInput {
-//   dispatch: React.Dispatch<any>;
-// }
-
 interface Props {
   titles: AnimeTitlesFragment;
   dispatch: React.Dispatch<any>;

@@ -1,5 +1,5 @@
-import { startCase } from 'lodash';
 import React, { ReactElement, useState } from 'react';
+import LabelInput from './LabelInput';
 import { Input, InputGroup } from './styles';
 
 interface InputFields {
@@ -25,12 +25,11 @@ export default function TextInput({
     parentDispatch({ type: fieldType, payload: updatedValue });
   };
   const onChange = readOnly ? undefined : handleChange;
-  // Move this formatter to some type of method. Splitting fieldType seems to be common.
-  const formattedLabel = label ?? startCase(fieldType.split('.').slice(-1)[0]);
 
   return (
     <InputGroup>
-      <label htmlFor={fieldType}>{formattedLabel}</label>
+      <LabelInput fieldType={fieldType} label={label} />
+
       <Input
         readOnly={readOnly}
         key={fieldType}

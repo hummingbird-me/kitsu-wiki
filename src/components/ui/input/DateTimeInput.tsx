@@ -1,7 +1,7 @@
-import { startCase } from 'lodash';
 import React, { ReactElement, useState } from 'react';
 // @ts-expect-error - We need to create a declaration file for this.
 import DateTimePicker from 'react-datetime-picker';
+import LabelInput from './LabelInput';
 
 interface DateInputFields {
   fieldType: string;
@@ -17,7 +17,6 @@ export default function DateInput({
   parentDispatch,
 }: DateInputFields): ReactElement {
   const [value, setValue] = useState(new Date(initialValue));
-  const formattedLabel = label ?? startCase(fieldType.split('.').slice(-1)[0]);
   // I'd like to figure out how to make this dateTime a type.
   // I know it will always be a dateTime object (or undefined).
   const handleChange = (dateTime: any) => {
@@ -29,7 +28,7 @@ export default function DateInput({
 
   return (
     <div>
-      <label htmlFor={fieldType}>{formattedLabel}</label>
+      <LabelInput fieldType={fieldType} label={label} />
       <DateTimePicker onChange={handleChange} value={value} />
     </div>
   );

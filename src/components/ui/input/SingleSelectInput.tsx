@@ -1,6 +1,6 @@
-import { startCase } from 'lodash';
 import React, { ReactElement, useState } from 'react';
 import Select from 'react-select';
+import LabelInput from './LabelInput';
 
 interface InputFields<O> {
   fieldType: string;
@@ -19,8 +19,6 @@ export default function SingleSelectInput<O>({
 }: InputFields<O>): ReactElement {
   const [value, setValue] = useState(initialValue);
 
-  // Move this formatter to some type of method. Splitting fieldType seems to be common.
-  const formattedLabel = label ?? startCase(fieldType.split('.').slice(-1)[0]);
   const formattedOptions = options.map((option) => ({
     value: String(option),
     label: String(option),
@@ -33,7 +31,7 @@ export default function SingleSelectInput<O>({
 
   return (
     <div>
-      <label htmlFor={fieldType}>{formattedLabel}</label>
+      <LabelInput fieldType={fieldType} label={label} />
       <Select
         options={formattedOptions}
         value={formattedValue}
