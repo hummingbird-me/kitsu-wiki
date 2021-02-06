@@ -2,11 +2,10 @@ import React, { ReactElement, useReducer, useState } from 'react';
 import { TitleState } from 'src/logic/reducer_state/titleState';
 import { AgeRatingEnum, FindAnimeFieldsFragment, ReleaseStatusEnum } from 'src/types/graphql';
 import { MediaChange } from 'src/types/mediaChange';
-import TextInput from '../ui/input/TextInput';
-import TitlesInput from '../ui/input/TitlesInput';
 import Sidebar from '../ui/Navigation';
 import SingleSelectInput from '../ui/input/SingleSelectInput';
 import EditGroup from '../Media/EditGroup';
+import { TextInput, TitlesInput, DateInput, DateTimeInput } from 'src/components/ui/input';
 
 interface ActionInterface {
   type: string;
@@ -87,9 +86,19 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
           </>
         </EditGroup>
 
-        {/* startDate (Some date picker) */}
-        {/* endDate (some date picker) */}
-        {/* nextRelease (datetime picker) */}
+        <DateInput
+          fieldType='startDate'
+          initialValue={original.startDate}
+          parentDispatch={dispatch}
+        />
+
+        <DateInput fieldType='endDate' initialValue={original.endDate} parentDispatch={dispatch} />
+        <DateInput fieldType='endDate' initialValue={original.endDate} parentDispatch={dispatch} />
+        <DateTimeInput
+          fieldType='nextRelease'
+          initialValue={original.nextRelease}
+          parentDispatch={dispatch}
+        />
 
         <EditGroup title='Release'>
           <>
