@@ -1,8 +1,13 @@
 export type ID = string;
 export type NodeChange = { id?: ID };
+type HashChange = {
+  set?: { [key: string]: string };
+  remove?: [string];
+};
 
 export type MediaChange = NodeChange & {
   titles?: TitlesChange;
+  description?: HashChange;
   ageRating?: AgeRating;
   ageRatingGuide?: string;
   bannerImage?: ImageUpload;
@@ -23,7 +28,7 @@ type DateString = string;
 export type TitlesChange = {
   alternatives?: SetChange;
   canonical?: string;
-  // localized?: HashChange;
+  localized?: HashChange;
 };
 
 // Actual object types

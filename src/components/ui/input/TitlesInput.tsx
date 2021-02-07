@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function TitlesInput({
-  titles: { canonical, canonicalLocale },
+  titles: { canonical, canonicalLocale, alternatives, localized },
   dispatch,
 }: Props): ReactElement {
   return (

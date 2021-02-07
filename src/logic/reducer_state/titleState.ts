@@ -1,20 +1,24 @@
 import { cloneDeep } from 'lodash';
-import { MediaChange, TitlesChange } from 'src/types/mediaChange';
+import { TitlesChange } from 'src/types/mediaChange';
 
-export class TitleState {
-  #currentState: MediaChange;
+interface RequiredKeys {
+  titles?: TitlesChange;
+}
+
+export class TitleState<T extends RequiredKeys> {
+  #currentState: T;
   #titles: TitlesChange;
   #fieldName: string;
   #newValue: string | any;
 
-  constructor(currentState: MediaChange, fieldName: string, newValue: any) {
+  constructor(currentState: T, fieldName: string, newValue: any) {
     this.#currentState = cloneDeep(currentState);
     this.#titles = this.#currentState.titles || {};
     this.#fieldName = fieldName;
     this.#newValue = newValue;
   }
 
-  update(): MediaChange {
+  update(): T {
     switch (this.#fieldName) {
       default:
         this.#currentState.titles = {

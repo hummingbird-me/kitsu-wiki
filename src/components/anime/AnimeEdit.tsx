@@ -1,34 +1,18 @@
 import React, { ReactElement, useReducer, useState } from 'react';
-import { TitleState } from 'src/logic/reducer_state/titleState';
 import { AgeRatingEnum, FindAnimeFieldsFragment, ReleaseStatusEnum } from 'src/types/graphql';
 import { MediaChange } from 'src/types/mediaChange';
 import Sidebar from '../ui/Navigation';
 import SingleSelectInput from '../ui/input/SingleSelectInput';
 import EditGroup from '../Media/EditGroup';
-import { TextInput, TitlesInput, DateInput, DateTimeInput } from 'src/components/ui/input';
+import {
+  TextInput,
+  TitlesInput,
+  DateInput,
+  DateTimeInput,
+  TextAreaInput,
+} from 'src/components/ui/input';
+import { AnimeReducer } from './AnimeReducer';
 
-interface ActionInterface {
-  type: string;
-  payload: any;
-}
-
-const reducer = (state: MediaChange, action: ActionInterface) => {
-  const splitActions = action.type.split('.');
-
-  switch (splitActions[0]) {
-    case 'titles': {
-      const fieldName = splitActions.slice(-1)[0];
-      const titleState = new TitleState(state, fieldName, action.payload);
-
-      return titleState.update();
-    }
-    default:
-      return {
-        ...state,
-        [action.type]: action.payload,
-      };
-  }
-};
 interface AnimeInterface {
   anime: FindAnimeFieldsFragment;
 }
@@ -36,7 +20,7 @@ interface AnimeInterface {
 export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
   const changes: MediaChange = {};
   const [original, _setData] = useState(anime);
-  const [update, dispatch] = useReducer(reducer, changes);
+  const [update, dispatch] = useReducer(AnimeReducer, changes);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -67,7 +51,13 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
             <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
           </>
         </EditGroup>
-        {/* description (en)*/}
+
+        <TextAreaInput
+          fieldType='description.en'
+          label='Description'
+          initialValue={original.description['en']}
+          parentDispatch={dispatch}
+        />
 
         <EditGroup title='Age Rating'>
           <>
@@ -92,7 +82,6 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
           parentDispatch={dispatch}
         />
 
-        <DateInput fieldType='endDate' initialValue={original.endDate} parentDispatch={dispatch} />
         <DateInput fieldType='endDate' initialValue={original.endDate} parentDispatch={dispatch} />
         <DateTimeInput
           fieldType='nextRelease'

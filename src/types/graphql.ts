@@ -18,7 +18,7 @@ export type Scalars = {
   /** An ISO 8601-encoded datetime */
   ISO8601DateTime: any;
   /** A loose key-value map in GraphQL */
-  Map: any;
+  Map: Record<string, any>;
   Upload: any;
 };
 
