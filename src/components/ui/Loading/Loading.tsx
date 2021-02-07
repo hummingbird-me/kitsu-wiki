@@ -6,7 +6,7 @@ interface Props {
   fullScreen?: boolean;
 }
 
-const Loading = (fullScreen: Props): ReactElement => {
+const Loading = ({ fullScreen = false }: Props): ReactElement => {
   if (fullScreen) {
     return (
       <LoadingFullscreen>
@@ -30,12 +30,13 @@ const LoadingTie = styled.div`
   left: 0;
   width: 100%;
   height: 100px;
+  margin-top: -30px;
 `;
 
 const KitsuLoad = styled(KitsuLoading)`
   /* --size-from: 10px;
   --size-to: 20px; */
-  --animation-speed: 1800ms;
+  --animation-speed: 500ms;
   /* --translate-y: calc(calc(var(--size-to) - var(--size-from)) / -2); */
 
   height: 50px;

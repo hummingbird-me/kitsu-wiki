@@ -6,6 +6,7 @@ const SearchResultLayout = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(150px, 550px));
     justify-content: center;
     gap: 15px;
+    padding-bottom: 50px;
   }
 `;
 

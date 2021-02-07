@@ -4,7 +4,6 @@ const screenWidth = '640px';
 
 const SearchMediaLayout = styled.div`
   min-height: 100%;
-  padding-bottom: 50px;
 
   top: 0;
   left: 0;
