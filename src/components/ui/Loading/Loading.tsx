@@ -1,36 +1,68 @@
+import react, { ReactElement } from 'react';
 import styled from 'styled-components';
+import { KitsuLoading } from 'src/assets';
 
-const Loading = styled.div`
-  --size-from: 10px;
-  --size-to: 20px;
-  --animation-speed: 500ms;
-  --translate-y: calc(calc(var(--size-to) - var(--size-from)) / -2);
+interface Props {
+  fullScreen?: boolean;
+}
 
-  will-change: transform, width, height, filter;
+const Loading = (fullScreen: Props): ReactElement => {
+  if (fullScreen) {
+    return (
+      <LoadingFullscreen>
+        <KitsuLoad></KitsuLoad>
+      </LoadingFullscreen>
+    );
+  }
+
+  return (
+    <LoadingTie>
+      <KitsuLoad></KitsuLoad>
+    </LoadingTie>
+  );
+};
+
+const LoadingTie = styled.div`
+  display: flex;
+  justify-content: center;
 
   position: absolute;
-  background-color: var(--links-text);
-  border-radius: 50%;
-  left: 50%;
-  transform: translate(-50%);
+  left: 0;
+  width: 100%;
+  height: 100px;
+`;
 
-  animation: loading var(--animation-speed) linear infinite alternate-reverse;
+const KitsuLoad = styled(KitsuLoading)`
+  /* --size-from: 10px;
+  --size-to: 20px; */
+  --animation-speed: 1800ms;
+  /* --translate-y: calc(calc(var(--size-to) - var(--size-from)) / -2); */
+
+  height: 50px;
+  will-change: transform;
+
+  animation: loading var(--animation-speed) ease infinite;
 
   @keyframes loading {
-    from {
-      width: var(--size-from);
-      height: var(--size-from);
+    0% {
+      transform: rotate(15deg);
     }
-    to {
-      width: var(--size-to);
-      height: var(--size-to);
-      transform: translate(-50%, var(--translate-y));
-      filter: brightness(110%);
+    20% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(-15deg);
+    }
+    70% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(15deg);
     }
   }
 `;
 
-export const LoadingFullscreen = styled(Loading)`
+export const LoadingFullscreen = styled(LoadingTie)`
   top: 50%;
 `;
 

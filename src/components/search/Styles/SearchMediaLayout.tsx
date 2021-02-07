@@ -3,7 +3,9 @@ import styled from 'styled-components';
 const screenWidth = '640px';
 
 const SearchMediaLayout = styled.div`
-  min-height: 30rem;
+  min-height: 100%;
+  padding-bottom: 50px;
+
   top: 0;
   left: 0;
 
@@ -19,6 +21,8 @@ const SearchMediaLayout = styled.div`
     grid-template-columns: 0 6fr 0;
   }
   .search-layout {
+    margin-top: 100px;
+    margin-bottom: 40px;
     grid-column: 2;
 
     display: grid;

@@ -101,7 +101,7 @@ export default function SearchMedia(): ReactElement {
       </SearchMediaLayout>
       <SearchResultLayout>
         {loading ? (
-          <Loading></Loading>
+          <Loading />
         ) : error ? (
           <span className='search-error'>error</span>
         ) : !searchIsRendered ? (
