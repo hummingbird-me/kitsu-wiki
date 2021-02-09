@@ -5,6 +5,7 @@ import { MediaChange } from 'src/types/mediaChange';
 interface ActionInterface {
   type: string;
   payload: any;
+  action?: string;
 }
 
 export function AnimeReducer(state: MediaChange, action: ActionInterface): MediaChange {
@@ -13,7 +14,12 @@ export function AnimeReducer(state: MediaChange, action: ActionInterface): Media
   switch (splitActions[0]) {
     case 'titles': {
       const fieldName = splitActions.slice(-1)[0];
-      const titleState = new TitleState<MediaChange>(state, fieldName, action.payload);
+      const titleState = new TitleState<MediaChange>(
+        state,
+        fieldName,
+        action.payload,
+        action.action
+      );
 
       return titleState.update();
     }

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { AnimeTitlesFragment } from 'src/types/graphql';
-import TextInput from './TextInput';
+import { TextInput, SetInput } from 'src/components/ui/input';
 
 interface Props {
   titles: AnimeTitlesFragment;
@@ -8,9 +8,11 @@ interface Props {
 }
 
 export default function TitlesInput({
-  titles: { canonical, canonicalLocale, alternatives, localized },
+  titles: { canonical, canonicalLocale, alternatives = [], localized },
   dispatch,
 }: Props): ReactElement {
+  const formattedAlternatives = alternatives?.map((alt) => alt) ?? [];
+
   return (
     <div className='titles'>
       {/* <TextInput fieldType='titles.canonical' initialValue={canonical} parentDispatch={dispatch} /> */}
@@ -18,6 +20,13 @@ export default function TitlesInput({
       <TextInput
         fieldType='titles.canonicalLocale'
         initialValue={canonicalLocale}
+        parentDispatch={dispatch}
+      />
+
+      <SetInput
+        fieldType='alternatives'
+        label='Synonyms and Abbreviations'
+        initialValue={formattedAlternatives}
         parentDispatch={dispatch}
       />
     </div>
