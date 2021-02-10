@@ -52,15 +52,15 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
           </>
         </EditGroup>
 
-        <TextAreaInput
-          fieldType='description.en'
-          label='Description'
-          initialValue={original.description['en']}
-          parentDispatch={dispatch}
-        />
-
-        <EditGroup title='Age Rating'>
+        <EditGroup title='Synopsis and Age Rating'>
           <>
+            <TextAreaInput
+              fieldType='description.en'
+              label='Description'
+              initialValue={original.description['en']}
+              parentDispatch={dispatch}
+            />
+
             <SingleSelectInput<AgeRatingEnum>
               fieldType='ageRating'
               initialValue={original.ageRating}

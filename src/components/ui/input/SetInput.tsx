@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import LabelInput from './LabelInput';
-import { Input, InputGroup } from './styles';
+import { Input, InputGroup, AltTitles } from './styles';
 
 interface SetInputFields {
   fieldType: string;
@@ -51,9 +51,13 @@ export default function SetInput({
     <InputGroup>
       <LabelInput fieldType={fieldType} label={label} />
 
-      {items.map((item, index) => {
-        return <Input key={index} type='text' value={item} onChange={handleChange(index)}></Input>;
-      })}
+      <AltTitles>
+        {items.map((item, index) => {
+          return (
+            <Input key={index} type='text' value={item} onChange={handleChange(index)}></Input>
+          );
+        })}
+      </AltTitles>
     </InputGroup>
   );
 }

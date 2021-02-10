@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { AnimeTitlesFragment } from 'src/types/graphql';
 import { TextInput, SetInput } from 'src/components/ui/input';
+import { AltTitles } from './styles';
 
 interface Props {
   titles: AnimeTitlesFragment;
@@ -17,11 +18,28 @@ export default function TitlesInput({
     <div className='titles'>
       {/* <TextInput fieldType='titles.canonical' initialValue={canonical} parentDispatch={dispatch} /> */}
 
-      <TextInput
-        fieldType='titles.canonicalLocale'
-        initialValue={canonicalLocale}
-        parentDispatch={dispatch}
-      />
+      <AltTitles>
+        <TextInput
+          fieldType='titles.canonicalLocale'
+          initialValue={canonicalLocale}
+          parentDispatch={dispatch}
+        />
+        <TextInput
+          fieldType='titles.canonicalLocale'
+          initialValue={canonicalLocale}
+          parentDispatch={dispatch}
+        />
+        <TextInput
+          fieldType='titles.canonicalLocale'
+          initialValue={canonicalLocale}
+          parentDispatch={dispatch}
+        />
+        <TextInput
+          fieldType='titles.canonicalLocale'
+          initialValue={canonicalLocale}
+          parentDispatch={dispatch}
+        />
+      </AltTitles>
 
       <SetInput
         fieldType='alternatives'

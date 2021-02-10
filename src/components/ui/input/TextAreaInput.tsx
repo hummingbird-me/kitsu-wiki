@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import LabelInput from './LabelInput';
-import { Input, InputGroup } from './styles';
+import { TextArea, InputGroup } from './styles';
 
 interface TextAreaInputFields {
   fieldType: string;
@@ -26,7 +26,7 @@ export default function TextAreaInput({
   return (
     <InputGroup>
       <LabelInput fieldType={fieldType} label={label} />
-      <Input key={fieldType} type='textarea' value={value} onChange={handleChange} />
+      <TextArea key={fieldType} value={value} onChange={() => handleChange} rows={10} cols={50} />
     </InputGroup>
   );
 }

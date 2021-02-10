@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import Select from 'react-select';
+import { SingleSelect } from './styles';
 import LabelInput from './LabelInput';
 
 interface InputFields<O> {
@@ -32,18 +33,22 @@ export default function SingleSelectInput<O>({
   return (
     <div>
       <LabelInput fieldType={fieldType} label={label} />
-      <Select
-        options={formattedOptions}
-        value={formattedValue}
-        isClearable={true}
-        isSearchable={true}
-        onChange={(event) => {
-          const updatedValue = event?.value;
+      <SingleSelect>
+        <Select
+          className='single-select-container'
+          classNamePrefix='single-select'
+          options={formattedOptions}
+          value={formattedValue}
+          isClearable={true}
+          isSearchable={true}
+          onChange={(event) => {
+            const updatedValue = event?.value;
 
-          setValue(updatedValue);
-          parentDispatch({ type: fieldType, payload: updatedValue });
-        }}
-      />
+            setValue(updatedValue);
+            parentDispatch({ type: fieldType, payload: updatedValue });
+          }}
+        />
+      </SingleSelect>
     </div>
   );
 }
