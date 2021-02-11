@@ -41,12 +41,12 @@ export default function SearchMedia(): ReactElement {
   const fadeIn = { animation: 'fadeIn 50ms ease-in' };
   const fadeOut = { animation: 'fadeOut 60ms ease-in' };
 
-  const [executeSearch, { loading, error, data }] = useSearchMediaByTitleLazyQuery();
+  const [executeSearch, { loading, error, data, fetchMore }] = useSearchMediaByTitleLazyQuery();
 
   // Debounce search so it won't fire immediately
   const debouncedSearch = debounce((nextValue: string, mediaType: MediaTypeEnum) => {
     const searchTitleVariables: SearchMediaByTitleQueryVariables = {
-      first: 15,
+      first: 10,
       title: nextValue,
       media_type: mediaType,
     };
@@ -71,6 +71,20 @@ export default function SearchMedia(): ReactElement {
     // Lowercase search query for caching purposes
     debouncedSearch(nextValue.toLowerCase(), mediaType);
   };
+
+  // Paginate
+  if (
+    data &&
+    data.searchMediaByTitle.pageInfo.hasNextPage &&
+    fetchMore &&
+    data.searchMediaByTitle.pageInfo.endCursor
+  ) {
+    fetchMore({
+      variables: {
+        cursor: data?.searchMediaByTitle.pageInfo.endCursor,
+      },
+    });
+  }
 
   return (
     <>
@@ -106,10 +120,14 @@ export default function SearchMedia(): ReactElement {
           <span className='search-error'>error</span>
         ) : !searchIsRendered ? (
           <></>
-        ) : !loading && data && searchIsRendered ? (
+        ) : data ? (
           <div className='search-results' style={showResults ? fadeIn : fadeOut}>
-            {data?.searchMediaByTitle?.nodes?.map((media) => {
-              return <SearchResults data={media} />;
+            {data?.searchMediaByTitle?.edges?.map((media) => {
+              if (media?.node) {
+                return <SearchResults data={media?.node} key={media?.node?.id} />;
+              } else {
+                return null;
+              }
             })}
           </div>
         ) : (

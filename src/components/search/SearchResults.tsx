@@ -15,7 +15,7 @@ import Search from 'src/components/search/Styles/Search';
 import PosterImage from 'src/components/search/PosterImage';
 
 interface Props {
-  data: MediaSearchFieldsFragment | null;
+  data: MediaSearchFieldsFragment;
 }
 
 export default function SearchResults({ data }: Props): ReactElement {

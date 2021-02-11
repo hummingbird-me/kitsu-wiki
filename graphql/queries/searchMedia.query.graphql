@@ -2,10 +2,19 @@ query SearchMediaByTitle(
   $first: Int!
   $title: String!
   $media_type: MediaTypeEnum
+  $cursor: String
 ) {
-  searchMediaByTitle(first: $first, title: $title, mediaType: $media_type) {
-    nodes {
-      ...mediaSearchFields
+  searchMediaByTitle(first: $first, title: $title, mediaType: $media_type, after: $cursor)
+    @connection(key: "search") {
+    edges {
+      node {
+        ...mediaSearchFields
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
     }
   }
 }
