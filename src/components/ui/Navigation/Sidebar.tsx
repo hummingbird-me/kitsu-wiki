@@ -9,18 +9,14 @@ import HamburgerMenu from './HamburgerMenu';
 export default function Sidebar(): ReactElement {
   const [open, setOpen] = useState(false);
 
-  let openSesame: CSSProperties;
-  if (open) {
-    openSesame = { '--show-sidebar': 'block' } as CSSProperties;
-  } else {
-    openSesame = { '--show-sidebar': 'none' } as CSSProperties;
-  }
+  // Open/close sidebar
+  const openSesame = { '--show-sidebar': open ? 'block' : 'none' };
 
   const { path, url } = useRouteMatch();
 
   return (
     <>
-      <Sidenav className='sidebar' style={openSesame}>
+      <Sidenav className='sidebar' style={openSesame as CSSProperties}>
         <div className='kitsu-logo'>
           <KitsuDatabaseTools />
         </div>
