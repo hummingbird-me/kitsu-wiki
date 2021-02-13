@@ -11,7 +11,7 @@ import {
   DateTimeInput,
   TextAreaInput,
 } from 'src/components/ui/input';
-import { AnimeReducer } from './AnimeReducer';
+import AnimeReducer from './AnimeReducer';
 
 interface AnimeInterface {
   anime: FindAnimeFieldsFragment;

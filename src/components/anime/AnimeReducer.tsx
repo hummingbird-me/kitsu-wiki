@@ -1,14 +1,9 @@
 import { LocalizedState } from 'src/logic/reducer_state/localizedState';
 import { TitleState } from 'src/logic/reducer_state/titleState';
 import { MediaChange } from 'src/types/mediaChange';
+import { ReducerAction } from 'src/types/reducer';
 
-interface ActionInterface {
-  type: string;
-  payload: any;
-  action?: string;
-}
-
-export function AnimeReducer(state: MediaChange, action: ActionInterface): MediaChange {
+export default function AnimeReducer(state: MediaChange, action: ReducerAction): MediaChange {
   const splitActions = action.type.split('.');
 
   switch (splitActions[0]) {
