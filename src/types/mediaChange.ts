@@ -1,8 +1,20 @@
 export type ID = string;
 export type NodeChange = { id?: ID };
+
 type HashChange = {
   set?: { [key: string]: string };
   remove?: [string];
+};
+
+type SetChange = {
+  add?: [string];
+  remove?: [string];
+};
+
+export type TitlesChange = {
+  alternatives?: SetChange;
+  canonical?: string;
+  localized?: HashChange;
 };
 
 export type MediaChange = NodeChange & {
@@ -16,20 +28,9 @@ export type MediaChange = NodeChange & {
   startDate?: DateString;
 };
 
-type SetChange = {
-  add?: [string];
-  remove?: [string];
-};
-
 // TODO: these should be non-shitty types
 type ImageUpload = string;
 type DateString = string;
-
-export type TitlesChange = {
-  alternatives?: SetChange;
-  canonical?: string;
-  localized?: HashChange;
-};
 
 // Actual object types
 // can grab from graphql types
