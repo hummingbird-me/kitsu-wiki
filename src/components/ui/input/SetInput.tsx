@@ -44,7 +44,11 @@ export default function SetInput({
     }
 
     setItems(updatedItems);
-    parentDispatch({ type: fieldType, payload: updatedValue, action: action });
+    parentDispatch({
+      type: fieldType,
+      payload: { value: updatedValue, index: index },
+      action: action,
+    });
   };
 
   return (

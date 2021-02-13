@@ -23,7 +23,7 @@ export default function DateInput({
     const formattedDate = dateTime?.toISOString() ?? '';
 
     setValue(dateTime);
-    parentDispatch({ type: fieldType, payload: formattedDate });
+    parentDispatch({ type: fieldType, payload: { value: formattedDate } });
   };
 
   return (

@@ -13,7 +13,7 @@ interface InputFields {
 export default function TextInput({
   fieldType,
   label,
-  initialValue,
+  initialValue = '',
   readOnly = false,
   parentDispatch,
 }: InputFields): ReactElement {
@@ -22,7 +22,7 @@ export default function TextInput({
     const updatedValue = event.target.value;
 
     setValue(updatedValue);
-    parentDispatch({ type: fieldType, payload: updatedValue });
+    parentDispatch({ type: fieldType, payload: { value: updatedValue } });
   };
   const onChange = readOnly ? undefined : handleChange;
 

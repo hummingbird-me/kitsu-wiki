@@ -45,7 +45,7 @@ export default function SingleSelectInput<O>({
             const updatedValue = event?.value;
 
             setValue(updatedValue);
-            parentDispatch({ type: fieldType, payload: updatedValue });
+            parentDispatch({ type: fieldType, payload: { value: updatedValue } });
           }}
         />
       </SingleSelect>

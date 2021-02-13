@@ -20,7 +20,7 @@ export default function TextAreaInput({
     const updatedValue = event.target.value;
 
     setValue(updatedValue);
-    parentDispatch({ type: fieldType, payload: updatedValue });
+    parentDispatch({ type: fieldType, payload: { value: updatedValue } });
   };
 
   return (
