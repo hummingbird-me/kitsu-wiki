@@ -16,7 +16,7 @@ export default function TextAreaInput({
   parentDispatch,
 }: TextAreaInputFields): ReactElement {
   const [value, setValue] = useState(initialValue);
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const updatedValue = event.target.value;
 
     setValue(updatedValue);
@@ -26,7 +26,7 @@ export default function TextAreaInput({
   return (
     <InputGroup>
       <LabelInput fieldType={fieldType} label={label} />
-      <TextArea key={fieldType} value={value} onChange={() => handleChange} rows={10} cols={50} />
+      <TextArea key={fieldType} value={value} onChange={handleChange} rows={10} cols={50} />
     </InputGroup>
   );
 }
