@@ -1,7 +1,7 @@
-import { LocalizedState } from 'src/logic/reducer_state/localizedState';
-import { TitleState } from 'src/logic/reducer_state/titleState';
 import { MediaChange } from 'src/types/mediaChange';
 import { ReducerAction } from 'src/types/reducer';
+import localizedState from 'src/util/reducer-state/localized-state';
+import titleState from 'src/util/reducer-state/title-state';
 
 export default function AnimeReducer(state: MediaChange, action: ReducerAction): MediaChange {
   const splitActions = action.type.split('.');
@@ -9,24 +9,13 @@ export default function AnimeReducer(state: MediaChange, action: ReducerAction):
   switch (splitActions[0]) {
     case 'titles': {
       const fieldName = splitActions.slice(-1)[0];
-      const titleState = new TitleState<MediaChange>(
-        state,
-        fieldName,
-        action.payload,
-        action.action
-      );
 
-      return titleState.update();
+      return titleState<MediaChange>(state, fieldName, action.payload, action.action);
     }
     case 'description': {
       const [fieldName, language] = splitActions;
-      const descriptionState = new LocalizedState<MediaChange>(
-        state,
-        fieldName,
-        language,
-        action.payload
-      );
-      return descriptionState.update();
+
+      return localizedState<MediaChange>(state, fieldName, language, action.payload);
     }
     default:
       return {
