@@ -6,9 +6,9 @@ type HashChange = {
   remove?: [string];
 };
 
-type SetChange = {
-  add?: [string];
-  remove?: [string];
+export type SetChange = {
+  add?: string[];
+  remove?: string[];
 };
 
 export type TitlesChange = {

@@ -6,5 +6,4 @@ export interface ReducerAction {
 
 export interface ReducerPayload {
   value: string;
-  index?: number;
 }

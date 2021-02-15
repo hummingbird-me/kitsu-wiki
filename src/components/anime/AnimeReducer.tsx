@@ -9,7 +9,6 @@ export default function AnimeReducer(state: MediaChange, action: ReducerAction):
   switch (splitActions[0]) {
     case 'titles': {
       const fieldName = splitActions.slice(-1)[0];
-
       return titleState<MediaChange>(state, fieldName, action.payload, action.action);
     }
     case 'description': {

@@ -1,7 +1,7 @@
 import { cloneDeep } from 'lodash';
 import { TitlesChange } from 'src/types/mediaChange';
 import { ReducerPayload } from 'src/types/reducer';
-// import { setAction } from './set-state';
+import { chosenAction } from './set-state';
 
 interface RequiredKeys {
   titles?: TitlesChange;
@@ -15,15 +15,23 @@ export default function titleState<T extends RequiredKeys>(
   action = 'add'
 ): T {
   currentState = cloneDeep(currentState);
-  const titles = currentState.titles || {};
+  currentState.titles ??= {};
 
   switch (fieldName) {
     case 'alternatives': {
+      const updatedAlternatives = chosenAction(
+        action,
+        currentState.titles.alternatives,
+        fieldName,
+        payload
+      );
+
+      currentState.titles.alternatives = updatedAlternatives;
       break;
     }
     default:
       currentState.titles = {
-        ...titles,
+        ...currentState.titles,
         [fieldName]: payload.value,
       };
       break;

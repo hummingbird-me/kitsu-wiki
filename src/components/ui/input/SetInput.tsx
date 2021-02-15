@@ -25,37 +25,41 @@ export default function SetInput({
     }
 
     setItems(updatedItems);
-  }, [items]);
+  }, [items, setItems]);
 
   const handleChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    const updatedValue = event.target.value;
-    let updatedItems = [...items.slice(0, index), updatedValue, ...items.slice(index + 1)];
+    event.preventDefault();
 
-    if (items.slice(-1)[0] !== '') {
-      updatedItems = [...updatedItems, ''];
-    }
+    const updatedValue = event.target.value;
+    const updatedItems = [...items.slice(0, index), updatedValue, ...items.slice(index + 1)];
 
     setItems(updatedItems);
   };
 
   const handleDelete = (index: number) => (
-    _event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
+    event.preventDefault();
+
     const updatedValue = items.find((_, i) => i === index);
     const updatedItems = items.filter((_, i) => i !== index);
 
     setItems(updatedItems);
 
-    parentDispatch({
-      type: fieldType,
-      payload: { value: updatedValue },
-      action: 'remove',
-    });
+    if (updatedValue === '') return;
+
+    parentDispatch({ type: fieldType, payload: { value: updatedValue }, action: 'remove' });
   };
 
-  const handleEdit = () => (event: React.FocusEvent<HTMLInputElement>) => {
+  const handleEdit = (action: string) => (event: React.FocusEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    const updatedValue = event.target.value;
+
+    if (updatedValue === '') return;
+
     if (event.currentTarget === event.target) {
-      console.log('unfocused self');
+      parentDispatch({ type: fieldType, payload: { value: updatedValue }, action: action });
     }
   };
 
@@ -69,13 +73,17 @@ export default function SetInput({
             <div>
               <Input
                 key={index}
+                tabIndex={1}
                 type='text'
                 value={item}
                 onChange={handleChange(index)}
-                onBlur={handleEdit}
+                onFocus={handleEdit('remove')}
+                onBlur={handleEdit('add')}
               />
 
-              <button onClick={handleDelete(index)}>X</button>
+              <button key={`button-${index}`} onClick={handleDelete(index)}>
+                X
+              </button>
             </div>
           );
         })}

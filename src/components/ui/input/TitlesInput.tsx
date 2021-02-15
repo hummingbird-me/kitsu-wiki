@@ -42,7 +42,7 @@ export default function TitlesInput({
       </AltTitles>
 
       <SetInput
-        fieldType='alternatives'
+        fieldType='titles.alternatives'
         label='Synonyms and Abbreviations'
         initialValue={formattedAlternatives}
         parentDispatch={dispatch}
