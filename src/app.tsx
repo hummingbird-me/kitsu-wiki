@@ -1,12 +1,6 @@
-import React, { useState } from 'react';
+import React, { ReactElement } from 'react';
 import { Anime } from './routes';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  RouteComponentProps,
-  Switch,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { ApolloProvider } from '@apollo/client';
 import client from './client';
@@ -16,8 +10,8 @@ import Media from './routes/Home/index';
 import 'normalize.css';
 import GlobalStyles from './styles/GlobalStyles';
 
-const App = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+const App = (): ReactElement => {
+  /* const [dropdownOpen, setDropdownOpen] = useState(false); */
 
   return (
     <>
@@ -48,8 +42,8 @@ const App = () => {
         </nav> */}
           <div>
             <Switch>
-              <Route path="/anime" component={Anime} />
-              <Route exact path="/">
+              <Route path='/anime' component={Anime} />
+              <Route exact path='/'>
                 <Media />
               </Route>
             </Switch>

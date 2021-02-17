@@ -16,8 +16,6 @@ export const highlights = css`
 `;
 
 export const highlightsWithin = css`
-  border: 4px solid var(--unfocused-highlights);
-
   &:focus-within {
     border: 4px solid var(--focus-highlight);
     outline: none;

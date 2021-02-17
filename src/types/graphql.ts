@@ -18,7 +18,7 @@ export type Scalars = {
   /** An ISO 8601-encoded datetime */
   ISO8601DateTime: any;
   /** A loose key-value map in GraphQL */
-  Map: any;
+  Map: Record<string, any>;
   Upload: any;
 };
 
@@ -2972,6 +2972,7 @@ export type TitlesListLocalizedArgs = {
 };
 
 export type TitlesListInput = {
+  readonly canonical?: Maybe<Scalars['String']>;
   readonly localized?: Maybe<Scalars['Map']>;
   readonly alternatives?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly canonicalLocale?: Maybe<Scalars['String']>;
@@ -3093,9 +3094,18 @@ export type WithTimestamps = {
   readonly updatedAt: Scalars['ISO8601DateTime'];
 };
 
+export type AnimeTitlesFragment = (
+  { readonly __typename?: 'TitlesList' }
+  & Pick<TitlesList, 'canonical' | 'alternatives' | 'canonicalLocale' | 'localized'>
+);
+
 export type FindAnimeFieldsFragment = (
   { readonly __typename?: 'Anime' }
-  & Pick<Anime, 'id' | 'slug'>
+  & Pick<Anime, 'id' | 'slug' | 'description' | 'ageRating' | 'ageRatingGuide' | 'sfw' | 'startDate' | 'endDate' | 'nextRelease' | 'status' | 'tba'>
+  & { readonly titles: (
+    { readonly __typename?: 'TitlesList' }
+    & AnimeTitlesFragment
+  ) }
 );
 
 type MediaSearchFields_Anime_Fragment = (
@@ -3162,6 +3172,7 @@ export type SearchMediaByTitleQueryVariables = Exact<{
   first: Scalars['Int'];
   title: Scalars['String'];
   media_type?: Maybe<MediaTypeEnum>;
+  cursor?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -3169,22 +3180,49 @@ export type SearchMediaByTitleQuery = (
   { readonly __typename?: 'Query' }
   & { readonly searchMediaByTitle: (
     { readonly __typename?: 'MediaConnection' }
-    & { readonly nodes?: Maybe<ReadonlyArray<Maybe<(
-      { readonly __typename?: 'Anime' }
-      & MediaSearchFields_Anime_Fragment
-    ) | (
-      { readonly __typename?: 'Manga' }
-      & MediaSearchFields_Manga_Fragment
-    )>>> }
+    & { readonly edges?: Maybe<ReadonlyArray<Maybe<(
+      { readonly __typename?: 'MediaEdge' }
+      & Pick<MediaEdge, 'cursor'>
+      & { readonly node?: Maybe<(
+        { readonly __typename?: 'Anime' }
+        & MediaSearchFields_Anime_Fragment
+      ) | (
+        { readonly __typename?: 'Manga' }
+        & MediaSearchFields_Manga_Fragment
+      )> }
+    )>>>, readonly pageInfo: (
+      { readonly __typename?: 'PageInfo' }
+      & Pick<PageInfo, 'endCursor' | 'hasNextPage'>
+    ) }
   ) }
 );
 
+export const AnimeTitlesFragmentDoc = gql`
+    fragment animeTitles on TitlesList {
+  canonical
+  alternatives
+  canonicalLocale
+  localized
+}
+    `;
 export const FindAnimeFieldsFragmentDoc = gql`
     fragment findAnimeFields on Anime {
   id
   slug
+  titles {
+    ...animeTitles
+  }
+  description
+  ageRating
+  ageRatingGuide
+  sfw
+  startDate
+  endDate
+  nextRelease
+  status
+  tba
 }
-    `;
+    ${AnimeTitlesFragmentDoc}`;
 export const MediaSearchFieldsFragmentDoc = gql`
     fragment mediaSearchFields on Media {
   id
@@ -3271,10 +3309,22 @@ export type FindAnimeBySlugQueryHookResult = ReturnType<typeof useFindAnimeBySlu
 export type FindAnimeBySlugLazyQueryHookResult = ReturnType<typeof useFindAnimeBySlugLazyQuery>;
 export type FindAnimeBySlugQueryResult = Apollo.QueryResult<FindAnimeBySlugQuery, FindAnimeBySlugQueryVariables>;
 export const SearchMediaByTitleDocument = gql`
-    query SearchMediaByTitle($first: Int!, $title: String!, $media_type: MediaTypeEnum) {
-  searchMediaByTitle(first: $first, title: $title, mediaType: $media_type) {
-    nodes {
-      ...mediaSearchFields
+    query SearchMediaByTitle($first: Int!, $title: String!, $media_type: MediaTypeEnum, $cursor: String) {
+  searchMediaByTitle(
+    first: $first
+    title: $title
+    mediaType: $media_type
+    after: $cursor
+  ) @connection(key: "search") {
+    edges {
+      node {
+        ...mediaSearchFields
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
     }
   }
 }
@@ -3295,6 +3345,7 @@ export const SearchMediaByTitleDocument = gql`
  *      first: // value for 'first'
  *      title: // value for 'title'
  *      media_type: // value for 'media_type'
+ *      cursor: // value for 'cursor'
  *   },
  * });
  */

@@ -1,57 +1,109 @@
-import React, { ReactElement } from 'react';
-import { FindAnimeFieldsFragment } from 'src/types/graphql';
-import EditProvider from '../ui/edit/EditProvider';
-import InputField from '../ui/edit/InputField';
-import SelectField from '../ui/edit/SelectField';
-import ImageField from '../ui/edit/ImageField';
-import TitlesField from '../ui/edit/TitlesField';
-import MapField from '../ui/edit/MapField';
-import FormActions from '../ui/edit/FormActions';
-import { Maybe } from 'src/types/graphql';
+import React, { ReactElement, useReducer, useState } from 'react';
+import { AgeRatingEnum, FindAnimeFieldsFragment, ReleaseStatusEnum } from 'src/types/graphql';
+import { MediaChange } from 'src/types/mediaChange';
+import Sidebar from '../ui/Navigation';
+import SingleSelectInput from '../ui/input/SingleSelectInput';
+import EditGroup from '../Media/EditGroup';
+import {
+  TextInput,
+  TitlesInput,
+  DateInput,
+  DateTimeInput,
+  TextAreaInput,
+} from 'src/components/ui/input';
+import AnimeReducer from './AnimeReducer';
 
-const AnimeEdit = ({
-  anime,
-  onSave,
-}: {
-  anime: Maybe<FindAnimeFieldsFragment | undefined>;
-  onSave: any;
-}): ReactElement => {
-  return <div>Hello</div>;
-};
-// <form>
-// <EditProvider initialValue={anime}>
-//   <InputField readOnly field="id" type="text" />
-//   <InputField readOnly field="slug" type="text" />
-//   <TitlesField field="titles" />
-//   <MapField field="synopsis" keyName="Locale" type="textarea" />
-//   <ImageField field="posterImage" type="image" />
-//   <ImageField field="bannerImage" type="image" />
-//   <InputField
-//     field="sfw"
-//     type="checkbox"
-//     validate={() => ['error1', 'error2']}
-//   />
-//   <SelectField field="ageRating" options={['G', 'PG', 'R', 'R18']} />
-//   <InputField field="ageRatingGuide" type="text" />
-//   <SelectField
-//     field="season"
-//     options={['WINTER', 'SPRING', 'SUMMER', 'FALL']}
-//   />
-//   <SelectField
-//     field="status"
-//     options={['TBA', 'FINISHED', 'CURRENT', 'UPCOMING', 'UNRELEASED']}
-//   />
-//   <InputField field="startDate" type="date" />
-//   <InputField field="endDate" type="date" />
-//   <InputField readOnly field="nextRelease" type="datetime-local" />
-//   <InputField field="episodeCount" type="number" />
-//   <InputField field="episodeLength" type="number" />
-//   <InputField readOnly field="totalLength" type="text" />
-//   <InputField readOnly field="userCount" type="text" />
-//   <InputField readOnly field="favoritesCount" type="text" />
-//   <InputField readOnly field="averageRating" type="text" />
-//   <FormActions onSave={onSave} />
-// </EditProvider>
-// </form>
+interface AnimeInterface {
+  anime: FindAnimeFieldsFragment;
+}
 
-export default AnimeEdit;
+export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
+  const changes: MediaChange = {};
+  const [original, _setData] = useState(anime);
+  const [update, dispatch] = useReducer(AnimeReducer, changes);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    console.log(original);
+    console.log(update);
+  };
+
+  return (
+    <>
+      <Sidebar />
+      <form onSubmit={handleSubmit}>
+        <EditGroup title='Mods Only'>
+          <>
+            {/* figure out how to make parentDispatch optional when readOnly is supplied  */}
+            <TextInput
+              readOnly
+              fieldType='id'
+              initialValue={original.id}
+              parentDispatch={dispatch}
+            />
+            <TextInput fieldType='slug' initialValue={original.slug} parentDispatch={dispatch} />
+          </>
+        </EditGroup>
+
+        <EditGroup title='Titles'>
+          <>
+            <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
+          </>
+        </EditGroup>
+
+        <EditGroup title='Synopsis and Age Rating'>
+          <>
+            <TextAreaInput
+              fieldType='description.en'
+              label='Description'
+              initialValue={original.description['en']}
+              parentDispatch={dispatch}
+            />
+
+            <SingleSelectInput<AgeRatingEnum>
+              fieldType='ageRating'
+              initialValue={original.ageRating}
+              options={Object.values(AgeRatingEnum)}
+              parentDispatch={dispatch}
+            />
+
+            <TextInput
+              fieldType='ageRatingGuide'
+              initialValue={original.ageRatingGuide}
+              parentDispatch={dispatch}
+            />
+          </>
+        </EditGroup>
+
+        <DateInput
+          fieldType='startDate'
+          initialValue={original.startDate}
+          parentDispatch={dispatch}
+        />
+
+        <DateInput fieldType='endDate' initialValue={original.endDate} parentDispatch={dispatch} />
+        <DateTimeInput
+          fieldType='nextRelease'
+          initialValue={original.nextRelease}
+          parentDispatch={dispatch}
+        />
+
+        <EditGroup title='Release'>
+          <>
+            <SingleSelectInput<ReleaseStatusEnum>
+              fieldType='release'
+              initialValue={original.status}
+              options={Object.values(ReleaseStatusEnum)}
+              parentDispatch={dispatch}
+            />
+
+            <TextInput fieldType='tba' initialValue={original.tba} parentDispatch={dispatch} />
+          </>
+        </EditGroup>
+
+        <input type='submit' value='Submit' />
+      </form>
+    </>
+  );
+}

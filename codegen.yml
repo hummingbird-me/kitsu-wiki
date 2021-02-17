@@ -10,6 +10,8 @@ generates:
       - typescript-react-apollo
     config:
       immutableTypes: true
+      scalars:
+        Map: Record<string, any>
 
   src/types/possibleTypes.json:
     plugins:
