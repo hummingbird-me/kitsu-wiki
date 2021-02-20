@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { generalStyleInteractions } from './';
+import { generalStyleInteractions } from '.';
 
 const TextArea = styled.textarea`
   ${generalStyleInteractions}

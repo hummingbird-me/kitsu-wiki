@@ -1,6 +1,6 @@
 import react, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { generalStyleInteractions } from './';
+import { generalStyleInteractions } from '.';
 
 interface Props {
   children: ReactElement;

@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash';
-import { TitlesChange } from 'src/types/mediaChange';
+import { TitlesChange } from 'src/types/media-change';
 import { ReducerPayload } from 'src/types/reducer';
 import { chosenAction } from './set-state';
 

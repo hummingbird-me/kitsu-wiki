@@ -1,4 +1,4 @@
-import { MediaChange } from 'src/types/mediaChange';
+import { MediaChange } from 'src/types/media-change';
 import { ReducerAction } from 'src/types/reducer';
 import localizedState from 'src/util/reducer-state/localized-state';
 import titleState from 'src/util/reducer-state/title-state';

@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import client from './client';
 
-import Media from './routes/Home/index';
+import Media from './routes/home/index';
 
 import 'normalize.css';
-import GlobalStyles from './styles/GlobalStyles';
+import GlobalStyles from './styles/global-styles';
 
 const App = (): ReactElement => {
   /* const [dropdownOpen, setDropdownOpen] = useState(false); */
