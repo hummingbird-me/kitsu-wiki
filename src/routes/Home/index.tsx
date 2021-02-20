@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import SearchMedia from 'src/components/search/SearchMedia';
+import SearchMedia from 'src/components/search/search-media';
 
 export default function Media(): ReactElement {
   return (

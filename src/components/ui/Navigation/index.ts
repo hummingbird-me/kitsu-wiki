@@ -1,4 +1,4 @@
-import { default as Sidebar } from './Sidebar';
-export { default as HamburgerMenu } from './HamburgerMenu';
+import { default as Sidebar } from './sidebar';
+export { default as HamburgerMenu } from './hamburger-menu';
 
 export default Sidebar;

@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import LabelInput from './LabelInput';
+import LabelInput from './label-input';
 import { TextArea, InputGroup } from './styles';
 
 interface TextAreaInputFields {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Input } from './';
+import { Input } from '.';
 
 const InputGroup = styled.div`
   margin-bottom: 10px;

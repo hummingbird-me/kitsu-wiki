@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import EditId from './EditId';
-import EditSlug from './EditSlug';
+import EditId from './edit-id';
+import EditSlug from './edit-slug';
 
-import Editor from 'src/styles/layouts/EditorLayout';
+import Editor from 'src/styles/layouts/editor-layout';
 
 const Anime = ({ match, location }: { match: any; location: any }): ReactElement => (
   <Editor>

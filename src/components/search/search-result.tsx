@@ -9,10 +9,10 @@ import { seasonYear } from '../../logic/dateFunctions';
 import { MediaSearchFieldsFragment } from 'src/types/graphql';
 
 // Components
-import Title from './Styles/Title';
-import { SubtypeTag } from '../../styles/components/ui/Tag';
-import Search from 'src/components/search/Styles/Search';
-import PosterImage from 'src/components/search/PosterImage';
+import Title from './styles/title';
+import { SubtypeTag } from '../../styles/components/ui/tag';
+import Search from 'src/components/search/styles/search';
+import PosterImage from 'src/components/search/poster-image';
 
 interface Props {
   data: MediaSearchFieldsFragment;
