@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
 // Logic
-import { seasonYear } from '../../logic/dateFunctions';
+import { seasonYear } from '../../util/date-functions';
 
 // GraphQL
 /* import { SearchMediaByTitleQuery } from '../../routes/Home/searchMedia.types'; */
