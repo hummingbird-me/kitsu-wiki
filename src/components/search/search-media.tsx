@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import { debounce } from 'lodash';
 
 // Logical components
-import useDelayUnmount from 'src/logic/useDelayUnmount';
+import useDelayUnmount from 'src/util/use-delay-unmount';
 
 // GraphQl
 import {
