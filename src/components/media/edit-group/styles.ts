@@ -7,17 +7,24 @@ export const Container = styled.fieldset`
   grid-template-rows: auto 1fr;
   gap: 10px;
 
-  margin: 0;
-  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  max-width: 1200px;
+  filter: drop-shadow(0 0 10px #0e080e);
+
   legend {
     grid-row-start: 1;
-    font-size: var(--font-xxl);
+    padding-left: 0.1em;
+
+    font-weight: bold;
+    font-size: var(--font-xl);
   }
   .field-group {
     grid-row-start: 2;
 
     background-color: var(--form-group-background-color);
     border-radius: var(--rounded-input-group);
-    padding: 10px;
+    padding: 15px;
   }
 `;
