@@ -9,14 +9,16 @@ const GlobalStyles = createGlobalStyle`
 		--secondary-background-color: #312631ff;
 		--foreground-background-color: #453345ff;
 		--secondary-foreground-background-color: #6F5C6Fff;
-		--cta-accept-color: #236147ff;
 
 		// Gradient Invisible
 		--gradient-background-color: #16111600;
 		--gradient-secondary-background-color: #31263100;
 		--gradient-foreground-background-color: #45334500;
 		--gradient-secondary-foreground-background-color: #6F5C6F00;
-		--gradient-cta-accept-color: #23614700;
+
+		// CTA Colours
+		--cta-accept-color: #236147ff;
+		--cta-remove-color: #c94a4a;
 
 		// Text Colours
 		--main-text: #fff;
@@ -35,6 +37,7 @@ const GlobalStyles = createGlobalStyle`
 
 		// Shadow Colours
 		--foreground-shadow: #16111688;
+		--dark-shadow: #0E080E;
 
 		// Focus highlights
 		--focus-highlight: #ff8c7c;
