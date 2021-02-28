@@ -76,18 +76,26 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
           </>
         </EditGroup>
 
-        <DateInput
-          fieldType='startDate'
-          initialValue={original.startDate}
-          parentDispatch={dispatch}
-        />
+        <EditGroup title='Dates'>
+          <>
+            <DateInput
+              fieldType='startDate'
+              initialValue={original.startDate}
+              parentDispatch={dispatch}
+            />
 
-        <DateInput fieldType='endDate' initialValue={original.endDate} parentDispatch={dispatch} />
-        <DateTimeInput
-          fieldType='nextRelease'
-          initialValue={original.nextRelease}
-          parentDispatch={dispatch}
-        />
+            <DateInput
+              fieldType='endDate'
+              initialValue={original.endDate}
+              parentDispatch={dispatch}
+            />
+            <DateTimeInput
+              fieldType='nextRelease'
+              initialValue={original.nextRelease}
+              parentDispatch={dispatch}
+            />
+          </>
+        </EditGroup>
 
         <EditGroup title='Release'>
           <>
