@@ -3,6 +3,7 @@ import LabelInput from './label-input';
 import { Input, InputGroup } from './styles';
 
 interface InputFields {
+  fieldTitle?: string;
   fieldType: string;
   label?: string;
   initialValue?: string | null;
@@ -11,6 +12,7 @@ interface InputFields {
 }
 
 export default function TextInput({
+  fieldTitle,
   fieldType,
   label,
   initialValue = '',
@@ -28,7 +30,7 @@ export default function TextInput({
 
   return (
     <InputGroup>
-      <LabelInput fieldType={fieldType} label={label} />
+      <LabelInput fieldType={fieldTitle ?? fieldType} label={label} />
 
       <Input
         readOnly={readOnly}
