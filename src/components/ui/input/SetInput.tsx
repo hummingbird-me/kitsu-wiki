@@ -1,6 +1,8 @@
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactElement, useEffect, useState } from 'react';
 import LabelInput from './LabelInput';
-import { Input, InputGroup, AltTitles } from './styles';
+import { Input, InputGroup, AltTitles, RemoveButton, EditButton } from './styles';
 
 interface SetInputFields {
   fieldType: string;
@@ -16,6 +18,7 @@ export default function SetInput({
   parentDispatch,
 }: SetInputFields): ReactElement {
   const [items, setItems] = useState(initialValue);
+  const [edit, showEdit] = useState(false);
 
   useEffect(() => {
     let updatedItems = items;
@@ -65,7 +68,11 @@ export default function SetInput({
 
   return (
     <InputGroup>
-      <LabelInput fieldType={fieldType} label={label} />
+      <LabelInput fieldType={fieldType} label={label}>
+        <EditButton onClick={() => showEdit(edit ? false : true)}>
+          <FontAwesomeIcon icon={faPen} />
+        </EditButton>
+      </LabelInput>
 
       <AltTitles>
         {items.map((item, index) => {
@@ -81,9 +88,12 @@ export default function SetInput({
                 onBlur={handleEdit('add')}
               />
 
-              <button key={`button-${index}`} onClick={handleDelete(index)}>
-                X
-              </button>
+              <RemoveButton
+                key={`button-${index}`}
+                onClick={handleDelete(index)}
+                style={{ display: edit ? 'inline-block' : 'none' }}>
+                <FontAwesomeIcon icon={faTrash} />
+              </RemoveButton>
             </div>
           );
         })}
