@@ -7,12 +7,12 @@ export const highlights = css`
     border: 4px solid var(--focus-highlight);
     outline: none;
   }
-  &:hover:not(:active) {
+  /* &:hover:not(:active) {
     filter: brightness(110%);
   }
   &:active {
     filter: brightness(90%);
-  }
+  } */
 `;
 
 export const highlightsWithin = css`
@@ -20,12 +20,12 @@ export const highlightsWithin = css`
     border: 4px solid var(--focus-highlight);
     outline: none;
   }
-  &:hover:not(:active) {
+  /* &:hover:not(:active) {
     filter: brightness(110%);
   }
   &:active {
     filter: brightness(90%);
-  }
+  } */
 `;
 
 export default highlights;
