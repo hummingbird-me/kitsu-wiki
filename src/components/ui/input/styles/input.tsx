@@ -12,6 +12,13 @@ export const Input = styled.input`
 
   &:read-only {
     filter: brightness(50%);
+    &:hover {
+      cursor: not-allowed;
+      filter: brightness(50%);
+    }
+    &:focus {
+      border-color: var(--unfocused-highlights);
+    }
   }
 `;
 
