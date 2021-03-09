@@ -48,7 +48,12 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
 
         <EditGroup title='Titles'>
           <>
-            <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
+            <TitlesInput
+              key='titles'
+              titles={original.titles}
+              dispatch={dispatch}
+              locale={original.originalLocale}
+            />
           </>
         </EditGroup>
 
