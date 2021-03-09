@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { AnimeTitlesFragment, Media } from 'src/types/graphql';
 import { TextInput, SetInput } from 'src/components/ui/input';
+import { nativeLocale } from 'src/util/native-locale';
 
 interface Props {
   titles: AnimeTitlesFragment;
@@ -15,20 +16,10 @@ export default function TitlesInput({
 }: Props): ReactElement {
   const formattedAlternatives = alternatives?.map((alt) => alt) ?? [];
 
-  const nativeLocale = (inputLocale: string, title: AnimeTitlesFragment['localized']) => {
-    const inputMap = new Map([
-      ['japan', title.ja_jp],
-      ['china', title.zh_cn],
-    ]);
-
-    return inputMap.get(inputLocale);
-  };
-
   const nativeTitle = (
     title: AnimeTitlesFragment['localized'],
     locale: Media['originalLocale']
   ) => {
-    // eslint-disable-next-line no-constant-condition
     if (locale) {
       return nativeLocale(locale.toLocaleLowerCase(), title);
     } else if (title.ja_jp || title.ko_kr || title.zh_cn || title.zh_hk || title.zh_tw) {
@@ -42,6 +33,7 @@ export default function TitlesInput({
   return (
     <div className='titles'>
       {/* <TextInput fieldType='titles.canonical' initialValue={canonical} parentDispatch={dispatch} /> */}
+      <TextInput fieldType='titles.locale' initialValue={locale} parentDispatch={dispatch} />
 
       <TextInput fieldType='titles.English' initialValue={localized.en} parentDispatch={dispatch} />
       <TextInput
@@ -54,11 +46,6 @@ export default function TitlesInput({
         fieldTitle='Romanized'
         fieldType='titles.romanised'
         initialValue={localized.en_jp}
-        parentDispatch={dispatch}
-      />
-      <TextInput
-        fieldType='titles.canonicalLocale'
-        initialValue={canonicalLocale}
         parentDispatch={dispatch}
       />
 
