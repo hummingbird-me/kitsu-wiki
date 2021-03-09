@@ -13,4 +13,5 @@ fragment findAnimeFields on Anime {
   nextRelease
   status
   tba
+  originalLocale
 }
