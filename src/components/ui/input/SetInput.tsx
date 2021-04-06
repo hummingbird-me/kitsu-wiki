@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import LabelInput from './label-input';
+import LabelInput from './LabelInput';
 import { Input, InputGroup, AltTitles } from './styles';
 
 interface SetInputFields {

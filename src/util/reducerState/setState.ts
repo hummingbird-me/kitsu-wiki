@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash';
-import { SetChange } from 'src/types/media-change';
+import { SetChange } from 'src/types/mediaChange';
 import { ReducerPayload } from 'src/types/reducer';
 
 const defaultSetChange: SetChange = {

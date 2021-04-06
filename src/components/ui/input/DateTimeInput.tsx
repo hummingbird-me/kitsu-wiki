@@ -1,7 +1,7 @@
-import { startCase } from 'lodash';
 import React, { ReactElement, useState } from 'react';
-import DatePicker from 'react-date-picker';
-import LabelInput from './label-input';
+// @ts-expect-error - We need to create a declaration file for this.
+import DateTimePicker from 'react-datetime-picker';
+import LabelInput from './LabelInput';
 
 interface DateInputFields {
   fieldType: string;
@@ -17,19 +17,19 @@ export default function DateInput({
   parentDispatch,
 }: DateInputFields): ReactElement {
   const [value, setValue] = useState(new Date(initialValue));
-  // I'd like to figure out how to make this date a type.
-  // I know it will always be a date object (or undefined).
-  const handleChange = (date: any) => {
-    const formattedDate = date?.toISOString()?.substring(0, 10) ?? '';
+  // I'd like to figure out how to make this dateTime a type.
+  // I know it will always be a dateTime object (or undefined).
+  const handleChange = (dateTime: any) => {
+    const formattedDate = dateTime?.toISOString() ?? '';
 
-    setValue(date);
+    setValue(dateTime);
     parentDispatch({ type: fieldType, payload: { value: formattedDate } });
   };
 
   return (
     <div>
       <LabelInput fieldType={fieldType} label={label} />
-      <DatePicker onChange={handleChange} value={value} />
+      <DateTimePicker onChange={handleChange} value={value} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
 // Logic
-import { seasonYear } from '../../util/date-functions';
+import { seasonYear } from '../../util/dateFunction';
 
 // GraphQL
 /* import { SearchMediaByTitleQuery } from '../../routes/Home/searchMedia.types'; */
@@ -10,9 +10,9 @@ import { MediaSearchFieldsFragment } from 'src/types/graphql';
 
 // Components
 import Title from './styles/title';
-import { SubtypeTag } from '../../styles/components/ui/tag';
+import { SubtypeTag } from '../../styles/components/ui/Tag';
 import Search from 'src/components/search/styles/search';
-import PosterImage from 'src/components/search/poster-image';
+import PosterImage from 'src/components/search/PosterImage';
 
 interface Props {
   data: MediaSearchFieldsFragment;

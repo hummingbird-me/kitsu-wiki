@@ -1,2 +1,2 @@
-export { default as SearchResults } from './search-result';
-export { default as SearchMedia } from './search-media';
+export { default as SearchResults } from './SearchResult';
+export { default as SearchMedia } from './SearchMedia';

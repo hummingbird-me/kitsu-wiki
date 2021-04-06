@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import Select from 'react-select';
 import { SingleSelect } from './styles';
-import LabelInput from './label-input';
+import LabelInput from './LabelInput';
 
 interface InputFields<O> {
   fieldType: string;

@@ -1,4 +1,4 @@
-import Media from './home/index';
-import Anime from './anime';
+import Media from './Home/index';
+import Anime from './Anime';
 
 export { Media, Anime };

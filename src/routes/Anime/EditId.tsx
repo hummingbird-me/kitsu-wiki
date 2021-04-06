@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import AnimeEdit from 'src/components/anime/anime-edit';
-import Loading from 'src/components/ui/loading/loading';
+import AnimeEdit from 'src/components/anime/AnimeEdit';
+import Loading from 'src/components/ui/loading/Loading';
 
 // GraphQL
 import { useFindAnimeByIdQuery, FindAnimeByIdQueryVariables } from 'src/types/graphql';

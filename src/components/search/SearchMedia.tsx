@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import { debounce } from 'lodash';
 
 // Logical components
-import useDelayUnmount from 'src/util/use-delay-unmount';
+import useDelayUnmount from 'src/util/useDelayUnmount';
 
 // GraphQl
 import {
@@ -12,14 +12,14 @@ import {
 } from 'src/types/graphql';
 
 // Components
-import useDropdown from '../ui/use-dropdown';
-import SearchResults from './search-result';
+import useDropdown from '../ui/UseDropdown';
+import SearchResults from './SearchResult';
 // Styled-components
 import SearchMediaLayout from './styles/search-media-layout';
 import SearchResultLayout from './styles/search-result-layout';
-import Loading from '../ui/loading/loading';
+import Loading from '../ui/loading/Loading';
 import AddNewLink from 'src/components/search/styles/add-new-link';
-import { SearchInput } from '../ui/input/styles/input';
+import { SearchInput } from '../ui/input/styles/Input';
 
 // Media
 import { ReactComponent as KitsuDatabaseTools } from '../../assets/kitsuDatabaseTools.svg';

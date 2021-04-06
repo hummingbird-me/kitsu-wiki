@@ -1,9 +1,9 @@
 import React, { ReactElement, useReducer, useState } from 'react';
 import { AgeRatingEnum, FindAnimeFieldsFragment, ReleaseStatusEnum } from 'src/types/graphql';
-import { MediaChange } from 'src/types/media-change';
+import { MediaChange } from 'src/types/mediaChange';
 import Sidebar from '../ui/navigation';
-import SingleSelectInput from '../ui/input/single-select-input';
-import EditGroup from '../media/edit-group';
+import SingleSelectInput from '../ui/input/SingleSelectInput';
+import EditGroup from '../media/EditGroup';
 import {
   TextInput,
   TitlesInput,
@@ -11,7 +11,7 @@ import {
   DateTimeInput,
   TextAreaInput,
 } from 'src/components/ui/input';
-import AnimeReducer from './anime-reducer';
+import animeReducer from './animeReducer';
 
 interface AnimeInterface {
   anime: FindAnimeFieldsFragment;
@@ -20,7 +20,7 @@ interface AnimeInterface {
 export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
   const changes: MediaChange = {};
   const [original, _setData] = useState(anime);
-  const [update, dispatch] = useReducer(AnimeReducer, changes);
+  const [update, dispatch] = useReducer(animeReducer, changes);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
