@@ -1,10 +1,10 @@
-export { default as generalStyleInteractions } from 'src/styles/general-styles-interactions';
-export { default as frontPageSizes } from 'src/styles/front-page-size';
+export { default as generalStyleInteractions } from 'src/styles/generalStyleInteractions';
+export { default as frontPageSizes } from 'src/styles/frontPageSizes';
 
-export { default as Input } from './input';
-export { AltTitles } from './input';
-export { default as Button } from './button';
-export { default as select } from './select';
-export { default as InputGroup } from './input-group';
-export { default as TextArea } from './text-area';
-export { default as SingleSelect } from './single-select';
+export { default as Input } from './Input';
+export { AltTitles } from './Input';
+export { default as Button } from './Button';
+export { default as select } from './Select';
+export { default as InputGroup } from './InputGroup';
+export { default as TextArea } from './TextArea';
+export { default as SingleSelect } from './SingleSelect';

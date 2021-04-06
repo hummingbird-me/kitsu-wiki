@@ -12,7 +12,7 @@
     "baseUrl": ".",
     "typeRoots": [
       "./node_modules/@types",
-      "custom-typings"
+      "customTypings"
     ],
     "lib": [
       "dom",

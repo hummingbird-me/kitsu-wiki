@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import generalStyleInteractions from 'src/styles/general-styles-interactions';
+import generalStyleInteractions from 'src/styles/generalStyleInteractions';
 
 const AddNewLink = styled(Link)`
   ${generalStyleInteractions}

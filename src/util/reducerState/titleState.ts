@@ -1,7 +1,7 @@
 import { cloneDeep } from 'lodash';
-import { TitlesChange } from 'src/types/media-change';
+import { TitlesChange } from 'src/types/mediaChange';
 import { ReducerPayload } from 'src/types/reducer';
-import { chosenAction } from './set-state';
+import { chosenAction } from './setState';
 
 interface RequiredKeys {
   titles?: TitlesChange;
