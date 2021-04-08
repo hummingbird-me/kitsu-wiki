@@ -12,15 +12,18 @@ import {
   TextAreaInput,
 } from 'src/components/ui/input';
 import animeReducer from './animeReducer';
+import { findLocalStorageRecord } from 'src/util/localStorage';
 
 interface AnimeInterface {
   anime: FindAnimeFieldsFragment;
 }
 
 export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
-  const changes: MediaChange = {};
-  const [original, _setData] = useState(anime);
-  const [update, dispatch] = useReducer(animeReducer, changes);
+  const changes: MediaChange = { id: anime.id, type: anime.__typename };
+  const [original] = useState(anime);
+  const [update, dispatch] = useReducer(animeReducer, changes, (initial) =>
+    findLocalStorageRecord<MediaChange>(`${anime.__typename}-${anime.id}`, initial)
+  );
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
