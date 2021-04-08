@@ -1,5 +1,5 @@
 export type ID = string;
-export type NodeChange = { id?: ID };
+export type NodeChange = { id?: ID; type?: string };
 
 type HashChange = {
   set?: { [key: string]: string };
@@ -9,6 +9,10 @@ type HashChange = {
 export type SetChange = {
   add?: string[];
   remove?: string[];
+};
+
+export type StringChange = {
+  value: string;
 };
 
 export type TitlesChange = {
@@ -24,7 +28,7 @@ export type MediaChange = NodeChange & {
   ageRatingGuide?: string;
   bannerImage?: ImageUpload;
   posterImage?: ImageUpload;
-  slug?: string;
+  slug?: StringChange;
   startDate?: DateString;
 };
 
