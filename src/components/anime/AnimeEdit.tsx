@@ -45,11 +45,7 @@ export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
               initialValue={original.id}
               parentDispatch={dispatch}
             />
-            <TextInput
-              fieldType='slug'
-              initialValue={update.slug?.value || original.slug}
-              parentDispatch={dispatch}
-            />
+            <TextInput fieldType='slug' initialValue={original.slug} parentDispatch={dispatch} />
           </>
         </EditGroup>
 
