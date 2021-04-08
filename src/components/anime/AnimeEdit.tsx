@@ -19,10 +19,10 @@ interface AnimeInterface {
 }
 
 export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
-  const changes: MediaChange = { id: anime.id, type: 'Anime' };
+  const changes: MediaChange = { id: anime.id, type: anime.__typename };
   const [original] = useState(anime);
   const [update, dispatch] = useReducer(animeReducer, changes, (initial) =>
-    findLocalStorageRecord<MediaChange>(`anime-${anime.id}`, initial)
+    findLocalStorageRecord<MediaChange>(`${anime.__typename}-${anime.id}`, initial)
   );
 
   const handleSubmit = (e: any) => {

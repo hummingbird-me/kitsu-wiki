@@ -28,7 +28,7 @@ export default function animeReducer(state: MediaChange, action: ReducerAction):
       };
   }
 
-  updateLocalStorageRecord<MediaChange>(`anime-${state.id}`, updatedState);
+  updateLocalStorageRecord<MediaChange>(`${state.type}-${state.id}`, updatedState);
 
   return updatedState;
 }
