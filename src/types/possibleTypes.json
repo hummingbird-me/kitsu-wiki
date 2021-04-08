@@ -4,15 +4,15 @@
       "AnimeAmountConsumed",
       "MangaAmountConsumed"
     ],
-    "Base": [
-      "Generic"
-    ],
     "CategoryBreakdown": [
       "AnimeCategoryBreakdown",
       "MangaCategoryBreakdown"
     ],
     "Episodic": [
       "Anime"
+    ],
+    "Error": [
+      "Generic"
     ],
     "FavoriteItemUnion": [
       "Anime",
