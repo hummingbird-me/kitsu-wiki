@@ -1,4 +1,5 @@
 fragment findAnimeFields on Anime {
+  __typename
   id
   slug
   titles {
