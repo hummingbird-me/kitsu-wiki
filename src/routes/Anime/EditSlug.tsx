@@ -1,9 +1,9 @@
-import React, { ReactElement } from 'react';
-import AnimeEdit from 'src/components/anime/AnimeEdit';
+import { ReactElement } from 'react';
 import Loading from 'src/components/ui/loading/Loading';
 
 // GraphQl
 import { useFindAnimeBySlugQuery, FindAnimeBySlugQueryVariables } from 'src/types/graphql';
+import CreateFromType from '../WikiSubmission/CreateFromType';
 
 const EditSlug = ({ slug }: { slug: string }): ReactElement => {
   const findAnimeBySlug: FindAnimeBySlugQueryVariables = { slug: slug };
@@ -16,7 +16,7 @@ const EditSlug = ({ slug }: { slug: string }): ReactElement => {
 
   if (error) return <div>Error: {error}</div>;
 
-  return <AnimeEdit anime={data.findAnimeBySlug} />;
+  return <CreateFromType title={data.findAnimeBySlug.slug} record={data.findAnimeBySlug} />;
 };
 
 export default EditSlug;
