@@ -42,7 +42,7 @@
     "@graphql-codegen/typescript-react-apollo": "^2.2.1",
     "@types/jest": "^26.0.20",
     "@types/lodash": "^4.14.168",
-    "@types/node": "^14.14.20",
+    "@types/node": "^14.14.39",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-lazyload": "^3.0.0",
