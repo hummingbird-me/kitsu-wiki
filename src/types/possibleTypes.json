@@ -4,15 +4,15 @@
       "AnimeAmountConsumed",
       "MangaAmountConsumed"
     ],
-    "Base": [
-      "Generic"
-    ],
     "CategoryBreakdown": [
       "AnimeCategoryBreakdown",
       "MangaCategoryBreakdown"
     ],
     "Episodic": [
       "Anime"
+    ],
+    "Error": [
+      "Generic"
     ],
     "FavoriteItemUnion": [
       "Anime",
@@ -51,7 +51,9 @@
       "Comment",
       "Episode",
       "Favorite",
+      "Franchise",
       "ImageView",
+      "Installment",
       "LibraryEntry",
       "LibraryEvent",
       "Manga",
@@ -71,7 +73,8 @@
       "Streamer",
       "StreamingLink",
       "Video",
-      "Volume"
+      "Volume",
+      "WikiSubmission"
     ]
   }
 }
