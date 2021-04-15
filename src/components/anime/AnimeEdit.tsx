@@ -1,6 +1,12 @@
-import React, { ReactElement, useReducer, useState } from 'react';
-import { AgeRatingEnum, FindAnimeFieldsFragment, ReleaseStatusEnum } from 'src/types/graphql';
-import { MediaChange } from 'src/types/mediaChange';
+import React, { ReactElement, useEffect, useReducer, useState } from 'react';
+import {
+  AgeRatingEnum,
+  FindAnimeFieldsFragment,
+  ReleaseStatusEnum,
+  useUpdateDraftMutationMutation,
+  useSubmitDraftMutationMutation,
+  WikiSubmissionFieldsFragment,
+} from 'src/types/graphql';
 import Sidebar from '../ui/navigation';
 import SingleSelectInput from '../ui/input/SingleSelectInput';
 import EditGroup from '../media/EditGroup';
@@ -14,18 +20,37 @@ import {
 import animeReducer from './animeReducer';
 
 interface AnimeInterface {
-  anime: FindAnimeFieldsFragment;
+  record: FindAnimeFieldsFragment;
+  wikiSubmission: WikiSubmissionFieldsFragment;
 }
 
-export default function AnimeEdit({ anime }: AnimeInterface): ReactElement {
-  const changes: MediaChange = {};
-  const [original, _setData] = useState(anime);
-  const [update, dispatch] = useReducer(animeReducer, changes);
+export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): ReactElement {
+  const [original] = useState(record);
+  const [update, dispatch] = useReducer(animeReducer, wikiSubmission.draft);
+  const inputVariables = {
+    variables: {
+      input: {
+        id: wikiSubmission.id,
+        draft: update,
+      },
+    },
+  };
+  const [updateDraftMutation, { data, loading, error }] = useUpdateDraftMutationMutation(
+    inputVariables
+  );
+  const [
+    submitDraftMutation,
+    { loading: submitLoading, error: submitError },
+  ] = useSubmitDraftMutationMutation(inputVariables);
+
+  useEffect(() => {
+    updateDraftMutation();
+  }, [update, updateDraftMutation]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    console.log(original);
+    submitDraftMutation();
     console.log(update);
   };
 
