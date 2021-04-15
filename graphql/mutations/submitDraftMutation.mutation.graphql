@@ -1,0 +1,9 @@
+mutation SubmitDraftMutation($input: WikiSubmissionSubmitDraftInput!) {
+  wikiSubmission {
+    submitDraft(input: $input) {
+      wikiSubmission {
+        id
+      }
+    }
+  }
+}

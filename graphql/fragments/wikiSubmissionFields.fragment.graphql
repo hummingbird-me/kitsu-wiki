@@ -1,0 +1,5 @@
+fragment wikiSubmissionFields on WikiSubmission {
+  id
+  title
+  draft
+}
