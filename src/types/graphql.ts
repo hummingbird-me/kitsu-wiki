@@ -1463,6 +1463,11 @@ export enum LibraryEventKindEnum {
   Annotated = 'ANNOTATED'
 }
 
+export type LockInput = {
+  readonly id: Scalars['ID'];
+  readonly lockedReason: LockedReasonEnum;
+};
+
 export enum LockedReasonEnum {
   Spam = 'SPAM',
   TooHeated = 'TOO_HEATED',
@@ -3239,6 +3244,10 @@ export type Unit = {
 /** Media units such as episodes or chapters */
 export type UnitDescriptionArgs = {
   locales?: Maybe<ReadonlyArray<Scalars['String']>>;
+};
+
+export type UnlockInput = {
+  readonly id: Scalars['ID'];
 };
 
 
