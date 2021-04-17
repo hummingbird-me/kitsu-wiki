@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import SearchMedia from 'src/components/search/SearchMedia';
+import { default as Search } from 'src/components/search/SearchMedia';
 
-export default function Media(): ReactElement {
+export default function SearchMedia(): ReactElement {
   return (
     <Wrapper>
-      <SearchMedia />
+      <Search />
     </Wrapper>
   );
 }
