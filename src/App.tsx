@@ -18,30 +18,6 @@ const App = (): ReactElement => {
       <SessionContextProvider>
         <ApolloContext>
           <Router>
-            {/* {console.log(session)}
-            <nav>{session?.loggedIn ? <Link to='/'>Logout</Link> : <Link to='/'>Login</Link>}</nav> */}
-            {/* <nav className="navbar navbar-expand-lg navbar-light fixed-top bg-light">
-          <Link to="/" className="navbar-brand">
-            Kitsu Database
-          </Link>
-          <ul className="navbar-nav">
-            <li className="nav-item dropdown">
-              <div
-                className="nav-link dropdown-toggle"
-                style={{ cursor: 'pointer' }}
-                onClick={() => setDropdownOpen(!dropdownOpen)}>
-                Resources
-              </div>
-              <div
-                className={`dropdown-menu${dropdownOpen ? ' show' : ''}`}
-                onClick={() => setDropdownOpen(false)}>
-                <Link to="/media" className="dropdown-item">
-                  Media
-                </Link>
-              </div>
-            </li>
-          </ul>
-        </nav> */}
             <div>
               <Switch>
                 <PrivateRoute path='/search' component={Media} />
