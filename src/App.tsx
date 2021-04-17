@@ -7,6 +7,7 @@ import GlobalStyles from './styles/GlobalStyle';
 import ApolloContext from './contexts/ApolloContext';
 import Home from './components/home';
 import { SessionContextProvider } from './contexts/SessionContext';
+import { PrivateRoute } from './util/customRoute';
 
 const App = (): ReactElement => {
   /* const [dropdownOpen, setDropdownOpen] = useState(false); */
@@ -43,7 +44,7 @@ const App = (): ReactElement => {
         </nav> */}
             <div>
               <Switch>
-                <Route path='/search' component={Media} />
+                <PrivateRoute path='/search' component={Media} />
                 <Route exact path='/' component={Home} />
               </Switch>
             </div>
