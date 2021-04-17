@@ -10,8 +10,6 @@ import { SessionContextProvider } from './contexts/SessionContext';
 import { PrivateRoute } from './util/customRoute';
 
 const App = (): ReactElement => {
-  /* const [dropdownOpen, setDropdownOpen] = useState(false); */
-
   return (
     <>
       <GlobalStyles />
