@@ -7,7 +7,7 @@ import GlobalStyles from './styles/GlobalStyle';
 import ApolloContext from './contexts/ApolloContext';
 import Home from './components/home';
 import { SessionContextProvider } from './contexts/SessionContext';
-import { PrivateRoute } from './util/customRoute';
+import { UserRoute } from './util/customRoutes';
 
 const App = (): ReactElement => {
   return (
@@ -18,7 +18,7 @@ const App = (): ReactElement => {
           <Router>
             <div>
               <Switch>
-                <PrivateRoute path='/search' component={Media} />
+                <UserRoute path='/search' component={Media} />
                 <Route exact path='/' component={Home} />
               </Switch>
             </div>
