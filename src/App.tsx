@@ -1,14 +1,12 @@
 import React, { ReactElement } from 'react';
-import { Anime } from './routes';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-import { ApolloProvider } from '@apollo/client';
-import client from './client';
-
-import Media from './routes/Home/index';
+import { Media } from './routes';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 import 'normalize.css';
 import GlobalStyles from './styles/GlobalStyle';
+import ApolloContext from './contexts/ApolloContext';
+import Home from './components/home';
+import { SessionContextProvider } from './contexts/SessionContext';
 
 const App = (): ReactElement => {
   /* const [dropdownOpen, setDropdownOpen] = useState(false); */
@@ -16,9 +14,12 @@ const App = (): ReactElement => {
   return (
     <>
       <GlobalStyles />
-      <ApolloProvider client={client}>
-        <Router>
-          {/* <nav className="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+      <SessionContextProvider>
+        <ApolloContext>
+          <Router>
+            {/* {console.log(session)}
+            <nav>{session?.loggedIn ? <Link to='/'>Logout</Link> : <Link to='/'>Login</Link>}</nav> */}
+            {/* <nav className="navbar navbar-expand-lg navbar-light fixed-top bg-light">
           <Link to="/" className="navbar-brand">
             Kitsu Database
           </Link>
@@ -40,16 +41,17 @@ const App = (): ReactElement => {
             </li>
           </ul>
         </nav> */}
-          <div>
-            <Switch>
-              <Route path='/anime' component={Anime} />
-              <Route exact path='/'>
-                <Media />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </ApolloProvider>
+            <div>
+              <Switch>
+                <Route path='/search' component={Media} />
+                <Route exact path='/'>
+                  <Home />
+                </Route>
+              </Switch>
+            </div>
+          </Router>
+        </ApolloContext>
+      </SessionContextProvider>
     </>
   );
 };
