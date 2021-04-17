@@ -44,9 +44,7 @@ const App = (): ReactElement => {
             <div>
               <Switch>
                 <Route path='/search' component={Media} />
-                <Route exact path='/'>
-                  <Home />
-                </Route>
+                <Route exact path='/' component={Home} />
               </Switch>
             </div>
           </Router>

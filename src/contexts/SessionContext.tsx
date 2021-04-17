@@ -18,12 +18,13 @@ export const SessionContext = React.createContext<SessionProps>({
 export const SessionContextProvider: React.FunctionComponent<Record<string, unknown>> = function ({
   children,
 }) {
-  const [session, _setSession] = useState<Session>(null);
+  const [session, _setSession] = useState<Session>(LocalStorage.find('session'));
 
   const setSession = (newSession: Session) => {
     _setSession(newSession);
     return LocalStorage.save<Session>('session', newSession);
   };
+
   const clearSession = () => {
     _setSession(null);
     return LocalStorage.removeItem('session');
