@@ -12,7 +12,7 @@
     "date-fns": "^2.16.1",
     "graphql": "^15.4.0",
     "graphql.macro": "^1.4.2",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "query-string": "^6.13.7",
     "react": "^17.0.1",
