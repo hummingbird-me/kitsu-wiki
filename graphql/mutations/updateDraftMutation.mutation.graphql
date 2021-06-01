@@ -2,7 +2,7 @@ mutation UpdateDraftMutation($input: WikiSubmissionUpdateDraftInput!) {
   wikiSubmission {
     updateDraft(input: $input) {
       wikiSubmission {
-        draft
+        data
       }
     }
   }

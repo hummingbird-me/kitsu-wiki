@@ -29,7 +29,7 @@ export default function CreateFromType({ title, record }: RecordInterface): Reac
 
   const createDraftInput: WikiSubmissionCreateDraftInput = {
     title: title,
-    draft: draft,
+    data: draft,
   };
 
   const [createDraftMutationMutation, { data, loading, error }] = useCreateDraftMutationMutation({

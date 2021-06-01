@@ -2,5 +2,5 @@ fragment wikiSubmissionFields on WikiSubmission {
   id
   title
   status
-  draft
+  data
 }

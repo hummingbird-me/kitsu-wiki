@@ -21,14 +21,14 @@ interface Props {
 
 export default function FindTypeFromDraft({ wikiSubmission }: Props): ReactElement {
   let queryType;
-  const id = wikiSubmission.draft['id'];
-  const draftType = wikiSubmission.draft['type'];
+  const id = wikiSubmission.data['id'];
+  const dataType = wikiSubmission.data['type'];
   const variables = {
     id: id,
   };
   let formattedData;
   // This will most likely be a problem w/o types
-  switch (draftType) {
+  switch (dataType) {
     case WikiSubmissionDraftTypes.Anime:
       queryType = useFindAnimeByIdQuery;
       break;
@@ -48,7 +48,7 @@ export default function FindTypeFromDraft({ wikiSubmission }: Props): ReactEleme
   if (loading) return <Loading />;
   if (!data || error) return <div>Error: {error?.message}</div>;
 
-  switch (draftType) {
+  switch (dataType) {
     case WikiSubmissionDraftTypes.Anime:
       formattedData = (data as FindAnimeByIdQuery).findAnimeById;
       break;
@@ -61,7 +61,7 @@ export default function FindTypeFromDraft({ wikiSubmission }: Props): ReactEleme
     return <div>Error</div>;
   }
 
-  switch (draftType) {
+  switch (dataType) {
     case WikiSubmissionDraftTypes.Anime:
       return (
         <AnimeEdit

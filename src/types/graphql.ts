@@ -3320,15 +3320,20 @@ export type VolumeChaptersArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
+/** A Wiki Submission is used to either create or edit existing data in our database. This will allow a simple and convient way for users to submit issues/corrections without all the work being left to the mods. */
 export type WikiSubmission = WithTimestamps & {
   readonly __typename?: 'WikiSubmission';
   /** The user who created this draft */
   readonly author: Profile;
   readonly createdAt: Scalars['ISO8601DateTime'];
-  readonly draft?: Maybe<Scalars['JSON']>;
+  /** The full object that holds all the details for any modifications/additions/deletions made to the entity you are editing. This will be validated using JSON Schema. */
+  readonly data?: Maybe<Scalars['JSON']>;
   readonly id: Scalars['ID'];
+  /** Any additional information that may need to be provided related to the Wiki Submission */
   readonly notes?: Maybe<Scalars['String']>;
+  /** The status of the Wiki Submission */
   readonly status: WikiSubmissionStatusEnum;
+  /** The title given to the Wiki Submission. This will default to the title of what is being edited. */
   readonly title?: Maybe<Scalars['String']>;
   readonly updatedAt: Scalars['ISO8601DateTime'];
 };
@@ -3347,7 +3352,7 @@ export type WikiSubmissionConnection = {
 };
 
 export type WikiSubmissionCreateDraftInput = {
-  readonly draft: Scalars['JSON'];
+  readonly data: Scalars['JSON'];
   readonly title?: Maybe<Scalars['String']>;
   readonly notes?: Maybe<Scalars['String']>;
 };
@@ -3412,7 +3417,7 @@ export enum WikiSubmissionStatusEnum {
 
 export type WikiSubmissionSubmitDraftInput = {
   readonly id: Scalars['ID'];
-  readonly draft: Scalars['JSON'];
+  readonly data: Scalars['JSON'];
   readonly title?: Maybe<Scalars['String']>;
   readonly notes?: Maybe<Scalars['String']>;
 };
@@ -3512,7 +3517,7 @@ export type MediaSearchFieldsFragment = MediaSearchFields_Anime_Fragment | Media
 
 export type WikiSubmissionFieldsFragment = (
   { readonly __typename?: 'WikiSubmission' }
-  & Pick<WikiSubmission, 'id' | 'title' | 'status' | 'draft'>
+  & Pick<WikiSubmission, 'id' | 'title' | 'status' | 'data'>
 );
 
 export type CreateDraftMutationMutationVariables = Exact<{
@@ -3566,7 +3571,7 @@ export type UpdateDraftMutationMutation = (
       { readonly __typename?: 'WikiSubmissionUpdateDraftPayload' }
       & { readonly wikiSubmission?: Maybe<(
         { readonly __typename?: 'WikiSubmission' }
-        & Pick<WikiSubmission, 'draft'>
+        & Pick<WikiSubmission, 'data'>
       )> }
     )> }
   ) }
@@ -3746,7 +3751,7 @@ export const WikiSubmissionFieldsFragmentDoc = gql`
   id
   title
   status
-  draft
+  data
 }
     `;
 export const CreateDraftMutationDocument = gql`
@@ -3826,7 +3831,7 @@ export const UpdateDraftMutationDocument = gql`
   wikiSubmission {
     updateDraft(input: $input) {
       wikiSubmission {
-        draft
+        data
       }
     }
   }

@@ -26,12 +26,12 @@ interface AnimeInterface {
 
 export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): ReactElement {
   const [original] = useState(record);
-  const [update, dispatch] = useReducer(animeReducer, wikiSubmission.draft);
+  const [update, dispatch] = useReducer(animeReducer, wikiSubmission.data);
   const inputVariables = {
     variables: {
       input: {
         id: wikiSubmission.id,
-        draft: update,
+        data: update,
       },
     },
   };
