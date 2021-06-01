@@ -1,0 +1,5 @@
+query FindWikiSubmissionById($id: ID!) {
+  findWikiSubmissionById(id: $id) {
+    ...wikiSubmissionFields
+  }
+}

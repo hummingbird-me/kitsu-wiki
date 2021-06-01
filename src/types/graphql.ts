@@ -2659,6 +2659,8 @@ export type Query = {
   readonly findProfileById?: Maybe<Profile>;
   /** Find a single User by Slug */
   readonly findProfileBySlug?: Maybe<Profile>;
+  /** Find a single Wiki Submission by ID */
+  readonly findWikiSubmissionById?: Maybe<WikiSubmission>;
   /** All Franchise in the Kitsu database */
   readonly franchises?: Maybe<FranchiseConnection>;
   /** List trending media on Kitsu */
@@ -2790,6 +2792,11 @@ export type QueryFindProfileByIdArgs = {
 
 export type QueryFindProfileBySlugArgs = {
   slug: Scalars['String'];
+};
+
+
+export type QueryFindWikiSubmissionByIdArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -3449,6 +3456,26 @@ export type FindAnimeFieldsFragment = (
   ) }
 );
 
+type FindMediaFields_Anime_Fragment = (
+  { readonly __typename: 'Anime' }
+  & Pick<Anime, 'id' | 'slug' | 'description' | 'ageRating' | 'ageRatingGuide' | 'sfw' | 'startDate' | 'endDate' | 'nextRelease' | 'status' | 'tba'>
+  & { readonly titles: (
+    { readonly __typename?: 'TitlesList' }
+    & AnimeTitlesFragment
+  ) }
+);
+
+type FindMediaFields_Manga_Fragment = (
+  { readonly __typename: 'Manga' }
+  & Pick<Manga, 'id' | 'slug' | 'description' | 'ageRating' | 'ageRatingGuide' | 'sfw' | 'startDate' | 'endDate' | 'nextRelease' | 'status' | 'tba'>
+  & { readonly titles: (
+    { readonly __typename?: 'TitlesList' }
+    & AnimeTitlesFragment
+  ) }
+);
+
+export type FindMediaFieldsFragment = FindMediaFields_Anime_Fragment | FindMediaFields_Manga_Fragment;
+
 type MediaSearchFields_Anime_Fragment = (
   { readonly __typename?: 'Anime' }
   & Pick<Anime, 'id' | 'slug' | 'type' | 'description' | 'startDate' | 'tba'>
@@ -3485,7 +3512,7 @@ export type MediaSearchFieldsFragment = MediaSearchFields_Anime_Fragment | Media
 
 export type WikiSubmissionFieldsFragment = (
   { readonly __typename?: 'WikiSubmission' }
-  & Pick<WikiSubmission, 'id' | 'title' | 'draft'>
+  & Pick<WikiSubmission, 'id' | 'title' | 'status' | 'draft'>
 );
 
 export type CreateDraftMutationMutationVariables = Exact<{
@@ -3571,6 +3598,32 @@ export type FindAnimeBySlugQuery = (
   )> }
 );
 
+export type FindMangaByIdQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type FindMangaByIdQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly findMangaById?: Maybe<(
+    { readonly __typename?: 'Manga' }
+    & FindMediaFields_Manga_Fragment
+  )> }
+);
+
+export type FindWikiSubmissionByIdQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type FindWikiSubmissionByIdQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly findWikiSubmissionById?: Maybe<(
+    { readonly __typename?: 'WikiSubmission' }
+    & WikiSubmissionFieldsFragment
+  )> }
+);
+
 export type SearchMediaByTitleQueryVariables = Exact<{
   first: Scalars['Int'];
   title: Scalars['String'];
@@ -3600,6 +3653,29 @@ export type SearchMediaByTitleQuery = (
   ) }
 );
 
+export type UserWikiSubmissionsQueryVariables = Exact<{
+  first: Scalars['Int'];
+  statuses?: Maybe<ReadonlyArray<WikiSubmissionStatusEnum> | WikiSubmissionStatusEnum>;
+}>;
+
+
+export type UserWikiSubmissionsQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly currentAccount?: Maybe<(
+    { readonly __typename?: 'Account' }
+    & { readonly profile: (
+      { readonly __typename?: 'Profile' }
+      & { readonly wikiSubmissions: (
+        { readonly __typename?: 'WikiSubmissionConnection' }
+        & { readonly nodes?: Maybe<ReadonlyArray<Maybe<(
+          { readonly __typename?: 'WikiSubmission' }
+          & WikiSubmissionFieldsFragment
+        )>>> }
+      ) }
+    ) }
+  )> }
+);
+
 export const AnimeTitlesFragmentDoc = gql`
     fragment animeTitles on TitlesList {
   canonical
@@ -3610,6 +3686,25 @@ export const AnimeTitlesFragmentDoc = gql`
     `;
 export const FindAnimeFieldsFragmentDoc = gql`
     fragment findAnimeFields on Anime {
+  __typename
+  id
+  slug
+  titles {
+    ...animeTitles
+  }
+  description
+  ageRating
+  ageRatingGuide
+  sfw
+  startDate
+  endDate
+  nextRelease
+  status
+  tba
+}
+    ${AnimeTitlesFragmentDoc}`;
+export const FindMediaFieldsFragmentDoc = gql`
+    fragment findMediaFields on Media {
   __typename
   id
   slug
@@ -3650,6 +3745,7 @@ export const WikiSubmissionFieldsFragmentDoc = gql`
     fragment wikiSubmissionFields on WikiSubmission {
   id
   title
+  status
   draft
 }
     `;
@@ -3827,6 +3923,72 @@ export function useFindAnimeBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type FindAnimeBySlugQueryHookResult = ReturnType<typeof useFindAnimeBySlugQuery>;
 export type FindAnimeBySlugLazyQueryHookResult = ReturnType<typeof useFindAnimeBySlugLazyQuery>;
 export type FindAnimeBySlugQueryResult = Apollo.QueryResult<FindAnimeBySlugQuery, FindAnimeBySlugQueryVariables>;
+export const FindMangaByIdDocument = gql`
+    query FindMangaById($id: ID!) {
+  findMangaById(id: $id) {
+    ...findMediaFields
+  }
+}
+    ${FindMediaFieldsFragmentDoc}`;
+
+/**
+ * __useFindMangaByIdQuery__
+ *
+ * To run a query within a React component, call `useFindMangaByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindMangaByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindMangaByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFindMangaByIdQuery(baseOptions: Apollo.QueryHookOptions<FindMangaByIdQuery, FindMangaByIdQueryVariables>) {
+        return Apollo.useQuery<FindMangaByIdQuery, FindMangaByIdQueryVariables>(FindMangaByIdDocument, baseOptions);
+      }
+export function useFindMangaByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindMangaByIdQuery, FindMangaByIdQueryVariables>) {
+          return Apollo.useLazyQuery<FindMangaByIdQuery, FindMangaByIdQueryVariables>(FindMangaByIdDocument, baseOptions);
+        }
+export type FindMangaByIdQueryHookResult = ReturnType<typeof useFindMangaByIdQuery>;
+export type FindMangaByIdLazyQueryHookResult = ReturnType<typeof useFindMangaByIdLazyQuery>;
+export type FindMangaByIdQueryResult = Apollo.QueryResult<FindMangaByIdQuery, FindMangaByIdQueryVariables>;
+export const FindWikiSubmissionByIdDocument = gql`
+    query FindWikiSubmissionById($id: ID!) {
+  findWikiSubmissionById(id: $id) {
+    ...wikiSubmissionFields
+  }
+}
+    ${WikiSubmissionFieldsFragmentDoc}`;
+
+/**
+ * __useFindWikiSubmissionByIdQuery__
+ *
+ * To run a query within a React component, call `useFindWikiSubmissionByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindWikiSubmissionByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindWikiSubmissionByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFindWikiSubmissionByIdQuery(baseOptions: Apollo.QueryHookOptions<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>) {
+        return Apollo.useQuery<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>(FindWikiSubmissionByIdDocument, baseOptions);
+      }
+export function useFindWikiSubmissionByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>) {
+          return Apollo.useLazyQuery<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>(FindWikiSubmissionByIdDocument, baseOptions);
+        }
+export type FindWikiSubmissionByIdQueryHookResult = ReturnType<typeof useFindWikiSubmissionByIdQuery>;
+export type FindWikiSubmissionByIdLazyQueryHookResult = ReturnType<typeof useFindWikiSubmissionByIdLazyQuery>;
+export type FindWikiSubmissionByIdQueryResult = Apollo.QueryResult<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>;
 export const SearchMediaByTitleDocument = gql`
     query SearchMediaByTitle($first: Int!, $title: String!, $media_type: MediaTypeEnum, $cursor: String) {
   searchMediaByTitle(
@@ -3877,3 +4039,43 @@ export function useSearchMediaByTitleLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type SearchMediaByTitleQueryHookResult = ReturnType<typeof useSearchMediaByTitleQuery>;
 export type SearchMediaByTitleLazyQueryHookResult = ReturnType<typeof useSearchMediaByTitleLazyQuery>;
 export type SearchMediaByTitleQueryResult = Apollo.QueryResult<SearchMediaByTitleQuery, SearchMediaByTitleQueryVariables>;
+export const UserWikiSubmissionsDocument = gql`
+    query UserWikiSubmissions($first: Int!, $statuses: [WikiSubmissionStatusEnum!]) {
+  currentAccount {
+    profile {
+      wikiSubmissions(first: $first, statuses: $statuses) {
+        nodes {
+          ...wikiSubmissionFields
+        }
+      }
+    }
+  }
+}
+    ${WikiSubmissionFieldsFragmentDoc}`;
+
+/**
+ * __useUserWikiSubmissionsQuery__
+ *
+ * To run a query within a React component, call `useUserWikiSubmissionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserWikiSubmissionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserWikiSubmissionsQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      statuses: // value for 'statuses'
+ *   },
+ * });
+ */
+export function useUserWikiSubmissionsQuery(baseOptions: Apollo.QueryHookOptions<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>) {
+        return Apollo.useQuery<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>(UserWikiSubmissionsDocument, baseOptions);
+      }
+export function useUserWikiSubmissionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>) {
+          return Apollo.useLazyQuery<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>(UserWikiSubmissionsDocument, baseOptions);
+        }
+export type UserWikiSubmissionsQueryHookResult = ReturnType<typeof useUserWikiSubmissionsQuery>;
+export type UserWikiSubmissionsLazyQueryHookResult = ReturnType<typeof useUserWikiSubmissionsLazyQuery>;
+export type UserWikiSubmissionsQueryResult = Apollo.QueryResult<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>;

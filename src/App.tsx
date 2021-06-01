@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import { Media } from './routes';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { Anime, Media, UserSubmission } from './routes';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import 'normalize.css';
 import GlobalStyles from './styles/GlobalStyle';
@@ -19,6 +19,8 @@ const App = (): ReactElement => {
             <div>
               <Switch>
                 <UserRoute path='/search' component={Media} />
+                <UserRoute path='/anime' component={Anime} />
+                <UserRoute path='/user_submissions' component={UserSubmission} />
                 <Route exact path='/' component={Home} />
               </Switch>
             </div>
