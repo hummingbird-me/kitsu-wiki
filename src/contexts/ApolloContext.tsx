@@ -16,7 +16,7 @@ import { SessionContext } from './SessionContext';
 
 const ApolloContext: React.FC = function ApolloContext({ children }) {
   const sessionContext = useContext(SessionContext);
-  const host = 'http://kitsu.io/';
+  const host = 'https://kitsu.io/';
   const cache = new InMemoryCache({
     possibleTypes: generatedIntrospection.possibleTypes,
     typePolicies: {
