@@ -1,0 +1,11 @@
+query UserWikiSubmissions($first: Int!, $statuses: [WikiSubmissionStatusEnum!]) {
+  currentAccount {
+    profile {
+      wikiSubmissions(first: $first, statuses: $statuses) {
+        nodes {
+          ...wikiSubmissionFields
+        }
+      }
+    }
+  }
+}

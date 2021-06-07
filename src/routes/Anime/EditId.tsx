@@ -1,9 +1,9 @@
-import React, { ReactElement } from 'react';
-import AnimeEdit from 'src/components/anime/AnimeEdit';
+import { ReactElement } from 'react';
 import Loading from 'src/components/ui/loading/Loading';
 
 // GraphQL
 import { useFindAnimeByIdQuery, FindAnimeByIdQueryVariables } from 'src/types/graphql';
+import CreateFromType from '../WikiSubmission/CreateFromType';
 
 const EditId = ({ id }: { id: string }): ReactElement => {
   const findAnimeByIdVariables: FindAnimeByIdQueryVariables = { id: id };
@@ -14,7 +14,7 @@ const EditId = ({ id }: { id: string }): ReactElement => {
   if (loading) return <Loading />;
   if (!data || !data.findAnimeById || error) return <div>Error: {error}</div>;
 
-  return <AnimeEdit anime={data.findAnimeById} />;
+  return <CreateFromType title={data.findAnimeById.slug} record={data.findAnimeById} />;
 };
 
 export default EditId;

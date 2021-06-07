@@ -1,0 +1,5 @@
+query FindMangaById($id: ID!) {
+  findMangaById(id: $id) {
+    ...findMediaFields
+  }
+}

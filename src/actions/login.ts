@@ -10,7 +10,7 @@ export default async function login({
   params?: Record<string, string>;
   init?: RequestInit;
 }): Promise<NonNullable<Session>> {
-  const host = 'http://kitsu.io/';
+  const host = 'https://kitsu.io/';
   const body = new URLSearchParams(params);
   const response = await fetch(`${host}api/oauth/token`, {
     method: 'POST',

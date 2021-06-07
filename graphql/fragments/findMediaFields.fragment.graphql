@@ -1,4 +1,4 @@
-fragment findAnimeFields on Anime {
+fragment findMediaFields on Media {
   __typename
   id
   slug

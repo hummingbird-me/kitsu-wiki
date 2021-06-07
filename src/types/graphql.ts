@@ -17,6 +17,8 @@ export type Scalars = {
   ISO8601Date: any;
   /** An ISO 8601-encoded datetime */
   ISO8601DateTime: any;
+  /** Represents untyped JSON */
+  JSON: any;
   /** A loose key-value map in GraphQL */
   Map: Record<string, any>;
   Upload: any;
@@ -112,6 +114,8 @@ export type Anime = Media & Episodic & WithTimestamps & {
   readonly id: Scalars['ID'];
   /** A list of mappings for this media */
   readonly mappings: MappingConnection;
+  /** A list of your wiki submissions for this media */
+  readonly myWikiSubmissions: WikiSubmissionConnection;
   /** The time of the next release of this media */
   readonly nextRelease?: Maybe<Scalars['ISO8601DateTime']>;
   /** The country in which the media was primarily produced */
@@ -191,6 +195,15 @@ export type AnimeMappingsArgs = {
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+};
+
+
+export type AnimeMyWikiSubmissionsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  sort?: Maybe<ReadonlyArray<Maybe<WikiSubmissionSortOption>>>;
 };
 
 
@@ -867,6 +880,50 @@ export type FollowSortOption = {
   readonly direction: SortDirection;
 };
 
+/** Related media grouped together */
+export type Franchise = WithTimestamps & {
+  readonly __typename?: 'Franchise';
+  readonly createdAt: Scalars['ISO8601DateTime'];
+  readonly id: Scalars['ID'];
+  /** All media related to a franchise */
+  readonly installments?: Maybe<InstallmentConnection>;
+  /** The name of this franchise in various languages */
+  readonly titles: TitlesList;
+  readonly updatedAt: Scalars['ISO8601DateTime'];
+};
+
+
+/** Related media grouped together */
+export type FranchiseInstallmentsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  sort?: Maybe<ReadonlyArray<Maybe<InstallmentSortOption>>>;
+};
+
+/** The connection type for Franchise. */
+export type FranchiseConnection = {
+  readonly __typename?: 'FranchiseConnection';
+  /** A list of edges. */
+  readonly edges?: Maybe<ReadonlyArray<Maybe<FranchiseEdge>>>;
+  /** A list of nodes. */
+  readonly nodes?: Maybe<ReadonlyArray<Maybe<Franchise>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** The total amount of nodes. */
+  readonly totalCount: Scalars['Int'];
+};
+
+/** An edge in a connection. */
+export type FranchiseEdge = {
+  readonly __typename?: 'FranchiseEdge';
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node?: Maybe<Franchise>;
+};
+
 export type Generic = Error & {
   readonly __typename?: 'Generic';
   /** The error code. */
@@ -916,6 +973,72 @@ export type ImageView = WithTimestamps & {
   /** The width of the image */
   readonly width?: Maybe<Scalars['Int']>;
 };
+
+/** Individual media that belongs to a franchise */
+export type Installment = WithTimestamps & {
+  readonly __typename?: 'Installment';
+  /** Order based chronologically */
+  readonly alternativeOrder?: Maybe<Scalars['Int']>;
+  readonly createdAt: Scalars['ISO8601DateTime'];
+  /** The franchise related to this installment */
+  readonly franchise: Franchise;
+  readonly id: Scalars['ID'];
+  /** The media related to this installment */
+  readonly media: Media;
+  /** Order based by date released */
+  readonly releaseOrder?: Maybe<Scalars['Int']>;
+  /** Further explains the media relationship corresponding to a franchise */
+  readonly tag?: Maybe<InstallmentTagEnum>;
+  readonly updatedAt: Scalars['ISO8601DateTime'];
+};
+
+/** The connection type for Installment. */
+export type InstallmentConnection = {
+  readonly __typename?: 'InstallmentConnection';
+  /** A list of edges. */
+  readonly edges?: Maybe<ReadonlyArray<Maybe<InstallmentEdge>>>;
+  /** A list of nodes. */
+  readonly nodes?: Maybe<ReadonlyArray<Maybe<Installment>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** The total amount of nodes. */
+  readonly totalCount: Scalars['Int'];
+};
+
+/** An edge in a connection. */
+export type InstallmentEdge = {
+  readonly __typename?: 'InstallmentEdge';
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node?: Maybe<Installment>;
+};
+
+export enum InstallmentSortEnum {
+  ReleaseOrder = 'RELEASE_ORDER',
+  AlternativeOrder = 'ALTERNATIVE_ORDER'
+}
+
+export type InstallmentSortOption = {
+  readonly on: InstallmentSortEnum;
+  readonly direction: SortDirection;
+};
+
+export enum InstallmentTagEnum {
+  /** The main story. */
+  MainStory = 'MAIN_STORY',
+  /** Takes place sometime during the main storyline. */
+  SideStory = 'SIDE_STORY',
+  /** Uses characters of a different series, but is not an alternate setting or story. */
+  Spinoff = 'SPINOFF',
+  /** Characters from different media meet in the same story. */
+  Crossover = 'CROSSOVER',
+  /** Same universe/world/reality/timeline, completely different characters. */
+  AlternateSetting = 'ALTERNATE_SETTING',
+  /** Same setting, same characters, story is told differently. */
+  AlternateVersion = 'ALTERNATE_VERSION'
+}
+
 
 /** The user library filterable by media_type and status */
 export type Library = {
@@ -1340,11 +1463,6 @@ export enum LibraryEventKindEnum {
   Annotated = 'ANNOTATED'
 }
 
-export type LockInput = {
-  readonly id: Scalars['ID'];
-  readonly lockedReason: LockedReasonEnum;
-};
-
 export enum LockedReasonEnum {
   Spam = 'SPAM',
   TooHeated = 'TOO_HEATED',
@@ -1381,6 +1499,8 @@ export type Manga = Media & WithTimestamps & {
   readonly id: Scalars['ID'];
   /** A list of mappings for this media */
   readonly mappings: MappingConnection;
+  /** A list of your wiki submissions for this media */
+  readonly myWikiSubmissions: WikiSubmissionConnection;
   /** The time of the next release of this media */
   readonly nextRelease?: Maybe<Scalars['ISO8601DateTime']>;
   /** The country in which the media was primarily produced */
@@ -1453,6 +1573,15 @@ export type MangaMappingsArgs = {
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+};
+
+
+export type MangaMyWikiSubmissionsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  sort?: Maybe<ReadonlyArray<Maybe<WikiSubmissionSortOption>>>;
 };
 
 
@@ -1706,6 +1835,8 @@ export type Media = {
   readonly id: Scalars['ID'];
   /** A list of mappings for this media */
   readonly mappings: MappingConnection;
+  /** A list of your wiki submissions for this media */
+  readonly myWikiSubmissions: WikiSubmissionConnection;
   /** The time of the next release of this media */
   readonly nextRelease?: Maybe<Scalars['ISO8601DateTime']>;
   /** The country in which the media was primarily produced */
@@ -1769,6 +1900,16 @@ export type MediaMappingsArgs = {
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+};
+
+
+/** A media in the Kitsu database */
+export type MediaMyWikiSubmissionsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  sort?: Maybe<ReadonlyArray<Maybe<WikiSubmissionSortOption>>>;
 };
 
 
@@ -2019,6 +2160,7 @@ export type Mutation = {
   readonly mapping: MappingMutations;
   readonly post: PostMutations;
   readonly pro: ProMutations;
+  readonly wikiSubmission: WikiSubmissionMutations;
 };
 
 /** Information about pagination in a connection. */
@@ -2175,6 +2317,11 @@ export type PostLikeSortOption = {
   readonly direction: SortDirection;
 };
 
+export type PostLockInput = {
+  readonly id: Scalars['ID'];
+  readonly lockedReason: LockedReasonEnum;
+};
+
 /** Autogenerated return type of PostLock */
 export type PostLockPayload = {
   readonly __typename?: 'PostLockPayload';
@@ -2192,12 +2339,12 @@ export type PostMutations = {
 
 
 export type PostMutationsLockArgs = {
-  input: LockInput;
+  input: PostLockInput;
 };
 
 
 export type PostMutationsUnlockArgs = {
-  input: UnlockInput;
+  input: PostUnlockInput;
 };
 
 export enum PostSortEnum {
@@ -2207,6 +2354,10 @@ export enum PostSortEnum {
 export type PostSortOption = {
   readonly on: PostSortEnum;
   readonly direction: SortDirection;
+};
+
+export type PostUnlockInput = {
+  readonly id: Scalars['ID'];
 };
 
 /** Autogenerated return type of PostUnlock */
@@ -2342,6 +2493,8 @@ export type Profile = WithTimestamps & {
   readonly waifu?: Maybe<Character>;
   /** The properly-gendered term for the user's waifu. This should normally only be 'Waifu' or 'Husbando' but some people are jerks, including the person who wrote this... */
   readonly waifuOrHusbando?: Maybe<Scalars['String']>;
+  /** Wiki submissions created by this user */
+  readonly wikiSubmissions: WikiSubmissionConnection;
 };
 
 
@@ -2420,6 +2573,17 @@ export type ProfileSiteLinksArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
+
+/** A user profile on Kitsu */
+export type ProfileWikiSubmissionsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  sort?: Maybe<ReadonlyArray<Maybe<WikiSubmissionSortOption>>>;
+  statuses?: Maybe<ReadonlyArray<WikiSubmissionStatusEnum>>;
+};
+
 /** The connection type for Profile. */
 export type ProfileConnection = {
   readonly __typename?: 'ProfileConnection';
@@ -2495,6 +2659,10 @@ export type Query = {
   readonly findProfileById?: Maybe<Profile>;
   /** Find a single User by Slug */
   readonly findProfileBySlug?: Maybe<Profile>;
+  /** Find a single Wiki Submission by ID */
+  readonly findWikiSubmissionById?: Maybe<WikiSubmission>;
+  /** All Franchise in the Kitsu database */
+  readonly franchises?: Maybe<FranchiseConnection>;
   /** List trending media on Kitsu */
   readonly globalTrending: MediaConnection;
   /** List of Library Entries by MediaType and MediaId */
@@ -2523,6 +2691,8 @@ export type Query = {
   readonly searchProfileByUsername?: Maybe<ProfileConnection>;
   /** Get your current session info */
   readonly session: Session;
+  /** Select all Wiki Submissions that match with a supplied status. */
+  readonly wikiSubmissionsByStatuses?: Maybe<WikiSubmissionConnection>;
 };
 
 
@@ -2623,6 +2793,19 @@ export type QueryFindProfileByIdArgs = {
 
 export type QueryFindProfileBySlugArgs = {
   slug: Scalars['String'];
+};
+
+
+export type QueryFindWikiSubmissionByIdArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryFranchisesArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -2734,6 +2917,16 @@ export type QuerySearchProfileByUsernameArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   username: Scalars['String'];
+};
+
+
+export type QueryWikiSubmissionsByStatusesArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  sort?: Maybe<ReadonlyArray<Maybe<WikiSubmissionSortOption>>>;
+  statuses?: Maybe<ReadonlyArray<WikiSubmissionStatusEnum>>;
 };
 
 /** A quote from a media */
@@ -3056,10 +3249,6 @@ export type UnitDescriptionArgs = {
   locales?: Maybe<ReadonlyArray<Scalars['String']>>;
 };
 
-export type UnlockInput = {
-  readonly id: Scalars['ID'];
-};
-
 
 /** The media video. */
 export type Video = Streamable & WithTimestamps & {
@@ -3132,6 +3321,128 @@ export type VolumeChaptersArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
+/** A Wiki Submission is used to either create or edit existing data in our database. This will allow a simple and convient way for users to submit issues/corrections without all the work being left to the mods. */
+export type WikiSubmission = WithTimestamps & {
+  readonly __typename?: 'WikiSubmission';
+  /** The user who created this draft */
+  readonly author: Profile;
+  readonly createdAt: Scalars['ISO8601DateTime'];
+  /** The full object that holds all the details for any modifications/additions/deletions made to the entity you are editing. This will be validated using JSON Schema. */
+  readonly data?: Maybe<Scalars['JSON']>;
+  readonly id: Scalars['ID'];
+  /** Any additional information that may need to be provided related to the Wiki Submission */
+  readonly notes?: Maybe<Scalars['String']>;
+  /** The status of the Wiki Submission */
+  readonly status: WikiSubmissionStatusEnum;
+  /** The title given to the Wiki Submission. This will default to the title of what is being edited. */
+  readonly title?: Maybe<Scalars['String']>;
+  readonly updatedAt: Scalars['ISO8601DateTime'];
+};
+
+/** The connection type for WikiSubmission. */
+export type WikiSubmissionConnection = {
+  readonly __typename?: 'WikiSubmissionConnection';
+  /** A list of edges. */
+  readonly edges?: Maybe<ReadonlyArray<Maybe<WikiSubmissionEdge>>>;
+  /** A list of nodes. */
+  readonly nodes?: Maybe<ReadonlyArray<Maybe<WikiSubmission>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** The total amount of nodes. */
+  readonly totalCount: Scalars['Int'];
+};
+
+export type WikiSubmissionCreateDraftInput = {
+  readonly data: Scalars['JSON'];
+  readonly title?: Maybe<Scalars['String']>;
+  readonly notes?: Maybe<Scalars['String']>;
+};
+
+/** Autogenerated return type of WikiSubmissionCreateDraft */
+export type WikiSubmissionCreateDraftPayload = {
+  readonly __typename?: 'WikiSubmissionCreateDraftPayload';
+  readonly errors?: Maybe<ReadonlyArray<Error>>;
+  readonly wikiSubmission?: Maybe<WikiSubmission>;
+};
+
+/** An edge in a connection. */
+export type WikiSubmissionEdge = {
+  readonly __typename?: 'WikiSubmissionEdge';
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node?: Maybe<WikiSubmission>;
+};
+
+export type WikiSubmissionMutations = {
+  readonly __typename?: 'WikiSubmissionMutations';
+  /** Create a wiki submission draft */
+  readonly createDraft?: Maybe<WikiSubmissionCreateDraftPayload>;
+  /** Submit a wiki submission draft */
+  readonly submitDraft?: Maybe<WikiSubmissionSubmitDraftPayload>;
+  /** Update a wiki submission draft */
+  readonly updateDraft?: Maybe<WikiSubmissionUpdateDraftPayload>;
+};
+
+
+export type WikiSubmissionMutationsCreateDraftArgs = {
+  input: WikiSubmissionCreateDraftInput;
+};
+
+
+export type WikiSubmissionMutationsSubmitDraftArgs = {
+  input: WikiSubmissionSubmitDraftInput;
+};
+
+
+export type WikiSubmissionMutationsUpdateDraftArgs = {
+  input: WikiSubmissionUpdateDraftInput;
+};
+
+export enum WikiSubmissionSortEnum {
+  CreatedAt = 'CREATED_AT',
+  UpdatedAt = 'UPDATED_AT'
+}
+
+export type WikiSubmissionSortOption = {
+  readonly on: WikiSubmissionSortEnum;
+  readonly direction: SortDirection;
+};
+
+export enum WikiSubmissionStatusEnum {
+  Draft = 'DRAFT',
+  Pending = 'PENDING',
+  Approved = 'APPROVED',
+  Rejected = 'REJECTED'
+}
+
+export type WikiSubmissionSubmitDraftInput = {
+  readonly id: Scalars['ID'];
+  readonly data: Scalars['JSON'];
+  readonly title?: Maybe<Scalars['String']>;
+  readonly notes?: Maybe<Scalars['String']>;
+};
+
+/** Autogenerated return type of WikiSubmissionSubmitDraft */
+export type WikiSubmissionSubmitDraftPayload = {
+  readonly __typename?: 'WikiSubmissionSubmitDraftPayload';
+  readonly errors?: Maybe<ReadonlyArray<Error>>;
+  readonly wikiSubmission?: Maybe<WikiSubmission>;
+};
+
+export type WikiSubmissionUpdateDraftInput = {
+  readonly id: Scalars['ID'];
+  readonly data: Scalars['JSON'];
+  readonly notes?: Maybe<Scalars['String']>;
+};
+
+/** Autogenerated return type of WikiSubmissionUpdateDraft */
+export type WikiSubmissionUpdateDraftPayload = {
+  readonly __typename?: 'WikiSubmissionUpdateDraftPayload';
+  readonly errors?: Maybe<ReadonlyArray<Error>>;
+  readonly wikiSubmission?: Maybe<WikiSubmission>;
+};
+
 export type WithTimestamps = {
   readonly createdAt: Scalars['ISO8601DateTime'];
   readonly updatedAt: Scalars['ISO8601DateTime'];
@@ -3143,13 +3454,33 @@ export type AnimeTitlesFragment = (
 );
 
 export type FindAnimeFieldsFragment = (
-  { readonly __typename?: 'Anime' }
+  { readonly __typename: 'Anime' }
   & Pick<Anime, 'id' | 'slug' | 'description' | 'ageRating' | 'ageRatingGuide' | 'sfw' | 'startDate' | 'endDate' | 'nextRelease' | 'status' | 'tba'>
   & { readonly titles: (
     { readonly __typename?: 'TitlesList' }
     & AnimeTitlesFragment
   ) }
 );
+
+type FindMediaFields_Anime_Fragment = (
+  { readonly __typename: 'Anime' }
+  & Pick<Anime, 'id' | 'slug' | 'description' | 'ageRating' | 'ageRatingGuide' | 'sfw' | 'startDate' | 'endDate' | 'nextRelease' | 'status' | 'tba'>
+  & { readonly titles: (
+    { readonly __typename?: 'TitlesList' }
+    & AnimeTitlesFragment
+  ) }
+);
+
+type FindMediaFields_Manga_Fragment = (
+  { readonly __typename: 'Manga' }
+  & Pick<Manga, 'id' | 'slug' | 'description' | 'ageRating' | 'ageRatingGuide' | 'sfw' | 'startDate' | 'endDate' | 'nextRelease' | 'status' | 'tba'>
+  & { readonly titles: (
+    { readonly __typename?: 'TitlesList' }
+    & AnimeTitlesFragment
+  ) }
+);
+
+export type FindMediaFieldsFragment = FindMediaFields_Anime_Fragment | FindMediaFields_Manga_Fragment;
 
 type MediaSearchFields_Anime_Fragment = (
   { readonly __typename?: 'Anime' }
@@ -3185,6 +3516,68 @@ type MediaSearchFields_Manga_Fragment = (
 
 export type MediaSearchFieldsFragment = MediaSearchFields_Anime_Fragment | MediaSearchFields_Manga_Fragment;
 
+export type WikiSubmissionFieldsFragment = (
+  { readonly __typename?: 'WikiSubmission' }
+  & Pick<WikiSubmission, 'id' | 'title' | 'status' | 'data'>
+);
+
+export type CreateDraftMutationMutationVariables = Exact<{
+  input: WikiSubmissionCreateDraftInput;
+}>;
+
+
+export type CreateDraftMutationMutation = (
+  { readonly __typename?: 'Mutation' }
+  & { readonly wikiSubmission: (
+    { readonly __typename?: 'WikiSubmissionMutations' }
+    & { readonly createDraft?: Maybe<(
+      { readonly __typename?: 'WikiSubmissionCreateDraftPayload' }
+      & { readonly wikiSubmission?: Maybe<(
+        { readonly __typename?: 'WikiSubmission' }
+        & WikiSubmissionFieldsFragment
+      )> }
+    )> }
+  ) }
+);
+
+export type SubmitDraftMutationMutationVariables = Exact<{
+  input: WikiSubmissionSubmitDraftInput;
+}>;
+
+
+export type SubmitDraftMutationMutation = (
+  { readonly __typename?: 'Mutation' }
+  & { readonly wikiSubmission: (
+    { readonly __typename?: 'WikiSubmissionMutations' }
+    & { readonly submitDraft?: Maybe<(
+      { readonly __typename?: 'WikiSubmissionSubmitDraftPayload' }
+      & { readonly wikiSubmission?: Maybe<(
+        { readonly __typename?: 'WikiSubmission' }
+        & Pick<WikiSubmission, 'id'>
+      )> }
+    )> }
+  ) }
+);
+
+export type UpdateDraftMutationMutationVariables = Exact<{
+  input: WikiSubmissionUpdateDraftInput;
+}>;
+
+
+export type UpdateDraftMutationMutation = (
+  { readonly __typename?: 'Mutation' }
+  & { readonly wikiSubmission: (
+    { readonly __typename?: 'WikiSubmissionMutations' }
+    & { readonly updateDraft?: Maybe<(
+      { readonly __typename?: 'WikiSubmissionUpdateDraftPayload' }
+      & { readonly wikiSubmission?: Maybe<(
+        { readonly __typename?: 'WikiSubmission' }
+        & Pick<WikiSubmission, 'data'>
+      )> }
+    )> }
+  ) }
+);
+
 export type FindAnimeByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -3208,6 +3601,32 @@ export type FindAnimeBySlugQuery = (
   & { readonly findAnimeBySlug?: Maybe<(
     { readonly __typename?: 'Anime' }
     & FindAnimeFieldsFragment
+  )> }
+);
+
+export type FindMangaByIdQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type FindMangaByIdQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly findMangaById?: Maybe<(
+    { readonly __typename?: 'Manga' }
+    & FindMediaFields_Manga_Fragment
+  )> }
+);
+
+export type FindWikiSubmissionByIdQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type FindWikiSubmissionByIdQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly findWikiSubmissionById?: Maybe<(
+    { readonly __typename?: 'WikiSubmission' }
+    & WikiSubmissionFieldsFragment
   )> }
 );
 
@@ -3240,6 +3659,29 @@ export type SearchMediaByTitleQuery = (
   ) }
 );
 
+export type UserWikiSubmissionsQueryVariables = Exact<{
+  first: Scalars['Int'];
+  statuses?: Maybe<ReadonlyArray<WikiSubmissionStatusEnum> | WikiSubmissionStatusEnum>;
+}>;
+
+
+export type UserWikiSubmissionsQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly currentAccount?: Maybe<(
+    { readonly __typename?: 'Account' }
+    & { readonly profile: (
+      { readonly __typename?: 'Profile' }
+      & { readonly wikiSubmissions: (
+        { readonly __typename?: 'WikiSubmissionConnection' }
+        & { readonly nodes?: Maybe<ReadonlyArray<Maybe<(
+          { readonly __typename?: 'WikiSubmission' }
+          & WikiSubmissionFieldsFragment
+        )>>> }
+      ) }
+    ) }
+  )> }
+);
+
 export const AnimeTitlesFragmentDoc = gql`
     fragment animeTitles on TitlesList {
   canonical
@@ -3250,6 +3692,26 @@ export const AnimeTitlesFragmentDoc = gql`
     `;
 export const FindAnimeFieldsFragmentDoc = gql`
     fragment findAnimeFields on Anime {
+  __typename
+  id
+  slug
+  titles {
+    ...animeTitles
+  }
+  description
+  ageRating
+  ageRatingGuide
+  sfw
+  startDate
+  endDate
+  nextRelease
+  status
+  tba
+}
+    ${AnimeTitlesFragmentDoc}`;
+export const FindMediaFieldsFragmentDoc = gql`
+    fragment findMediaFields on Media {
+  __typename
   id
   slug
   titles {
@@ -3285,6 +3747,122 @@ export const MediaSearchFieldsFragmentDoc = gql`
   }
 }
     `;
+export const WikiSubmissionFieldsFragmentDoc = gql`
+    fragment wikiSubmissionFields on WikiSubmission {
+  id
+  title
+  status
+  data
+}
+    `;
+export const CreateDraftMutationDocument = gql`
+    mutation CreateDraftMutation($input: WikiSubmissionCreateDraftInput!) {
+  wikiSubmission {
+    createDraft(input: $input) {
+      wikiSubmission {
+        ...wikiSubmissionFields
+      }
+    }
+  }
+}
+    ${WikiSubmissionFieldsFragmentDoc}`;
+export type CreateDraftMutationMutationFn = Apollo.MutationFunction<CreateDraftMutationMutation, CreateDraftMutationMutationVariables>;
+
+/**
+ * __useCreateDraftMutationMutation__
+ *
+ * To run a mutation, you first call `useCreateDraftMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateDraftMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createDraftMutationMutation, { data, loading, error }] = useCreateDraftMutationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateDraftMutationMutation(baseOptions?: Apollo.MutationHookOptions<CreateDraftMutationMutation, CreateDraftMutationMutationVariables>) {
+        return Apollo.useMutation<CreateDraftMutationMutation, CreateDraftMutationMutationVariables>(CreateDraftMutationDocument, baseOptions);
+      }
+export type CreateDraftMutationMutationHookResult = ReturnType<typeof useCreateDraftMutationMutation>;
+export type CreateDraftMutationMutationResult = Apollo.MutationResult<CreateDraftMutationMutation>;
+export type CreateDraftMutationMutationOptions = Apollo.BaseMutationOptions<CreateDraftMutationMutation, CreateDraftMutationMutationVariables>;
+export const SubmitDraftMutationDocument = gql`
+    mutation SubmitDraftMutation($input: WikiSubmissionSubmitDraftInput!) {
+  wikiSubmission {
+    submitDraft(input: $input) {
+      wikiSubmission {
+        id
+      }
+    }
+  }
+}
+    `;
+export type SubmitDraftMutationMutationFn = Apollo.MutationFunction<SubmitDraftMutationMutation, SubmitDraftMutationMutationVariables>;
+
+/**
+ * __useSubmitDraftMutationMutation__
+ *
+ * To run a mutation, you first call `useSubmitDraftMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSubmitDraftMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [submitDraftMutationMutation, { data, loading, error }] = useSubmitDraftMutationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSubmitDraftMutationMutation(baseOptions?: Apollo.MutationHookOptions<SubmitDraftMutationMutation, SubmitDraftMutationMutationVariables>) {
+        return Apollo.useMutation<SubmitDraftMutationMutation, SubmitDraftMutationMutationVariables>(SubmitDraftMutationDocument, baseOptions);
+      }
+export type SubmitDraftMutationMutationHookResult = ReturnType<typeof useSubmitDraftMutationMutation>;
+export type SubmitDraftMutationMutationResult = Apollo.MutationResult<SubmitDraftMutationMutation>;
+export type SubmitDraftMutationMutationOptions = Apollo.BaseMutationOptions<SubmitDraftMutationMutation, SubmitDraftMutationMutationVariables>;
+export const UpdateDraftMutationDocument = gql`
+    mutation UpdateDraftMutation($input: WikiSubmissionUpdateDraftInput!) {
+  wikiSubmission {
+    updateDraft(input: $input) {
+      wikiSubmission {
+        data
+      }
+    }
+  }
+}
+    `;
+export type UpdateDraftMutationMutationFn = Apollo.MutationFunction<UpdateDraftMutationMutation, UpdateDraftMutationMutationVariables>;
+
+/**
+ * __useUpdateDraftMutationMutation__
+ *
+ * To run a mutation, you first call `useUpdateDraftMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateDraftMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateDraftMutationMutation, { data, loading, error }] = useUpdateDraftMutationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateDraftMutationMutation(baseOptions?: Apollo.MutationHookOptions<UpdateDraftMutationMutation, UpdateDraftMutationMutationVariables>) {
+        return Apollo.useMutation<UpdateDraftMutationMutation, UpdateDraftMutationMutationVariables>(UpdateDraftMutationDocument, baseOptions);
+      }
+export type UpdateDraftMutationMutationHookResult = ReturnType<typeof useUpdateDraftMutationMutation>;
+export type UpdateDraftMutationMutationResult = Apollo.MutationResult<UpdateDraftMutationMutation>;
+export type UpdateDraftMutationMutationOptions = Apollo.BaseMutationOptions<UpdateDraftMutationMutation, UpdateDraftMutationMutationVariables>;
 export const FindAnimeByIdDocument = gql`
     query FindAnimeById($id: ID!) {
   findAnimeById(id: $id) {
@@ -3351,6 +3929,72 @@ export function useFindAnimeBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type FindAnimeBySlugQueryHookResult = ReturnType<typeof useFindAnimeBySlugQuery>;
 export type FindAnimeBySlugLazyQueryHookResult = ReturnType<typeof useFindAnimeBySlugLazyQuery>;
 export type FindAnimeBySlugQueryResult = Apollo.QueryResult<FindAnimeBySlugQuery, FindAnimeBySlugQueryVariables>;
+export const FindMangaByIdDocument = gql`
+    query FindMangaById($id: ID!) {
+  findMangaById(id: $id) {
+    ...findMediaFields
+  }
+}
+    ${FindMediaFieldsFragmentDoc}`;
+
+/**
+ * __useFindMangaByIdQuery__
+ *
+ * To run a query within a React component, call `useFindMangaByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindMangaByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindMangaByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFindMangaByIdQuery(baseOptions: Apollo.QueryHookOptions<FindMangaByIdQuery, FindMangaByIdQueryVariables>) {
+        return Apollo.useQuery<FindMangaByIdQuery, FindMangaByIdQueryVariables>(FindMangaByIdDocument, baseOptions);
+      }
+export function useFindMangaByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindMangaByIdQuery, FindMangaByIdQueryVariables>) {
+          return Apollo.useLazyQuery<FindMangaByIdQuery, FindMangaByIdQueryVariables>(FindMangaByIdDocument, baseOptions);
+        }
+export type FindMangaByIdQueryHookResult = ReturnType<typeof useFindMangaByIdQuery>;
+export type FindMangaByIdLazyQueryHookResult = ReturnType<typeof useFindMangaByIdLazyQuery>;
+export type FindMangaByIdQueryResult = Apollo.QueryResult<FindMangaByIdQuery, FindMangaByIdQueryVariables>;
+export const FindWikiSubmissionByIdDocument = gql`
+    query FindWikiSubmissionById($id: ID!) {
+  findWikiSubmissionById(id: $id) {
+    ...wikiSubmissionFields
+  }
+}
+    ${WikiSubmissionFieldsFragmentDoc}`;
+
+/**
+ * __useFindWikiSubmissionByIdQuery__
+ *
+ * To run a query within a React component, call `useFindWikiSubmissionByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindWikiSubmissionByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindWikiSubmissionByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFindWikiSubmissionByIdQuery(baseOptions: Apollo.QueryHookOptions<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>) {
+        return Apollo.useQuery<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>(FindWikiSubmissionByIdDocument, baseOptions);
+      }
+export function useFindWikiSubmissionByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>) {
+          return Apollo.useLazyQuery<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>(FindWikiSubmissionByIdDocument, baseOptions);
+        }
+export type FindWikiSubmissionByIdQueryHookResult = ReturnType<typeof useFindWikiSubmissionByIdQuery>;
+export type FindWikiSubmissionByIdLazyQueryHookResult = ReturnType<typeof useFindWikiSubmissionByIdLazyQuery>;
+export type FindWikiSubmissionByIdQueryResult = Apollo.QueryResult<FindWikiSubmissionByIdQuery, FindWikiSubmissionByIdQueryVariables>;
 export const SearchMediaByTitleDocument = gql`
     query SearchMediaByTitle($first: Int!, $title: String!, $media_type: MediaTypeEnum, $cursor: String) {
   searchMediaByTitle(
@@ -3401,3 +4045,43 @@ export function useSearchMediaByTitleLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type SearchMediaByTitleQueryHookResult = ReturnType<typeof useSearchMediaByTitleQuery>;
 export type SearchMediaByTitleLazyQueryHookResult = ReturnType<typeof useSearchMediaByTitleLazyQuery>;
 export type SearchMediaByTitleQueryResult = Apollo.QueryResult<SearchMediaByTitleQuery, SearchMediaByTitleQueryVariables>;
+export const UserWikiSubmissionsDocument = gql`
+    query UserWikiSubmissions($first: Int!, $statuses: [WikiSubmissionStatusEnum!]) {
+  currentAccount {
+    profile {
+      wikiSubmissions(first: $first, statuses: $statuses) {
+        nodes {
+          ...wikiSubmissionFields
+        }
+      }
+    }
+  }
+}
+    ${WikiSubmissionFieldsFragmentDoc}`;
+
+/**
+ * __useUserWikiSubmissionsQuery__
+ *
+ * To run a query within a React component, call `useUserWikiSubmissionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserWikiSubmissionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserWikiSubmissionsQuery({
+ *   variables: {
+ *      first: // value for 'first'
+ *      statuses: // value for 'statuses'
+ *   },
+ * });
+ */
+export function useUserWikiSubmissionsQuery(baseOptions: Apollo.QueryHookOptions<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>) {
+        return Apollo.useQuery<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>(UserWikiSubmissionsDocument, baseOptions);
+      }
+export function useUserWikiSubmissionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>) {
+          return Apollo.useLazyQuery<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>(UserWikiSubmissionsDocument, baseOptions);
+        }
+export type UserWikiSubmissionsQueryHookResult = ReturnType<typeof useUserWikiSubmissionsQuery>;
+export type UserWikiSubmissionsLazyQueryHookResult = ReturnType<typeof useUserWikiSubmissionsLazyQuery>;
+export type UserWikiSubmissionsQueryResult = Apollo.QueryResult<UserWikiSubmissionsQuery, UserWikiSubmissionsQueryVariables>;

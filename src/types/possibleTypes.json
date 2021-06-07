@@ -51,7 +51,9 @@
       "Comment",
       "Episode",
       "Favorite",
+      "Franchise",
       "ImageView",
+      "Installment",
       "LibraryEntry",
       "LibraryEvent",
       "Manga",
@@ -71,7 +73,8 @@
       "Streamer",
       "StreamingLink",
       "Video",
-      "Volume"
+      "Volume",
+      "WikiSubmission"
     ]
   }
 }

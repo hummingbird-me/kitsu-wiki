@@ -18,6 +18,7 @@ export type TitlesChange = {
 };
 
 export type MediaChange = NodeChange & {
+  type: string;
   titles?: TitlesChange;
   description?: HashChange;
   ageRating?: AgeRating;
