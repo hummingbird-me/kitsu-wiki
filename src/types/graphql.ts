@@ -2691,6 +2691,7 @@ export type Query = {
   readonly searchProfileByUsername?: Maybe<ProfileConnection>;
   /** Get your current session info */
   readonly session: Session;
+  /** Select all Wiki Submissions that match with a supplied status. */
   readonly wikiSubmissionsByStatuses?: Maybe<WikiSubmissionConnection>;
 };
 
@@ -3431,7 +3432,7 @@ export type WikiSubmissionSubmitDraftPayload = {
 
 export type WikiSubmissionUpdateDraftInput = {
   readonly id: Scalars['ID'];
-  readonly draft: Scalars['JSON'];
+  readonly data: Scalars['JSON'];
   readonly notes?: Maybe<Scalars['String']>;
 };
 
