@@ -1,10 +1,12 @@
 import React, { ReactElement, useEffect, useState } from 'react';
+import { SetChange } from 'src/types/mediaChange';
 import LabelInput from './LabelInput';
 import { Input, InputGroup, AltTitles } from './styles';
 
 interface SetInputFields {
   fieldType: string;
   label?: string;
+  cache?: SetChange | null;
   initialValue?: Array<string>;
   parentDispatch: React.Dispatch<any>;
 }
@@ -12,10 +14,11 @@ interface SetInputFields {
 export default function SetInput({
   fieldType,
   label,
+  cache = null,
   initialValue = [],
   parentDispatch,
 }: SetInputFields): ReactElement {
-  const [items, setItems] = useState(initialValue);
+  const [items, setItems] = useState(InitialValue(cache, initialValue));
 
   useEffect(() => {
     let updatedItems = items;
@@ -90,4 +93,13 @@ export default function SetInput({
       </AltTitles>
     </InputGroup>
   );
+}
+
+function InitialValue(cache: SetChange | null, values: Array<string>): Array<string> {
+  if (cache == null) return values;
+
+  values = values.filter((value) => !cache.remove?.includes(value));
+  values = values.concat(cache.add || []);
+
+  return values;
 }

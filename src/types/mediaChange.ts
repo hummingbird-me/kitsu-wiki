@@ -1,7 +1,9 @@
+import { ReleaseStatusEnum } from './graphql';
+
 export type ID = string;
 export type NodeChange = { id?: ID };
 
-type HashChange = {
+export type HashChange = {
   set?: { [key: string]: string };
   remove?: [string];
 };
@@ -27,11 +29,16 @@ export type MediaChange = NodeChange & {
   posterImage?: ImageUpload;
   slug?: string;
   startDate?: DateString;
+  endDate?: DateString;
+  nextRelease?: DateTimeString;
+  tba?: string;
+  status: ReleaseStatusEnum;
 };
 
 // TODO: these should be non-shitty types
 type ImageUpload = string;
 type DateString = string;
+type DateTimeString = string;
 
 // Actual object types
 // can grab from graphql types

@@ -13,13 +13,12 @@ export default function animeReducer(state: MediaChange, action: ReducerAction):
     }
     case 'description': {
       const [fieldName, language] = splitActions;
-
       return localizedState<MediaChange>(state, fieldName, language, action.payload);
     }
     default:
       return {
         ...state,
-        [action.type]: action.payload,
+        [action.type]: action.payload.value,
       };
   }
 }
