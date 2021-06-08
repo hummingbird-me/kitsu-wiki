@@ -6,6 +6,7 @@ import LabelInput from './LabelInput';
 interface DateInputFields {
   fieldType: string;
   label?: string;
+  cache?: string;
   initialValue?: string;
   parentDispatch: React.Dispatch<any>;
 }
@@ -13,10 +14,11 @@ interface DateInputFields {
 export default function DateInput({
   fieldType,
   label,
+  cache,
   initialValue = '',
   parentDispatch,
 }: DateInputFields): ReactElement {
-  const [value, setValue] = useState(new Date(initialValue));
+  const [value, setValue] = useState(new Date(cache || initialValue));
   // I'd like to figure out how to make this dateTime a type.
   // I know it will always be a dateTime object (or undefined).
   const handleChange = (dateTime: any) => {

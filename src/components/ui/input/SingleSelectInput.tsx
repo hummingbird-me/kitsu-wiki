@@ -6,6 +6,7 @@ import LabelInput from './LabelInput';
 interface InputFields<O> {
   fieldType: string;
   label?: string;
+  cache?: string;
   initialValue?: string | null;
   options: O[];
   parentDispatch: React.Dispatch<any>;
@@ -14,11 +15,12 @@ interface InputFields<O> {
 export default function SingleSelectInput<O>({
   fieldType,
   label,
+  cache,
   initialValue,
   options,
   parentDispatch,
 }: InputFields<O>): ReactElement {
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(cache || initialValue);
 
   const formattedOptions = options.map((option) => ({
     value: String(option),

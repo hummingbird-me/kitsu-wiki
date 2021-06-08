@@ -67,13 +67,23 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
               initialValue={original.id}
               parentDispatch={dispatch}
             />
-            <TextInput fieldType='slug' initialValue={original.slug} parentDispatch={dispatch} />
+            <TextInput
+              fieldType='slug'
+              cache={update.slug}
+              initialValue={original.slug}
+              parentDispatch={dispatch}
+            />
           </>
         </EditGroup>
 
         <EditGroup title='Titles'>
           <>
-            <TitlesInput key='titles' titles={original.titles} dispatch={dispatch} />
+            <TitlesInput
+              key='titles'
+              cache={update.titles}
+              titles={original.titles}
+              dispatch={dispatch}
+            />
           </>
         </EditGroup>
 
@@ -82,7 +92,8 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
             <TextAreaInput
               fieldType='description.en'
               label='Description'
-              initialValue={original.description['en']}
+              cache={update.description}
+              initialValue={original.description.en}
               parentDispatch={dispatch}
             />
 
@@ -95,6 +106,7 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
 
             <TextInput
               fieldType='ageRatingGuide'
+              cache={update.ageRatingGuide}
               initialValue={original.ageRatingGuide}
               parentDispatch={dispatch}
             />
@@ -103,13 +115,21 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
 
         <DateInput
           fieldType='startDate'
+          cache={update.startDate}
           initialValue={original.startDate}
           parentDispatch={dispatch}
         />
 
-        <DateInput fieldType='endDate' initialValue={original.endDate} parentDispatch={dispatch} />
+        <DateInput
+          fieldType='endDate'
+          cache={update.endDate}
+          initialValue={original.endDate}
+          parentDispatch={dispatch}
+        />
+
         <DateTimeInput
           fieldType='nextRelease'
+          cache={update.nextRelease}
           initialValue={original.nextRelease}
           parentDispatch={dispatch}
         />
@@ -118,12 +138,18 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
           <>
             <SingleSelectInput<ReleaseStatusEnum>
               fieldType='release'
+              cache={update.status}
               initialValue={original.status}
               options={Object.values(ReleaseStatusEnum)}
               parentDispatch={dispatch}
             />
 
-            <TextInput fieldType='tba' initialValue={original.tba} parentDispatch={dispatch} />
+            <TextInput
+              fieldType='tba'
+              cache={update.tba}
+              initialValue={original.tba}
+              parentDispatch={dispatch}
+            />
           </>
         </EditGroup>
 
