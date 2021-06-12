@@ -18,6 +18,8 @@ import {
   TextAreaInput,
 } from 'src/components/ui/input';
 import animeReducer from './animeReducer';
+import ListEditor from '../ui/ListEditor';
+import MediaCharacterEdit from '../mediaCharacter/MediaCharacterEdit';
 
 interface AnimeInterface {
   record: FindAnimeFieldsFragment;
@@ -152,6 +154,12 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
             />
           </>
         </EditGroup>
+
+        <ListEditor
+          initialItems={original.characters.nodes}
+          cache={update}
+          parentDispatch={dispatch}
+        />
 
         <input type='submit' value='Submit' />
       </form>

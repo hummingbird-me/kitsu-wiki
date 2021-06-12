@@ -14,4 +14,9 @@ fragment findAnimeFields on Anime {
   nextRelease
   status
   tba
+  characters(first: 1) {
+    nodes {
+      ...findMediaCharacterFields
+    }
+  }
 }

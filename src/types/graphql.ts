@@ -3459,7 +3459,18 @@ export type FindAnimeFieldsFragment = (
   & { readonly titles: (
     { readonly __typename?: 'TitlesList' }
     & AnimeTitlesFragment
+  ), readonly characters: (
+    { readonly __typename?: 'MediaCharacterConnection' }
+    & { readonly nodes?: Maybe<ReadonlyArray<Maybe<(
+      { readonly __typename?: 'MediaCharacter' }
+      & FindMediaCharacterFieldsFragment
+    )>>> }
   ) }
+);
+
+export type FindMediaCharacterFieldsFragment = (
+  { readonly __typename?: 'MediaCharacter' }
+  & Pick<MediaCharacter, 'id'>
 );
 
 type FindMediaFields_Anime_Fragment = (
@@ -3690,6 +3701,11 @@ export const AnimeTitlesFragmentDoc = gql`
   localized
 }
     `;
+export const FindMediaCharacterFieldsFragmentDoc = gql`
+    fragment findMediaCharacterFields on MediaCharacter {
+  id
+}
+    `;
 export const FindAnimeFieldsFragmentDoc = gql`
     fragment findAnimeFields on Anime {
   __typename
@@ -3707,8 +3723,14 @@ export const FindAnimeFieldsFragmentDoc = gql`
   nextRelease
   status
   tba
+  characters(first: 1) {
+    nodes {
+      ...findMediaCharacterFields
+    }
+  }
 }
-    ${AnimeTitlesFragmentDoc}`;
+    ${AnimeTitlesFragmentDoc}
+${FindMediaCharacterFieldsFragmentDoc}`;
 export const FindMediaFieldsFragmentDoc = gql`
     fragment findMediaFields on Media {
   __typename
