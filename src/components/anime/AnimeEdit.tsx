@@ -156,6 +156,7 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
         </EditGroup>
 
         <ListEditor
+          Component={MediaCharacterEdit}
           initialItems={original.characters.nodes}
           cache={update}
           parentDispatch={dispatch}
