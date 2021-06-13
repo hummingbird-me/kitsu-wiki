@@ -1,4 +1,4 @@
-import { ReleaseStatusEnum } from './graphql';
+import { FindMediaCharacterFieldsFragment, ReleaseStatusEnum } from './graphql';
 
 export type ID = string;
 export type NodeChange = { id?: ID };
@@ -48,3 +48,10 @@ enum AgeRating {
   R,
   R18,
 }
+
+export type ModelFragmentTypes = FindMediaCharacterFieldsFragment;
+export type ModelEditInterface = {
+  record: ModelFragmentTypes;
+  cache: MediaChange;
+  dispatch: React.Dispatch<any>;
+};

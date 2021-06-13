@@ -1,14 +1,10 @@
-import React, { Component, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { FindMediaCharacterFieldsFragment, Maybe } from 'src/types/graphql';
-import { MediaChange } from 'src/types/mediaChange';
-import MediaCharacterEdit from '../mediaCharacter/MediaCharacterEdit';
-
-let components: typeof MediaCharacterEdit;
-let fragments: FindMediaCharacterFieldsFragment;
+import { MediaChange, ModelEditInterface, ModelFragmentTypes } from 'src/types/mediaChange';
 
 interface Props {
-  Component: React.ComponentType<any>;
-  initialItems?: Maybe<ReadonlyArray<Maybe<FindMediaCharacterFieldsFragment>>>;
+  Component: React.ComponentType<ModelEditInterface>;
+  initialItems?: Maybe<ReadonlyArray<Maybe<ModelFragmentTypes>>>;
   cache: MediaChange;
   parentDispatch: React.Dispatch<any>;
 }
@@ -19,7 +15,7 @@ export default function ListEditor({
   cache,
   parentDispatch,
 }: Props): ReactElement {
-  const mutableItems = (initialItems || []) as FindMediaCharacterFieldsFragment[];
+  const mutableItems = (initialItems || []) as ModelFragmentTypes[];
   const [items, setItems] = useState(mutableItems);
 
   const addItem = () => (event: React.MouseEvent<HTMLButtonElement>) => {
