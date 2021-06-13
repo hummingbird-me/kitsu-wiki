@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import { FindMediaCharacterFieldsFragment, Maybe } from 'src/types/graphql';
+import { Maybe } from 'src/types/graphql';
 import { MediaChange, ModelEditInterface, ModelFragmentTypes } from 'src/types/mediaChange';
 
 interface Props {
