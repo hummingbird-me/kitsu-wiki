@@ -21,7 +21,7 @@ export default function ListEditor({
   const addItem = () => (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    const newItem = {} as FindMediaCharacterFieldsFragment;
+    const newItem = {} as ModelFragmentTypes;
     setItems([...items, newItem]);
   };
 
