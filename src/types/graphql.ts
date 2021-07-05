@@ -3470,7 +3470,11 @@ export type FindAnimeFieldsFragment = (
 
 export type FindMediaCharacterFieldsFragment = (
   { readonly __typename?: 'MediaCharacter' }
-  & Pick<MediaCharacter, 'id'>
+  & Pick<MediaCharacter, 'id' | 'role'>
+  & { readonly character: (
+    { readonly __typename?: 'Character' }
+    & Pick<Character, 'id'>
+  ) }
 );
 
 type FindMediaFields_Anime_Fragment = (
@@ -3704,6 +3708,10 @@ export const AnimeTitlesFragmentDoc = gql`
 export const FindMediaCharacterFieldsFragmentDoc = gql`
     fragment findMediaCharacterFields on MediaCharacter {
   id
+  role
+  character {
+    id
+  }
 }
     `;
 export const FindAnimeFieldsFragmentDoc = gql`

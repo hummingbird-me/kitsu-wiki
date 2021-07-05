@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useReducer, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import {
   AgeRatingEnum,
   FindAnimeFieldsFragment,
@@ -17,43 +17,54 @@ import {
   DateTimeInput,
   TextAreaInput,
 } from 'src/components/ui/input';
-import animeReducer from './animeReducer';
 import ListEditor from '../ui/ListEditor';
 import MediaCharacterEdit from '../mediaCharacter/MediaCharacterEdit';
+import { ReducerAction } from 'src/types/reducer';
+import { MediaChange } from 'src/types/mediaChange';
+import { AnimeChangeEditInterface } from 'src/types/listEditorTypes';
 
-interface AnimeInterface {
-  record: FindAnimeFieldsFragment;
-  wikiSubmission: WikiSubmissionFieldsFragment;
-}
+// interface AnimeInterface {
+//   record: FindAnimeFieldsFragment;
+//   // wikiSubmission: WikiSubmissionFieldsFragment;
+//   cache: MediaChange;
+//   dispatch: React.Dispatch<ReducerAction>;
+// }
 
-export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): ReactElement {
+export default function AnimeEdit({
+  record,
+  // wikiSubmission,
+  cache,
+  dispatch,
+}: AnimeChangeEditInterface): ReactElement {
   const [original] = useState(record);
-  const [update, dispatch] = useReducer(animeReducer, wikiSubmission.data);
-  const inputVariables = {
-    variables: {
-      input: {
-        id: wikiSubmission.id,
-        data: update,
-      },
-    },
-  };
-  const [updateDraftMutation, { data, loading, error }] = useUpdateDraftMutationMutation(
-    inputVariables
-  );
-  const [
-    submitDraftMutation,
-    { loading: submitLoading, error: submitError },
-  ] = useSubmitDraftMutationMutation(inputVariables);
+  // const inputVariables = {
+  //   variables: {
+  //     input: {
+  //       id: wikiSubmission.id,
+  //       data: cache,
+  //     },
+  //   },
+  // };
 
-  useEffect(() => {
-    updateDraftMutation();
-  }, [update, updateDraftMutation]);
+  // const [updateDraftMutation, { data, loading, error }] = useUpdateDraftMutationMutation(
+  //   inputVariables
+  // );
+  // const [
+  //   submitDraftMutation,
+  //   { loading: submitLoading, error: submitError },
+  // ] = useSubmitDraftMutationMutation(inputVariables);
+
+  // useEffect(() => {
+  //   updateDraftMutation();
+  //   console.log('Draft Updated');
+  //   console.log(cache);
+  // }, [cache, updateDraftMutation]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    submitDraftMutation();
-    console.log(update);
+    // submitDraftMutation();
+    console.log(cache);
   };
 
   return (
@@ -71,7 +82,7 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
             />
             <TextInput
               fieldType='slug'
-              cache={update.slug}
+              cache={cache.slug}
               initialValue={original.slug}
               parentDispatch={dispatch}
             />
@@ -82,9 +93,9 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
           <>
             <TitlesInput
               key='titles'
-              cache={update.titles}
+              cache={cache.titles}
               titles={original.titles}
-              dispatch={dispatch}
+              parentDispatch={dispatch}
             />
           </>
         </EditGroup>
@@ -94,7 +105,7 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
             <TextAreaInput
               fieldType='description.en'
               label='Description'
-              cache={update.description}
+              cache={cache.description}
               initialValue={original.description.en}
               parentDispatch={dispatch}
             />
@@ -108,7 +119,7 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
 
             <TextInput
               fieldType='ageRatingGuide'
-              cache={update.ageRatingGuide}
+              cache={cache.ageRatingGuide}
               initialValue={original.ageRatingGuide}
               parentDispatch={dispatch}
             />
@@ -117,21 +128,21 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
 
         <DateInput
           fieldType='startDate'
-          cache={update.startDate}
+          cache={cache.startDate}
           initialValue={original.startDate}
           parentDispatch={dispatch}
         />
 
         <DateInput
           fieldType='endDate'
-          cache={update.endDate}
+          cache={cache.endDate}
           initialValue={original.endDate}
           parentDispatch={dispatch}
         />
 
         <DateTimeInput
           fieldType='nextRelease'
-          cache={update.nextRelease}
+          cache={cache.nextRelease}
           initialValue={original.nextRelease}
           parentDispatch={dispatch}
         />
@@ -140,7 +151,7 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
           <>
             <SingleSelectInput<ReleaseStatusEnum>
               fieldType='release'
-              cache={update.status}
+              cache={cache.status}
               initialValue={original.status}
               options={Object.values(ReleaseStatusEnum)}
               parentDispatch={dispatch}
@@ -148,7 +159,7 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
 
             <TextInput
               fieldType='tba'
-              cache={update.tba}
+              cache={cache.tba}
               initialValue={original.tba}
               parentDispatch={dispatch}
             />
@@ -158,7 +169,7 @@ export default function AnimeEdit({ record, wikiSubmission }: AnimeInterface): R
         <ListEditor
           Component={MediaCharacterEdit}
           initialItems={original.characters.nodes}
-          cache={update}
+          cache={cache.mediaCharacters}
           parentDispatch={dispatch}
         />
 

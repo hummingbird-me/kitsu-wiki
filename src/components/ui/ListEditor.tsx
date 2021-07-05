@@ -1,12 +1,12 @@
 import React, { ReactElement, useState } from 'react';
 import { Maybe } from 'src/types/graphql';
-import { MediaChange, ModelEditInterface, ModelFragmentTypes } from 'src/types/mediaChange';
+import { ModelEditUnion } from 'src/types/listEditorTypes';
 
 interface Props {
-  Component: React.ComponentType<ModelEditInterface>;
-  initialItems?: Maybe<ReadonlyArray<Maybe<ModelFragmentTypes>>>;
-  cache: MediaChange;
-  parentDispatch: React.Dispatch<any>;
+  Component: React.ComponentType<ModelEditUnion>;
+  initialItems?: Maybe<ReadonlyArray<Maybe<ModelEditUnion['record']>>>;
+  cache: Array<ModelEditUnion['cache']>;
+  parentDispatch: ModelEditUnion['dispatch'];
 }
 
 export default function ListEditor({
@@ -15,13 +15,13 @@ export default function ListEditor({
   cache,
   parentDispatch,
 }: Props): ReactElement {
-  const mutableItems = (initialItems || []) as ModelFragmentTypes[];
+  const mutableItems = (initialItems || []) as ModelEditUnion['record'][];
   const [items, setItems] = useState(mutableItems);
 
   const addItem = () => (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    const newItem = {} as ModelFragmentTypes;
+    const newItem = {} as ModelEditUnion['record'];
     setItems([...items, newItem]);
   };
 
@@ -36,10 +36,16 @@ export default function ListEditor({
     <div className='list'>
       <button onClick={addItem()}>Add</button>
       {items.map((item, index) => {
+        let currentCache = {} as ModelEditUnion['cache'];
+
+        if (Array.isArray(cache)) {
+          currentCache = cache[index];
+        }
+
         return (
           <div>
             <button onClick={removeItem(index)}>Remove</button>
-            <Component key={index} record={item} cache={cache} dispatch={parentDispatch} />
+            <Component key={index} record={item} cache={currentCache} dispatch={parentDispatch} />
           </div>
         );
       })}
