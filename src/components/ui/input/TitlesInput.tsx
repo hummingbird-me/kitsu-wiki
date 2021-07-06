@@ -7,13 +7,13 @@ import { TitlesChange } from 'src/types/mediaChange';
 interface Props {
   titles: AnimeTitlesFragment;
   cache?: TitlesChange;
-  dispatch: React.Dispatch<any>;
+  parentDispatch: React.Dispatch<any>;
 }
 
 export default function TitlesInput({
   titles: { canonical, canonicalLocale, alternatives = [], localized },
   cache,
-  dispatch,
+  parentDispatch,
 }: Props): ReactElement {
   const formattedAlternatives = alternatives?.map((alt) => alt) ?? [];
 
@@ -25,22 +25,22 @@ export default function TitlesInput({
         <TextInput
           fieldType='titles.canonicalLocale'
           initialValue={canonicalLocale}
-          parentDispatch={dispatch}
+          parentDispatch={parentDispatch}
         />
         <TextInput
           fieldType='titles.canonicalLocale'
           initialValue={canonicalLocale}
-          parentDispatch={dispatch}
+          parentDispatch={parentDispatch}
         />
         <TextInput
           fieldType='titles.canonicalLocale'
           initialValue={canonicalLocale}
-          parentDispatch={dispatch}
+          parentDispatch={parentDispatch}
         />
         <TextInput
           fieldType='titles.canonicalLocale'
           initialValue={canonicalLocale}
-          parentDispatch={dispatch}
+          parentDispatch={parentDispatch}
         />
       </AltTitles>
 
@@ -49,7 +49,7 @@ export default function TitlesInput({
         label='Synonyms and Abbreviations'
         cache={cache?.alternatives}
         initialValue={formattedAlternatives}
-        parentDispatch={dispatch}
+        parentDispatch={parentDispatch}
       />
     </div>
   );
