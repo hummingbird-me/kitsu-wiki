@@ -21,7 +21,10 @@ import ListEditor from '../ui/ListEditor';
 import MediaCharacterEdit from '../mediaCharacter/MediaCharacterEdit';
 import { ReducerAction } from 'src/types/reducer';
 import { MediaChange } from 'src/types/mediaChange';
-import { AnimeChangeEditInterface } from 'src/types/listEditorTypes';
+import {
+  AnimeChangeEditInterface,
+  MediaCharacterChangeEditInterface,
+} from 'src/types/listEditorTypes';
 
 // interface AnimeInterface {
 //   record: FindAnimeFieldsFragment;
@@ -166,7 +169,7 @@ export default function AnimeEdit({
           </>
         </EditGroup>
 
-        <ListEditor
+        <ListEditor<MediaCharacterChangeEditInterface>
           Component={MediaCharacterEdit}
           initialItems={original.characters.nodes}
           cache={cache.mediaCharacters}

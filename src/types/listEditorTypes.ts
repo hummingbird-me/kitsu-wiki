@@ -5,9 +5,9 @@ import { ReducerAction } from './reducer';
 export type ModelFragmentTypes = FindAnimeFieldsFragment | FindMediaCharacterFieldsFragment;
 export type ModelCacheType = MediaChange | MediaCharacterChange;
 
-export type ModelEditUnion = MediaCharacterChangeEditInterface;
+// export type ModelEditUnion = MediaCharacterChangeEditInterface;
 // NOTE: how to make this work?
-// export type ModelEditUnion = MediaCharacterChangeEditInterface | AnimeChangeEditInterface;
+export type ModelEditUnion = MediaCharacterChangeEditInterface | AnimeChangeEditInterface;
 
 export interface ModelEditInterface {
   record: ModelFragmentTypes;
