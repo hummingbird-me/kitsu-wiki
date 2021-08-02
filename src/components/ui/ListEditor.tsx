@@ -45,6 +45,8 @@ export default function ListEditor<T extends ModelEditUnion>({
         return (
           <div>
             <button onClick={removeItem(index)}>Remove</button>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-ignore */}
             <Component key={index} record={item} cache={currentCache} dispatch={parentDispatch} />
           </div>
         );
