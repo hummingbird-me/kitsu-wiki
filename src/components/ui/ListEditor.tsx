@@ -1,15 +1,15 @@
 import React, { ReactElement, useState } from 'react';
 import { Maybe } from 'src/types/graphql';
-import { ModelEditUnion } from 'src/types/listEditorTypes';
+import { ModelItemInterface } from 'src/types/itemTypes';
 
-interface Props<T extends ModelEditUnion> {
+interface Props<T extends ModelItemInterface> {
   Component: React.ComponentType<T>;
   initialItems?: Maybe<ReadonlyArray<Maybe<T['record']>>>;
   cache: Array<T['cache']>;
-  parentDispatch: T['dispatch'];
+  parentDispatch: T['parentDispatch'];
 }
 
-export default function ListEditor<T extends ModelEditUnion>({
+export default function ListEditor<T extends ModelItemInterface>({
   Component,
   initialItems,
   cache,
@@ -36,7 +36,7 @@ export default function ListEditor<T extends ModelEditUnion>({
     <div className='list'>
       <button onClick={addItem()}>Add</button>
       {items.map((item, index) => {
-        let currentCache = {} as ModelEditUnion['cache'];
+        let currentCache = {} as ModelItemInterface['cache'];
 
         if (Array.isArray(cache)) {
           currentCache = cache[index];

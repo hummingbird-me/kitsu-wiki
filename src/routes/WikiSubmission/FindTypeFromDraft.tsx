@@ -69,7 +69,7 @@ export default function FindTypeFromDraft({ wikiSubmission }: Props): ReactEleme
       return (
         <AnimeEdit
           record={formattedData as FindAnimeFieldsFragment}
-          // wikiSubmission={wikiSubmission}
+          wikiSubmission={wikiSubmission}
           cache={reducer.updatedState}
           dispatch={reducer.dispatch}
         />

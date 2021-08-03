@@ -1,24 +1,22 @@
-import React, { ReactElement } from 'react';
-import { CharacterRoleEnum, FindMediaCharacterFieldsFragment } from 'src/types/graphql';
-import { MediaCharacterChangeEditInterface } from 'src/types/listEditorTypes';
-import { MediaCharacterChange } from 'src/types/mediaChange';
-import { ReducerAction } from 'src/types/reducer';
+import { ReactElement } from 'react';
+import { CharacterRoleEnum } from 'src/types/graphql';
+import { MediaCharacterItemInterface } from 'src/types/itemTypes';
 import { SingleSelectInput, TextInput } from '../ui/input';
 
-export default function MediaCharacterEdit({
+export default function MediaCharacterItem({
   record,
   cache,
-  dispatch,
-}: MediaCharacterChangeEditInterface): ReactElement {
+  parentDispatch,
+}: MediaCharacterItemInterface): ReactElement {
   return (
     <>
-      <TextInput readOnly fieldType='id' initialValue={record.id} parentDispatch={dispatch} />
+      <TextInput readOnly fieldType='id' initialValue={record.id} parentDispatch={parentDispatch} />
       <SingleSelectInput<CharacterRoleEnum>
         fieldType='role'
         initialValue={record.role}
         options={Object.values(CharacterRoleEnum)}
         cache={cache.role}
-        parentDispatch={dispatch}
+        parentDispatch={parentDispatch}
       />
     </>
   );

@@ -5,22 +5,20 @@ import { ReducerAction } from './reducer';
 export type ModelFragmentTypes = FindAnimeFieldsFragment | FindMediaCharacterFieldsFragment;
 export type ModelCacheType = MediaChange | MediaCharacterChange;
 
-// export type ModelEditUnion = MediaCharacterChangeEditInterface;
-// NOTE: how to make this work?
-export type ModelEditUnion = MediaCharacterChangeEditInterface | AnimeChangeEditInterface;
+export type ModelItemUnion = MediaCharacterItemInterface | AnimeItemInterface;
 
-export interface ModelEditInterface {
+export interface ModelItemInterface {
   record: ModelFragmentTypes;
   cache: ModelCacheType;
-  dispatch: React.Dispatch<ReducerAction>;
+  parentDispatch: React.Dispatch<ReducerAction>;
 }
 
-export interface MediaCharacterChangeEditInterface extends ModelEditInterface {
+export interface MediaCharacterItemInterface extends ModelItemInterface {
   record: FindMediaCharacterFieldsFragment;
   cache: MediaCharacterChange;
 }
 
-export interface AnimeChangeEditInterface extends ModelEditInterface {
+export interface AnimeItemInterface extends ModelItemInterface {
   record: FindAnimeFieldsFragment;
   cache: MediaChange;
 }
