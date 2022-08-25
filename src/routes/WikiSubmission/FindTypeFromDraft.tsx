@@ -9,6 +9,7 @@ import {
   useFindMangaByIdQuery,
   WikiSubmissionFieldsFragment,
 } from 'src/types/graphql';
+import * as CustomReducer from 'src/util/customReducer';
 
 enum WikiSubmissionDraftTypes {
   Anime = 'Anime',
@@ -27,7 +28,9 @@ export default function FindTypeFromDraft({ wikiSubmission }: Props): ReactEleme
     id: id,
   };
   let formattedData;
+  const reducer = CustomReducer.Find(wikiSubmission);
   // This will most likely be a problem w/o types
+  // This will be moved to some HOC function and most likely encapsulate which reducer to use.
   switch (dataType) {
     case WikiSubmissionDraftTypes.Anime:
       queryType = useFindAnimeByIdQuery;
@@ -67,6 +70,8 @@ export default function FindTypeFromDraft({ wikiSubmission }: Props): ReactEleme
         <AnimeEdit
           record={formattedData as FindAnimeFieldsFragment}
           wikiSubmission={wikiSubmission}
+          cache={reducer.updatedState}
+          dispatch={reducer.dispatch}
         />
       );
     case WikiSubmissionDraftTypes.Manga:

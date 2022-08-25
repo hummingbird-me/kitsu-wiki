@@ -46,11 +46,11 @@ export default function CreateFromType({ title, record }: RecordInterface): Reac
   if (!data || !data.wikiSubmission.createDraft?.wikiSubmission || error)
     return <div>Error: {error?.message}</div>;
 
-  const wikiSubmissionId = data.wikiSubmission.createDraft.wikiSubmission.id.toString();
-  const draftRoute = `/user_submissions/${wikiSubmissionId}/edit`;
+  const wikiSubmission = data.wikiSubmission.createDraft.wikiSubmission;
+  const draftRoute = `/user_submissions/${wikiSubmission.id}/edit`;
 
   // eslint-disable-next-line no-restricted-globals
   history.replaceState(null, '', draftRoute);
 
-  return <FindTypeFromDraft wikiSubmission={data.wikiSubmission.createDraft.wikiSubmission} />;
+  return <FindTypeFromDraft wikiSubmission={wikiSubmission} />;
 }
