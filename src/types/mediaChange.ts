@@ -33,6 +33,11 @@ export type MediaChange = NodeChange & {
   nextRelease?: DateTimeString;
   tba?: string;
   status: ReleaseStatusEnum;
+  mediaCharacters: Array<MediaCharacterChange>;
+};
+
+export type MediaCharacterChange = NodeChange & {
+  role: string; // should be enum.
 };
 
 // TODO: these should be non-shitty types

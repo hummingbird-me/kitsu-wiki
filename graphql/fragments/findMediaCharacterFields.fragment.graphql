@@ -1,0 +1,7 @@
+fragment findMediaCharacterFields on MediaCharacter {
+  id
+  role
+  character {
+    id
+  }
+}
